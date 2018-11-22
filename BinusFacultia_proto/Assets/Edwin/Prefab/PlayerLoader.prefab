@@ -1,0 +1,235 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1156179713570320}
+  m_IsPrefabAsset: 1
+--- !u!1 &1069703671827094
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4039415087202330}
+  - component: {fileID: 114473283062020512}
+  m_Layer: 0
+  m_Name: Player-Chara
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1156179713570320
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4236228452167240}
+  - component: {fileID: 114244667038122374}
+  m_Layer: 0
+  m_Name: PlayerLoader
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1658285120750414
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4180634125082980}
+  - component: {fileID: 114144491472073984}
+  m_Layer: 0
+  m_Name: Player-Chara (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1752877340797922
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4710624729577822}
+  - component: {fileID: 114090506409960858}
+  m_Layer: 0
+  m_Name: Player-Chara (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4039415087202330
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1069703671827094}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4236228452167240}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4180634125082980
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1658285120750414}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4236228452167240}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4236228452167240
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1156179713570320}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.0175638, y: 0.231631, z: 3.0019531}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4039415087202330}
+  - {fileID: 4180634125082980}
+  - {fileID: 4710624729577822}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4710624729577822
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1752877340797922}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4236228452167240}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114090506409960858
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1752877340797922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41185e20ed4e1ab4d8ed8740e6200309, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trainTracker: 
+  chara:
+    isDefending: 0
+    name: 
+    HPmax: 0
+    HPcurr: 0
+    MPmax: 0
+    MPcurr: 0
+    atk: 0
+    def: 0
+    spd: 0
+    baseAtk: 0
+    baseDef: 0
+    baseSpd: 0
+    actionPointMax: 0
+    isEnemy: 0
+    sequence: []
+  skillList: []
+--- !u!114 &114144491472073984
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1658285120750414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41185e20ed4e1ab4d8ed8740e6200309, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trainTracker: 
+  chara:
+    isDefending: 0
+    name: 
+    HPmax: 0
+    HPcurr: 0
+    MPmax: 0
+    MPcurr: 0
+    atk: 0
+    def: 0
+    spd: 0
+    baseAtk: 0
+    baseDef: 0
+    baseSpd: 0
+    actionPointMax: 0
+    isEnemy: 0
+    sequence: []
+  skillList: []
+--- !u!114 &114244667038122374
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1156179713570320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21799ee92f607b841a9e1d289866f7a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allPlayerChara:
+  - {fileID: 1671291080308888, guid: 320a52bdbbd45234c8b4626d783d197c, type: 2}
+  - {fileID: 1671291080308888, guid: 9b1ef0f547e1a1447b224683807156a5, type: 2}
+  - {fileID: 1671291080308888, guid: cec9b988d4d394f4a83b34f495d6dc12, type: 2}
+  party: []
+--- !u!114 &114473283062020512
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1069703671827094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41185e20ed4e1ab4d8ed8740e6200309, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trainTracker: 
+  chara:
+    isDefending: 0
+    name: 
+    HPmax: 0
+    HPcurr: 0
+    MPmax: 0
+    MPcurr: 0
+    atk: 0
+    def: 0
+    spd: 0
+    baseAtk: 0
+    baseDef: 0
+    baseSpd: 0
+    actionPointMax: 0
+    isEnemy: 0
+    sequence: []
+  skillList: []

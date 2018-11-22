@@ -27,7 +27,7 @@ public abstract class Action
 public abstract class PlayerAction : Action
 {
     public bool needTarget = true;
-    public abstract List<Chara> GetValidTarget();
+    public abstract List<Chara> GetValidTarget(List<Chara> allChara);
     public Chara target;
     public void setTarget(Chara target)
     {
@@ -48,10 +48,10 @@ public class paAttack : PlayerAction
         targetBox.text += source.name + " attacks " + target.name + " for " + damage + " damage!\n";
     }
 
-    public override List<Chara> GetValidTarget()
+    public override List<Chara> GetValidTarget(List<Chara> allChara)
     {
         List<Chara> validTarget = new List<Chara>();
-        foreach (Chara chara in targetList)
+        foreach (Chara chara in allChara)
         {
             if (chara.isEnemy && chara.HPcurr > 0)
             {
@@ -60,6 +60,10 @@ public class paAttack : PlayerAction
         }
         return validTarget;
     }
+}
+public abstract class paSkill : PlayerAction
+{
+    public int level;
 }
 
 public class AttackFoe : Action

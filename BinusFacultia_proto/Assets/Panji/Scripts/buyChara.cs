@@ -13,11 +13,12 @@ public class buyChara : MonoBehaviour {
     {
 
         coinsText = GameObject.Find("Coins Text").GetComponent<Text>();
+        coinsText.text = "Coins : $" + coins.ToString();
     }
 
     void update()
     {
-        coinsText.text = "Coins : $" +coins.ToString();
+        
     }
 
     public int Coins()
@@ -29,5 +30,7 @@ public class buyChara : MonoBehaviour {
     {
         coins += _coins;
         coins = Mathf.Clamp(coins, 0, 999);
+        Debug.Log(_coins);
+        coinsText.text = "Coins : $" + coins.ToString();
     }
 }

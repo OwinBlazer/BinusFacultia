@@ -10,10 +10,15 @@ public class Chara
     public string name;
     public int HPmax;
     public int HPcurr;
-    public int MP;
+    public int MPmax;
+    public int MPcurr;
     public int atk;
     public int def;
     public int spd;
+    public int baseAtk;
+    public int baseDef;
+    public int baseSpd;
+
     public int actionPointMax;
     public bool isEnemy;
     public Chara(string name, int HPmax, int MP, int atk, int def, int spd, bool isEnemy)
@@ -21,10 +26,14 @@ public class Chara
         this.name = name;
         this.HPmax = HPmax;
         HPcurr = HPmax;
-        this.MP = MP;
+        this.MPmax = MP;
+        MPcurr = MP;
         this.atk = atk;
         this.def = def;
         this.spd = spd;
+        baseDef = def;
+        baseSpd = spd;
+        baseAtk = atk;
         this.isEnemy = isEnemy;
         isDefending = false;
         actionPointMax = 0;

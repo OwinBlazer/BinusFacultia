@@ -23,9 +23,10 @@ public class CombatEngine : MonoBehaviour {
     [SerializeField] public Text[] charNameText;
     [SerializeField] public Text[] charHPText;
     [SerializeField] public Text[] charAPtext;
-
+    public PlayerLoader playerLoader;
     List<Chara> allChara = new List<Chara>();
     List<Action> allActions = new List<Action>();
+    public GameObject[] skillButton;
     bool combatInProgress;
 
     public List<Chara> GetAllChara()
@@ -38,9 +39,19 @@ public class CombatEngine : MonoBehaviour {
         enemy2 = Instantiate(enemy1);
         enemy3 = Instantiate(enemy1);
         phaseID = 0;
+
+        playerLoader.initializeParty();
+        List<Chara> tempList = playerLoader.GetPlayerCharacters();
+        foreach(Chara chara in tempList)
+        {
+            allChara.Add(chara);
+        }
+        /*
+
         allChara.Add(new Chara("Gatto", 30, 20, 10, 3, 9, false));
         allChara.Add(new Chara("Gitte", 30, 20, 10, 3, 8, false));
         allChara.Add(new Chara("Goando", 30, 20, 10, 3, 10, false));
+        */
         allChara.Add(enemy1.GetComponent<EnemyChara>().chara);
         allChara[allChara.Count - 1].Initialize();
         allChara.Add(enemy2.GetComponent<EnemyChara>().chara);
@@ -70,6 +81,8 @@ public class CombatEngine : MonoBehaviour {
             }
         }
         UpdateAPUI();
+        //run every status effect on character<=============================@
+
     }
     void OrderPhase()
     {
@@ -81,8 +94,6 @@ public class CombatEngine : MonoBehaviour {
             {
                 if (chara.isEnemy)
                 {
-                    Debug.Log(chara.name);
-                    Debug.Log(chara.queuedAction.Count);
                     chara.
                         queuedAction.Add(
                         chara.GetNextAction(allChara));
@@ -114,26 +125,41 @@ public class CombatEngine : MonoBehaviour {
         switch (actionID)
         {
             case 0://attack
-                tempAction = new paAttack();
-                tempAction.needTarget = true;
+                ActionAttack();
                 break;
-            case 1://skill@
+            case 1://skill
+                ActionSkill();
                 break;//open skill menu
             case 2://item@
+                anim.SetInteger("actionMenuID", 4);
                 break;//open items menu
         }
-        tempAction.source = tempSource;
-        if (!tempAction.needTarget)
-        {
-            loadActionToChara();
-        }
-        else
-        {
-            //OPEN TARGET MENU
-            LoadValidTargets();
-            anim.SetInteger("actionMenuID", 2);
-        }
 
+    }
+    private void ActionSkill()
+    {
+        LoadValidSkills();
+        anim.SetInteger("actionMenuID", 3);
+    }
+    private void LoadValidSkills()
+    {
+        //based on character's skill
+        List<SkillInterface> validSkill = playerLoader.GetSkills(tempSource);
+        for(int i = 0; i < validSkill.Count; i++)
+        {
+            if (validSkill[i].skillLevel > 0)
+            {
+                skillButton[i].SetActive(true);
+                skillButton[i].transform.GetChild(0).GetComponent<Text>().text = validSkill[i].skillName;
+            }
+        }
+    }
+    private void ActionAttack()
+    {
+        tempAction = new paAttack();
+        tempAction.needTarget = true;
+        tempAction.source = tempSource;
+        LoadValidTargets();
     }
     public void LoadValidTargets()
     {
@@ -142,20 +168,30 @@ public class CombatEngine : MonoBehaviour {
             Destroy(buttonList[i]);
         }
         buttonList.Clear();
-        foreach (Chara chara in allChara)
+        //based on action's requirement
+        List<Chara> validTarget = tempAction.GetValidTarget(allChara);
+        foreach (Chara chara in validTarget)
         {
-            //based on action's requirement<================================================@
-            if(chara.HPcurr > 0&&chara.isEnemy)
-            {
-                GameObject newButton = Instantiate(targetButton, targetListParent.transform);
-                buttonList.Add(newButton);
-                newButton.GetComponent<TargetButton>().initiateButton(chara.name, allChara.IndexOf(chara));
-            }
+            //use object pooling? <@
+            GameObject newButton = Instantiate(targetButton, targetListParent.transform);
+            buttonList.Add(newButton);
+            newButton.GetComponent<TargetButton>().initiateButton(chara.name, allChara.IndexOf(chara));
         }
+        anim.SetInteger("actionMenuID", 2);
     }
     public void SetSkill(int skillID)
     {
-        //skillID loads the skill depending on the chose character's skill on that slot@
+        // skillID loads the skill depending on the chosen character's skill on that slot
+        tempAction = playerLoader.party[allChara.IndexOf(tempSource)].skillList[skillID].GetSkill(tempSource,allChara);
+        if (tempAction.needTarget)
+        {
+            LoadValidTargets();
+        }
+        else
+        {
+            loadActionToChara();
+        }
+        // supply target into action
     }
     public void SetTarget(int slotID)
     {
@@ -258,11 +294,16 @@ public class CombatEngine : MonoBehaviour {
     }
     void ExecuteByBatch()
     {
-        //FIX THIS FOR FINAL GAME<=======================================@
-        allActions[0].executeAction();
-        allActions[0].updateLog(logbox);
-        allActions[0].source.actionPointMax--;
-        allActions.RemoveAt(0);
+        Debug.Log("Source is " + allActions[0].source.name);
+        int flagSpd = allActions[0].source.spd;
+        while (allActions.Count>0&&flagSpd == allActions[0].source.spd)
+        {
+            Debug.Log("Source :" + allActions[0].source.name);
+            allActions[0].executeAction();
+            allActions[0].updateLog(logbox);
+            allActions[0].source.actionPointMax--;
+            allActions.RemoveAt(0);
+        }
     }
     void UpdateActionList()
     {

@@ -27,6 +27,7 @@ public class CombatEngine : MonoBehaviour {
     List<Chara> allChara = new List<Chara>();
     List<Action> allActions = new List<Action>();
     public GameObject[] skillButton;
+    public GameObject[] itemButton;
     bool combatInProgress;
 
     public List<Chara> GetAllChara()
@@ -115,6 +116,7 @@ public class CombatEngine : MonoBehaviour {
     }
     public void SetActionDefend()
     {
+        //triggers cancel execution of action before clear queue! @@@
         tempSource.queuedAction.Clear();
         UpdateAPUI();
         anim.SetInteger("actionMenuID", 0);
@@ -131,10 +133,50 @@ public class CombatEngine : MonoBehaviour {
                 ActionSkill();
                 break;//open skill menu
             case 2://item@
-                anim.SetInteger("actionMenuID", 4);
+                ActionItem();
                 break;//open items menu
         }
 
+    }
+    private void ActionItem()
+    {
+        LoadValidItems();
+        anim.SetInteger("actionMenuID", 4);
+    }
+    private void LoadValidItems()
+    {
+        int itemCount = 0;
+        List<ItemInterface> validItems = playerLoader.GetItems();
+        for(int i = 0; i < validItems.Count; i++)
+        {
+            if (validItems[i].GetQty() > 0)
+            {
+                itemCount++;
+                itemButton[i].SetActive(true);
+                itemButton[i].transform.GetChild(0).GetComponent<Text>().text = validItems[i].GetName();
+            }
+            else
+            {
+                itemButton[i].SetActive(false);
+            }
+        }
+        if (itemCount <= 0)
+        {
+            logbox.text = "You have no usable items!";
+            anim.SetInteger("actionMenuID", 0);
+        }
+    }
+    public void SetItem(int itemID)
+    {
+        tempAction = playerLoader.allItem[itemID].UseItem(tempSource);
+        if (tempAction.needTarget)
+        {
+            LoadValidTargets();
+        }
+        else
+        {
+            loadActionToChara();
+        }
     }
     private void ActionSkill()
     {
@@ -207,6 +249,7 @@ public class CombatEngine : MonoBehaviour {
             if (tempAction.source.queuedAction.Count < tempAction.source.actionPointMax)
             {
                 tempAction.source.queuedAction.Add(tempAction);
+                //tempAction:reserve@~
                 UpdateAPUI();
             }
             else
@@ -272,6 +315,7 @@ public class CombatEngine : MonoBehaviour {
         allActions.Clear();
         foreach(Chara chara in allChara)
         {
+            //cancel reserve here@~
             chara.queuedAction.Clear();
             chara.isDefending = false;
         }

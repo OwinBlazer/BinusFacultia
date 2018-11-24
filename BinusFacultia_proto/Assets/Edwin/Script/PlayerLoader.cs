@@ -8,7 +8,7 @@ public class PlayerLoader : MonoBehaviour {
     //saves current party status
     //references to all character prefabs, so can spawn needed ones
     public List<GameObject> allPlayerChara;
-
+    public List<ItemInterface> allItem;
     [HideInInspector]
     public List<PlayerChara> party;
 
@@ -46,5 +46,9 @@ public class PlayerLoader : MonoBehaviour {
             }
         }
         return tempSkillList;
+    }
+    public List<ItemInterface> GetItems()
+    {
+        return allItem;
     }
 }

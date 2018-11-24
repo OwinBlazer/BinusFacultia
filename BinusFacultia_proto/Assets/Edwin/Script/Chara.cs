@@ -51,7 +51,14 @@ public class Chara
             HPcurr = 0;
         }
     }
-
+    public void HealDamage(int heal)
+    {
+        HPcurr += heal;
+        if(HPcurr > HPmax)
+        {
+            HPcurr = HPmax;
+        }
+    }
     private int seqIndex=0;
     private int actIndex=9999;
     public Action GetNextAction(List<Chara> allChara)

@@ -203,6 +203,8 @@ MonoBehaviour:
   - {fileID: 1671291080308888, guid: 320a52bdbbd45234c8b4626d783d197c, type: 2}
   - {fileID: 1671291080308888, guid: 9b1ef0f547e1a1447b224683807156a5, type: 2}
   - {fileID: 1671291080308888, guid: cec9b988d4d394f4a83b34f495d6dc12, type: 2}
+  allItem:
+  - {fileID: 114481585021781610, guid: f6c549331c1f03e4c8d8f01fa2f1ecb2, type: 2}
   party: []
 --- !u!114 &114473283062020512
 MonoBehaviour:

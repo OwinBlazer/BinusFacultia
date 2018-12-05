@@ -62,11 +62,17 @@ MonoBehaviour:
     atk: 10
     def: 5
     spd: 5
+    baseHPmax: 0
     baseAtk: 5
     baseDef: 5
     baseSpd: 5
+    efTauntRate: 0
+    efStunRate: 0
+    efRecov: 0
+    efExtend: 0
+    efPoison: 0
     actionPointMax: 5
     isEnemy: 0
     sequence: []
   skillList:
-  - {fileID: 114170005396631792, guid: 488c9b7adc91bc046bb48c14e415ed78, type: 2}
+  - {fileID: 114964996953594904, guid: 488c9b7adc91bc046bb48c14e415ed78, type: 2}

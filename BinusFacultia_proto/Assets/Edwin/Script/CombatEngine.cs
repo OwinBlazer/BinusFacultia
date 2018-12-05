@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿    using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,7 +12,7 @@ public class CombatEngine : MonoBehaviour {
     private List<GameObject> buttonList = new List<GameObject>();
     [SerializeField] Animator anim;
     [SerializeField] private GameObject executeButton;
-    Chara tempSource;
+    [SerializeField]Chara tempSource;
     PlayerAction tempAction;
     Chara tempTarget;
     private int phaseID;
@@ -53,17 +53,22 @@ public class CombatEngine : MonoBehaviour {
         allChara.Add(new Chara("Gitte", 30, 20, 10, 3, 8, false));
         allChara.Add(new Chara("Goando", 30, 20, 10, 3, 10, false));
         */
+
+        LoadEnemy();
+        combatInProgress = true;
+        UpdateHPUI();
+        Combat();
+    }
+    private void LoadEnemy()
+    {
+        //FIX THIS @
         allChara.Add(enemy1.GetComponent<EnemyChara>().chara);
         allChara[allChara.Count - 1].Initialize();
         allChara.Add(enemy2.GetComponent<EnemyChara>().chara);
         allChara[allChara.Count - 1].Initialize();
         allChara.Add(enemy3.GetComponent<EnemyChara>().chara);
         allChara[allChara.Count - 1].Initialize();
-        combatInProgress = true;
-        UpdateHPUI();
-        Combat();
     }
-
     public void Combat()
     {
         if (combatInProgress){
@@ -81,9 +86,48 @@ public class CombatEngine : MonoBehaviour {
                 chara.actionPointMax++;
             }
         }
-        UpdateAPUI();
         //run every status effect on character<=============================@
+        //TEST CASE:
+        //Try poison
+        //try atkbuff
+        EffectPoison();
+        UpdateHPUI();
+        RunAllEffect();
+        UpdateAPUI();
 
+    }
+    void EffectPoison()
+    {
+        foreach (Chara chara in allChara)
+        {
+            if (chara.efPoison != 0)
+            {
+                Debug.Log("Poisoned here!");
+                chara.HPcurr -= chara.efPoison;
+                logbox.text += chara.name+" suffers "+chara.efPoison+" Overload damage!\n";
+            }
+        }
+    }
+    void RunAllEffect()
+    {
+        foreach(Chara chara in allChara)
+        {
+            int indexFlag = 0;
+            while (indexFlag < chara.statusEffectList.Count)
+            {
+                //chara.statusEffectList[indexFlag].RunEffect(chara);
+                chara.statusEffectList[indexFlag].ReduceDur(chara);
+                if (chara.statusEffectList[indexFlag].GetDur() <= 0)
+                {
+                    chara.statusEffectList[indexFlag].ResetEffect(chara);
+                    chara.statusEffectList.RemoveAt(indexFlag);
+                }
+                else
+                {
+                    indexFlag++;
+                }
+            }
+        }
     }
     void OrderPhase()
     {
@@ -116,7 +160,6 @@ public class CombatEngine : MonoBehaviour {
     }
     public void SetActionDefend()
     {
-        //triggers cancel execution of action before clear queue! @@@
         tempSource.queuedAction.Clear();
         UpdateAPUI();
         anim.SetInteger("actionMenuID", 0);
@@ -132,7 +175,7 @@ public class CombatEngine : MonoBehaviour {
             case 1://skill
                 ActionSkill();
                 break;//open skill menu
-            case 2://item@
+            case 2://item
                 ActionItem();
                 break;//open items menu
         }
@@ -249,7 +292,6 @@ public class CombatEngine : MonoBehaviour {
             if (tempAction.source.queuedAction.Count < tempAction.source.actionPointMax)
             {
                 tempAction.source.queuedAction.Add(tempAction);
-                //tempAction:reserve@~
                 UpdateAPUI();
             }
             else
@@ -275,7 +317,6 @@ public class CombatEngine : MonoBehaviour {
                     if (chara.queuedAction.Count == 0)
                     {
                         chara.isDefending = true;
-                        Debug.Log("Defending: " + chara.name);
                     }
                     else
                     {
@@ -315,7 +356,6 @@ public class CombatEngine : MonoBehaviour {
         allActions.Clear();
         foreach(Chara chara in allChara)
         {
-            //cancel reserve here@~
             chara.queuedAction.Clear();
             chara.isDefending = false;
         }
@@ -338,11 +378,9 @@ public class CombatEngine : MonoBehaviour {
     }
     void ExecuteByBatch()
     {
-        Debug.Log("Source is " + allActions[0].source.name);
         int flagSpd = allActions[0].source.spd;
         while (allActions.Count>0&&flagSpd == allActions[0].source.spd)
         {
-            Debug.Log("Source :" + allActions[0].source.name);
             allActions[0].executeAction();
             allActions[0].updateLog(logbox);
             allActions[0].source.actionPointMax--;

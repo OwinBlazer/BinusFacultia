@@ -22,7 +22,7 @@ public class PlayerLoader : MonoBehaviour {
             Chara tempChara = allPlayerChara[i].GetComponent<PlayerChara>().chara;
             party.Add(transform.GetChild(i).GetComponent<PlayerChara>());
             party[i].chara = new Chara(tempChara.name, tempChara.HPmax, tempChara.MPmax, tempChara.baseAtk, tempChara.baseDef, tempChara.baseSpd, false);
-            party[i].skillList = allPlayerChara[0].GetComponent<PlayerChara>().skillList;
+            party[i].skillList = allPlayerChara[i].GetComponent<PlayerChara>().skillList;
         }
         party[2].chara.HPcurr -= 5;
     }

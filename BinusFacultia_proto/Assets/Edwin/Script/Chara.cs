@@ -5,6 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class Chara
 {
+    public List<StatusEffect> statusEffectList = new List<StatusEffect>();
     public List<Action> queuedAction = new List<Action>();
     public bool isDefending;
     public string name;
@@ -15,9 +16,17 @@ public class Chara
     public int atk;
     public int def;
     public int spd;
+    public int baseHPmax;
     public int baseAtk;
     public int baseDef;
     public int baseSpd;
+
+    public Chara efTauntTarget;
+    public float efTauntRate;
+    public float efStunRate;
+    public int efRecov;
+    public int efExtend;
+    public int efPoison;
 
     public int actionPointMax;
     public bool isEnemy;
@@ -39,9 +48,20 @@ public class Chara
         actionPointMax = 0;
         queuedAction = new List<Action>();
     }
+    public void InflictStatus(StatusEffect se)
+    {
+        statusEffectList.Add(se);
+        se.RunEffect(this);
+        Debug.Log("This has been poisoned with value "+this.efPoison);
+    }
     public void Initialize()
     {
         queuedAction = new List<Action>();
+        statusEffectList = new List<StatusEffect>();
+        efTauntRate = 0f;
+        efStunRate = 0f;
+        efRecov = 0;
+        efPoison = 0;
     }
     public void TakeDamage(int damage)
     {

@@ -1,0 +1,18 @@
+Nama 				- Tipe	- Deskripsi
+________________________________________________________________________________________
+gold 				- int	- uang yang dipakai untuk beli item dan latihan menaikkan stats
+point				- int	- uang yang dapakai untuk unlock karakter
+item01				- int	- Rock Fried Chicken- Reviver 50%
+item02				- int	- Evada Pasta - Status Effect Remover
+item03				- int	- Rose Bento - Recover 1 ally hp to full
+item04				- int	- Hocky Bento - Recover 1 ally mp to full
+char01isUnlocked		- bool	- Retas - Cyber security: Sudah beli atau belum
+char02isUnlocked		- bool	- Nisbi - Business Creation
+char03isUnlocked		- bool	- Lola - Hotel Management
+char04isUnlocked		- bool	- Gatto - GAT
+char05isUnlocked		- bool	- Kumhu - Business Law
+char06isUnlocked		- bool	- Yi Ha - IR
+partyDetails1			- string- For the first party member, Holds name, Max HP, current HP, Max MP, current MP, base atk, def, spd, unlocked skills, number of trainings done and status effects they have.
+partyDetails2			- string- For the second party member, Holds name, Max HP, current HP, Max MP, current MP, base atk, def, spd, unlocked skills, number of trainings done and status effects they have.
+partyDetails3			- string- For the third party member, Holds name, Max HP, current HP, Max MP, current MP, base atk, def, spd, unlocked skills, number of trainings done and status effects they have.
+enemyDetails			- string- Stores number of enemies, and the relevant information of enemies by order of load. Includes name, id, current hp, status effects and current action in list of action

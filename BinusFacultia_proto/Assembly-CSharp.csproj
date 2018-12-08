@@ -67,6 +67,10 @@
     <Compile Include="Assets\Edwin\Script\AI_AttackOne.cs" />
     <Compile Include="Assets\Edwin\Script\C00sk00_MultiAttack.cs" />
     <Compile Include="Assets\Edwin\Script\C00sk01_PoisonStack.cs" />
+    <Compile Include="Assets\Edwin\Script\C01sk01_CompSec.cs" />
+    <Compile Include="Assets\Edwin\Script\C01sk02_Algorythm.cs" />
+    <Compile Include="Assets\Edwin\Script\C01sk03_CyberLaw.cs" />
+    <Compile Include="Assets\Edwin\Script\C01sk04_Cryptography.cs" />
     <Compile Include="Assets\Edwin\Script\Chara.cs" />
     <Compile Include="Assets\Edwin\Script\CombatEngine.cs" />
     <Compile Include="Assets\Edwin\Script\EnemyAction.cs" />
@@ -81,6 +85,7 @@
     <Compile Include="Assets\Panji\Scripts\buttonInteraction.cs" />
     <Compile Include="Assets\Panji\Scripts\buyChara.cs" />
     <Compile Include="Assets\Panji\Scripts\playerGold.cs" />
+    <None Include="Assets\PlayerPref.txt" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>E:/04_DeveloperFolder/09_MWGPFacultia/Gitroot/BinusFacultia/BinusFacultia_proto/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>

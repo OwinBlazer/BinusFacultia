@@ -54,19 +54,29 @@ MonoBehaviour:
   trainTracker: 
   chara:
     isDefending: 0
-    name: Testa
-    HPmax: 20
-    HPcurr: 20
-    MPmax: 0
-    MPcurr: 0
-    atk: 10
-    def: 5
-    spd: 5
-    baseAtk: 5
-    baseDef: 5
-    baseSpd: 5
-    actionPointMax: 5
+    name: Retas
+    HPmax: 90
+    HPcurr: 90
+    MPmax: 60
+    MPcurr: 60
+    atk: 9
+    def: 15
+    spd: 6
+    baseHPmax: 90
+    baseAtk: 9
+    baseDef: 15
+    baseSpd: 6
+    efShield: 0
+    efTauntRate: 0
+    efStunRate: 0
+    efRecov: 0
+    efExtend: 0
+    efPoison: 0
+    actionPointMax: 3
     isEnemy: 0
     sequence: []
   skillList:
-  - {fileID: 114170005396631792, guid: 74fa88c03dc1bdb459b9a2a586a17d3e, type: 2}
+  - {fileID: 114491749980619688, guid: 74fa88c03dc1bdb459b9a2a586a17d3e, type: 2}
+  - {fileID: 114710773448536144, guid: b4ce3821a5038fe4697a9a4dc5e53f17, type: 2}
+  - {fileID: 114950102940585110, guid: fa30be38186a4334d968a8354ca41cda, type: 2}
+  - {fileID: 114536988027961824, guid: 23d1333f824bf60498613240dc927a18, type: 2}

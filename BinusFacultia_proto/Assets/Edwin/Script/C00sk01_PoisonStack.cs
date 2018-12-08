@@ -13,6 +13,7 @@ public class C00sk01_PoisonStack : SkillInterface
         skill.level = skillLevel;
         skill.duration = duration;
         skill.needTarget = true;
+        skill.mpCost = mpCost;
         return skill;
     }
 }
@@ -24,16 +25,27 @@ public class PoisonStack : paSkill
     public int duration;
     public override void executeAction()
     {
-        damage = CalculateDamage(source.atk, target);
-        StatusEffect se = new Ef_Poison();
-        se.InitializeSE(level, duration);
-        target.TakeDamage(damage);
-        target.InflictStatus(se);
+        if (source.MPcurr < mpCost)
+        {
+            message = source.name + " has not enough MP!\n";
+        }
+        else
+        {
+            source.MPcurr -= mpCost;
+            message = target.name + " is attacked for " + damage + " and OVERLOADED!\n";
+            damage = CalculateDamage(source.atk, target);
+            StatusEffect se = new Ef_Poison();
+            se.InitializeSE(level, duration);
+            target.TakeDamage(damage);
+            target.InflictStatus(se);
+        }
+        
     }
 
     public override void updateLog(Text targetBox)
     {
-        targetBox.text += target.name+" is attacked for "+ damage+ " and OVERLOADED!\n";
+        
+        targetBox.text += message;
     }
 
     public override List<Chara> GetValidTarget(List<Chara> allChara)

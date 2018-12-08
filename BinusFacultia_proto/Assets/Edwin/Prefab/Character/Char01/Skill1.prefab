@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4248121298685918}
-  - component: {fileID: 114170005396631792}
+  - component: {fileID: 114491749980619688}
   m_Layer: 0
   m_Name: Skill1
   m_TagString: Untagged
@@ -40,7 +40,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114170005396631792
+--- !u!114 &114491749980619688
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -48,9 +48,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1351314421609028}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d9c13b9d60dc50438115aa8c3db2dfe, type: 3}
+  m_Script: {fileID: 11500000, guid: 7e882726961171b4cb2761c36e175652, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillName: Multi-Smack
-  mpCost: 10
+  skillName: Computer Security
+  mpCost: 5
   skillLevel: 1
+  duration: 2

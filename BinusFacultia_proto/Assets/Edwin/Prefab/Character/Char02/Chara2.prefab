@@ -57,8 +57,8 @@ MonoBehaviour:
     name: Testi
     HPmax: 20
     HPcurr: 20
-    MPmax: 0
-    MPcurr: 0
+    MPmax: 10
+    MPcurr: 10
     atk: 10
     def: 5
     spd: 5
@@ -66,6 +66,7 @@ MonoBehaviour:
     baseAtk: 5
     baseDef: 5
     baseSpd: 5
+    efShield: 0
     efTauntRate: 0
     efStunRate: 0
     efRecov: 0

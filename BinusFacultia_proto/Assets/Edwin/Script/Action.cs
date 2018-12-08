@@ -6,22 +6,33 @@ using UnityEngine.UI;
 [System.Serializable]//<===========how to put action into inspector?????@
 public abstract class Action
 {
+    public string message;
     public Chara source;
     public List<Chara> targetList = new List<Chara>();
     public abstract void executeAction();
     public abstract void updateLog(Text targetBox);
     public int CalculateDamage(int atk, Chara target)
     {
-        int dmg = atk - target.def;
-        if (target.isDefending)
+
+        if (target.efShield > 0)
         {
-            dmg /= 2;
+            return 0;
         }
-        if (dmg <= 0)
+        else
         {
-            dmg = 1;
+
+            int dmg = atk - target.def;
+
+            if (target.isDefending)
+            {
+                dmg /= 2;
+            }
+            if (dmg <= 0)
+            {
+                dmg = 1;
+            }
+            return dmg;
         }
-        return dmg;
     }
 }
 public abstract class PlayerAction : Action
@@ -45,7 +56,8 @@ public class paAttack : PlayerAction
 
     public override void updateLog(Text targetBox)
     {
-        targetBox.text += source.name + " attacks " + target.name + " for " + damage + " damage!\n";
+        message = source.name + " attacks " + target.name + " for " + damage + " damage!\n";
+        targetBox.text += message;
     }
 
     public override List<Chara> GetValidTarget(List<Chara> allChara)
@@ -64,6 +76,7 @@ public class paAttack : PlayerAction
 public abstract class paSkill : PlayerAction
 {
     public int level;
+    public int mpCost;
 }
 
 public class AttackFoe : Action
@@ -77,7 +90,8 @@ public class AttackFoe : Action
     }
     public override void updateLog(Text targetBox)
     {
-        targetBox.text += source.name + " attacks " + target.name + " for " + damage;
+        message = source.name + " attacks " + target.name + " for " + damage+"\n";
+        targetBox.text += message;
     }
     public override void executeAction()
     {
@@ -106,7 +120,8 @@ public class AttackPlayer : Action
     }
     public override void updateLog(Text targetBox)
     {
-        targetBox.text += source.name + " attacks " + target.name + " for " + damage + "\n";
+        message = source.name + " attacks " + target.name + " for " + damage + "\n";
+        targetBox.text += message;
     }
     public override void executeAction()
     {

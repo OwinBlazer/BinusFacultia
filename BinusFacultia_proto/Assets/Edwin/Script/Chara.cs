@@ -21,6 +21,7 @@ public class Chara
     public int baseDef;
     public int baseSpd;
 
+    public int efShield;
     public Chara efTauntTarget;
     public float efTauntRate;
     public float efStunRate;
@@ -50,9 +51,25 @@ public class Chara
     }
     public void InflictStatus(StatusEffect se)
     {
-        statusEffectList.Add(se);
-        se.RunEffect(this);
-        Debug.Log("This has been poisoned with value "+this.efPoison);
+        //validate status effect here
+        bool isNewStatusEffect = true;
+        se.duration += efExtend;
+        for(int i = 0; i < statusEffectList.Count; i++)
+        {
+            if (statusEffectList[i].StatusID == se.StatusID)
+            {
+                isNewStatusEffect = false;
+                if (statusEffectList[i].level < se.level)
+                {
+                    statusEffectList[i] = se;
+                }
+            }
+        }
+        if (isNewStatusEffect)
+        {
+            statusEffectList.Add(se);
+            se.RunEffect(this);
+        }
     }
     public void Initialize()
     {
@@ -62,13 +79,36 @@ public class Chara
         efStunRate = 0f;
         efRecov = 0;
         efPoison = 0;
+        efShield = 0;
+        efExtend = 0;
     }
     public void TakeDamage(int damage)
     {
-        HPcurr -= damage;
-        if (HPcurr < 0)
+        if (efShield <= 0)
         {
-            HPcurr = 0;
+            HPcurr -= damage;
+            if (HPcurr < 0)
+            {
+                HPcurr = 0;
+            }
+        }
+        else
+        {
+            efShield--;
+            int tempFlag = 0;
+            while (tempFlag < statusEffectList.Count)
+            {
+                if (statusEffectList[tempFlag].StatusID == 12)
+                {
+                    statusEffectList[tempFlag].level--;
+                    if (statusEffectList[tempFlag].level <= 0)
+                    {
+                        statusEffectList.RemoveAt(tempFlag);
+                        break;
+                    }
+                }
+                tempFlag++;
+            }
         }
     }
     public void HealDamage(int heal)

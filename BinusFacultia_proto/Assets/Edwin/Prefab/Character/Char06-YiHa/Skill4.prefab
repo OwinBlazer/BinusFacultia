@@ -51,6 +51,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 229e74b1bd76bff459d701db47768a7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillName: 
+  skillName: International Organization
   mpCost: 0
-  skillLevel: 0
+  skillLevel: 1

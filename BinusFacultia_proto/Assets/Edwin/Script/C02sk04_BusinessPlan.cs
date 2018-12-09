@@ -32,6 +32,7 @@ public class BusPlan : paSkill
             target.MPcurr += 5 * level;
             foreach (StatusEffect se in target.statusEffectList)
             {
+                se.ResetEffect(target);
                 se.level += level;
                 se.RunEffect(target);
             }

@@ -33,6 +33,7 @@ public class IntOrg : paSkill
             target.TakeDamage(damage);
             foreach (StatusEffect se in target.statusEffectList)
             {
+                se.ResetEffect(target);
                 se.level += level;
                 se.RunEffect(target);
             }

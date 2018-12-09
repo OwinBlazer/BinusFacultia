@@ -35,6 +35,7 @@ public abstract class StatusEffect {
 }
 
 public class Ef_AtkUP:StatusEffect {
+    private int effect;
     public override void InitializeSE(int level, int duration)
     {
 
@@ -46,7 +47,8 @@ public class Ef_AtkUP:StatusEffect {
     }
     public override void RunEffect(Chara target)
     {
-        target.atk = target.baseAtk + (int)Mathf.Floor(Mathf.Pow(level+1, 1.5f)); ;
+        effect = (int)Mathf.Floor(Mathf.Pow(level + 1, 1.5f));
+        target.atk +=  effect;
     }
     public override void ReduceDur(Chara target)
     {
@@ -58,11 +60,12 @@ public class Ef_AtkUP:StatusEffect {
     }
     public override void ResetEffect(Chara target)
     {
-        target.atk = target.baseAtk;
+        target.atk -=effect;
     }
 }
 public class Ef_SpdUP : StatusEffect
 {
+    private int effect;
     public override void InitializeSE(int level, int duration)
     {
 
@@ -74,7 +77,8 @@ public class Ef_SpdUP : StatusEffect
     }
     public override void RunEffect(Chara target)
     {
-        target.spd = target.baseSpd + (int)Mathf.Floor(Mathf.Pow(level+1, 1.5f)); ;
+        effect = (int)Mathf.Floor(Mathf.Pow(level + 1, 1.5f));
+        target.spd +=  effect;
     }
     public override void ReduceDur(Chara target)
     {
@@ -86,11 +90,12 @@ public class Ef_SpdUP : StatusEffect
     }
     public override void ResetEffect(Chara target)
     {
-        target.spd = target.baseSpd;
+        target.spd -= effect;
     }
 }
 public class Ef_DefUP : StatusEffect
 {
+    private int effect;
     public override void InitializeSE(int level, int duration)
     {
 
@@ -102,7 +107,8 @@ public class Ef_DefUP : StatusEffect
     }
     public override void RunEffect(Chara target)
     {
-        target.def = target.baseDef + (int)Mathf.Floor(Mathf.Pow(level+1, 1.5f)); ;
+        effect = (int)Mathf.Floor(Mathf.Pow(level + 1, 1.5f));
+        target.def += effect ;
     }
     public override void ReduceDur(Chara target)
     {
@@ -114,11 +120,12 @@ public class Ef_DefUP : StatusEffect
     }
     public override void ResetEffect(Chara target)
     {
-        target.def = target.baseDef;
+        target.def -=effect;
     }
 }
 public class Ef_AtkDOWN : StatusEffect
 {
+    private int effect;
     public override void InitializeSE(int level, int duration)
     {
 
@@ -130,7 +137,8 @@ public class Ef_AtkDOWN : StatusEffect
     }
     public override void RunEffect(Chara target)
     {
-        target.atk = target.baseAtk - (int)Mathf.Floor(Mathf.Pow(level+1, 1.5f)); ;
+        effect = (int)Mathf.Floor(Mathf.Pow(level + 1, 1.5f));
+        target.atk -= effect ;
     }
     public override void ReduceDur(Chara target)
     {
@@ -142,11 +150,12 @@ public class Ef_AtkDOWN : StatusEffect
     }
     public override void ResetEffect(Chara target)
     {
-        target.atk = target.baseAtk;
+        target.atk += effect;
     }
 }
 public class Ef_SpdDOWN : StatusEffect
 {
+    private int effect;
     public override void InitializeSE(int level, int duration)
     {
 
@@ -158,7 +167,8 @@ public class Ef_SpdDOWN : StatusEffect
     }
     public override void RunEffect(Chara target)
     {
-        target.spd = target.baseSpd - (int)Mathf.Floor(Mathf.Pow(level+1, 1.5f)); ;
+        effect = (int)Mathf.Floor(Mathf.Pow(level + 1, 1.5f));
+        target.spd -= effect ;
     }
     public override void ReduceDur(Chara target)
     {
@@ -170,11 +180,12 @@ public class Ef_SpdDOWN : StatusEffect
     }
     public override void ResetEffect(Chara target)
     {
-        target.spd = target.baseSpd;
+        target.spd += effect;
     }
 }
 public class Ef_DefDOWN : StatusEffect
 {
+    private int effect;
     public override void InitializeSE(int level, int duration)
     {
 
@@ -186,7 +197,8 @@ public class Ef_DefDOWN : StatusEffect
     }
     public override void RunEffect(Chara target)
     {
-        target.def = target.baseDef - (int)Mathf.Floor(Mathf.Pow(level+1, 1.5f)); ;
+        effect = (int)Mathf.Floor(Mathf.Pow(level + 1, 1.5f));
+        target.def -= effect ;
     }
     public override void ReduceDur(Chara target)
     {
@@ -198,7 +210,7 @@ public class Ef_DefDOWN : StatusEffect
     }
     public override void ResetEffect(Chara target)
     {
-        target.def = target.baseDef;
+        target.def += effect;
     }
 }
 public class Ef_Poison : StatusEffect

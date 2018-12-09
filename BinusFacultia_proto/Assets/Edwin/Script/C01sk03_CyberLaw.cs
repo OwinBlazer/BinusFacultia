@@ -30,6 +30,7 @@ public class CyLaw : paSkill
             source.MPcurr -= mpCost;
             foreach(StatusEffect se in target.statusEffectList)
             {
+                se.ResetEffect(target);
                 se.level += level;
                 se.RunEffect(target);
             }

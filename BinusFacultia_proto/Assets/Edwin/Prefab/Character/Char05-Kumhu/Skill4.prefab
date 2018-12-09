@@ -9,30 +9,30 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1671291080308888}
+  m_RootGameObject: {fileID: 1351314421609028}
   m_IsPrefabAsset: 1
---- !u!1 &1671291080308888
+--- !u!1 &1351314421609028
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4203750412228474}
-  - component: {fileID: 114298732011459260}
+  - component: {fileID: 4248121298685918}
+  - component: {fileID: 114411142663677496}
   m_Layer: 0
-  m_Name: Chara2
+  m_Name: Skill4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4203750412228474
+--- !u!4 &4248121298685918
 Transform:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1671291080308888}
+  m_GameObject: {fileID: 1351314421609028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.0175638, y: 0.231631, z: 3.0019531}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -40,40 +40,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114298732011459260
+--- !u!114 &114411142663677496
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1671291080308888}
+  m_GameObject: {fileID: 1351314421609028}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41185e20ed4e1ab4d8ed8740e6200309, type: 3}
+  m_Script: {fileID: 11500000, guid: f0e9689ca9fba8b4ba2c3cf995e4d362, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trainTracker: 
-  chara:
-    isDefending: 0
-    name: Testi
-    HPmax: 20
-    HPcurr: 20
-    MPmax: 10
-    MPcurr: 10
-    atk: 10
-    def: 5
-    spd: 5
-    baseHPmax: 0
-    baseAtk: 5
-    baseDef: 5
-    baseSpd: 5
-    efShield: 0
-    efTauntRate: 0
-    efStunRate: 0
-    efRecov: 0
-    efExtend: 0
-    efPoison: 0
-    actionPointMax: 5
-    isEnemy: 0
-    sequence: []
-  skillList:
-  - {fileID: 114964996953594904, guid: 488c9b7adc91bc046bb48c14e415ed78, type: 2}
+  skillName: Labor Law
+  mpCost: 5
+  skillLevel: 1
+  duration: 2

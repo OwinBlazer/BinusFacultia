@@ -324,12 +324,11 @@ public class CombatEngine : MonoBehaviour {
                     }
                 }
             }
-
             foreach (Chara chara in allChara)
             {
-                foreach (Action action in chara.queuedAction)
+                for(int i = chara.queuedAction.Count - 1; i >= 0; i--)
                 {
-                    allActions.Add(action);
+                    allActions.Add(chara.queuedAction[i]);
                 }
             }
             ExecutionPhase();
@@ -381,10 +380,30 @@ public class CombatEngine : MonoBehaviour {
         int flagSpd = allActions[0].source.spd;
         while (allActions.Count>0&&flagSpd == allActions[0].source.spd)
         {
-            allActions[0].executeAction();
-            allActions[0].updateLog(logbox);
-            allActions[0].source.actionPointMax--;
+            if (EffectStun(allActions[0].source.efStunRate))
+            {
+                logbox.text += allActions[0].source.name + " is stunned for this action!\n";
+            }
+            else
+            {
+                allActions[0].executeAction();
+                allActions[0].updateLog(logbox);
+                allActions[0].source.actionPointMax--;
+            }
             allActions.RemoveAt(0);
+        }
+    }
+    bool EffectStun(float rate)
+    {
+        float failNum = 1 - rate;
+        float rng = Random.Range((float)0, (float)1);
+        if (rng <= failNum)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
         }
     }
     void UpdateActionList()

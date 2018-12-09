@@ -7,10 +7,17 @@ public abstract class StatusEffect {
     public int duration;
     public int StatusID;
     /*status effectID list:
-    1 = Ef_AtkUP Up
+    1 = AtkUP
+    2 = SpdUP
+    3 = DefUP
+    4 = AtkDOWN
+    5 = SpdDOWN
+    6 = DefDOWN
     11 = Poison(Overload)
     12 = Shield
     13 = Extend
+    14 = Regen
+    15 = Stun
     */
     public abstract void InitializeSE(int level, int duration);
     public abstract void RunEffect(Chara target);
@@ -39,7 +46,7 @@ public class Ef_AtkUP:StatusEffect {
     }
     public override void RunEffect(Chara target)
     {
-        target.atk = target.baseAtk + (int)Mathf.Floor(Mathf.Pow(level, 1.5f)); ;
+        target.atk = target.baseAtk + (int)Mathf.Floor(Mathf.Pow(level+1, 1.5f)); ;
     }
     public override void ReduceDur(Chara target)
     {
@@ -54,7 +61,146 @@ public class Ef_AtkUP:StatusEffect {
         target.atk = target.baseAtk;
     }
 }
+public class Ef_SpdUP : StatusEffect
+{
+    public override void InitializeSE(int level, int duration)
+    {
 
+        {
+            this.level = level;
+            this.duration = duration;
+            this.StatusID = 2;
+        }
+    }
+    public override void RunEffect(Chara target)
+    {
+        target.spd = target.baseSpd + (int)Mathf.Floor(Mathf.Pow(level+1, 1.5f)); ;
+    }
+    public override void ReduceDur(Chara target)
+    {
+        ChangeDurBy(-1);
+        if (GetDur() <= 0)
+        {
+            ResetEffect(target);
+        }
+    }
+    public override void ResetEffect(Chara target)
+    {
+        target.spd = target.baseSpd;
+    }
+}
+public class Ef_DefUP : StatusEffect
+{
+    public override void InitializeSE(int level, int duration)
+    {
+
+        {
+            this.level = level;
+            this.duration = duration;
+            this.StatusID = 3;
+        }
+    }
+    public override void RunEffect(Chara target)
+    {
+        target.def = target.baseDef + (int)Mathf.Floor(Mathf.Pow(level+1, 1.5f)); ;
+    }
+    public override void ReduceDur(Chara target)
+    {
+        ChangeDurBy(-1);
+        if (GetDur() <= 0)
+        {
+            ResetEffect(target);
+        }
+    }
+    public override void ResetEffect(Chara target)
+    {
+        target.def = target.baseDef;
+    }
+}
+public class Ef_AtkDOWN : StatusEffect
+{
+    public override void InitializeSE(int level, int duration)
+    {
+
+        {
+            this.level = level;
+            this.duration = duration;
+            this.StatusID = 4;
+        }
+    }
+    public override void RunEffect(Chara target)
+    {
+        target.atk = target.baseAtk - (int)Mathf.Floor(Mathf.Pow(level+1, 1.5f)); ;
+    }
+    public override void ReduceDur(Chara target)
+    {
+        ChangeDurBy(-1);
+        if (GetDur() <= 0)
+        {
+            ResetEffect(target);
+        }
+    }
+    public override void ResetEffect(Chara target)
+    {
+        target.atk = target.baseAtk;
+    }
+}
+public class Ef_SpdDOWN : StatusEffect
+{
+    public override void InitializeSE(int level, int duration)
+    {
+
+        {
+            this.level = level;
+            this.duration = duration;
+            this.StatusID = 5;
+        }
+    }
+    public override void RunEffect(Chara target)
+    {
+        target.spd = target.baseSpd - (int)Mathf.Floor(Mathf.Pow(level+1, 1.5f)); ;
+    }
+    public override void ReduceDur(Chara target)
+    {
+        ChangeDurBy(-1);
+        if (GetDur() <= 0)
+        {
+            ResetEffect(target);
+        }
+    }
+    public override void ResetEffect(Chara target)
+    {
+        target.spd = target.baseSpd;
+    }
+}
+public class Ef_DefDOWN : StatusEffect
+{
+    public override void InitializeSE(int level, int duration)
+    {
+
+        {
+            this.level = level;
+            this.duration = duration;
+            this.StatusID = 6;
+        }
+    }
+    public override void RunEffect(Chara target)
+    {
+        target.def = target.baseDef - (int)Mathf.Floor(Mathf.Pow(level+1, 1.5f)); ;
+    }
+    public override void ReduceDur(Chara target)
+    {
+        ChangeDurBy(-1);
+        if (GetDur() <= 0)
+        {
+            ResetEffect(target);
+        }
+    }
+    public override void ResetEffect(Chara target)
+    {
+        target.def = target.baseDef;
+    }
+}
 public class Ef_Poison : StatusEffect
 {
     public override void InitializeSE(int level, int duration)
@@ -68,7 +214,7 @@ public class Ef_Poison : StatusEffect
     }
     public override void RunEffect(Chara target)
     {
-        target.efPoison = (int)Mathf.Floor(Mathf.Pow(level, 1.5f));
+        target.efPoison = (int)Mathf.Floor(Mathf.Pow(level+1, 1.5f));
     }
     public override void ReduceDur(Chara target)
     {
@@ -139,5 +285,63 @@ public class Ef_Extend : StatusEffect
     public override void ResetEffect(Chara target)
     {
         target.efExtend = 0;
+    }
+}
+
+public class Ef_Regen : StatusEffect
+{
+    public override void InitializeSE(int level, int duration)
+    {
+
+        {
+            this.level = level;
+            this.duration = duration;
+            this.StatusID = 14;
+        }
+    }
+    public override void RunEffect(Chara target)
+    {
+        target.efRecov = (int)Mathf.Floor(Mathf.Pow(level + 1, 1.5f));
+    }
+    public override void ReduceDur(Chara target)
+    {
+        ChangeDurBy(-1);
+        if (GetDur() <= 0)
+        {
+            ResetEffect(target);
+        }
+    }
+    public override void ResetEffect(Chara target)
+    {
+        target.efRecov = 0;
+    }
+}
+
+public class Ef_Stun : StatusEffect
+{
+    public override void InitializeSE(int level, int duration)
+    {
+
+        {
+            this.level = level;
+            this.duration = duration;
+            this.StatusID = 15;
+        }
+    }
+    public override void RunEffect(Chara target)
+    {
+        target.efStunRate = level/(level+2);
+    }
+    public override void ReduceDur(Chara target)
+    {
+        ChangeDurBy(-1);
+        if (GetDur() <= 0)
+        {
+            ResetEffect(target);
+        }
+    }
+    public override void ResetEffect(Chara target)
+    {
+        target.efStunRate = 0;
     }
 }

@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Edwin/Scenes/Combat.unity
+- path: Assets/Panji/Scene/Shop Menu.unity
   isLoaded: 1
   isActive: 1

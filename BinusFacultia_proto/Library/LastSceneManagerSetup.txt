@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Panji/Scene/Shop Menu.unity
+- path: Assets/Dicky/Scene/EnchancementScreen.unity
   isLoaded: 1
   isActive: 1

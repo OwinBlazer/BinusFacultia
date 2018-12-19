@@ -18,7 +18,8 @@ public class characterBuyText : MonoBehaviour {
 	void Start () {
         //points = 5000;
         //pointsText.text = points.ToString()+" Pts";
-        saveManager.Instance.state.points = 5000;
+        //saveManager.Instance.state.points = 5000;
+        PlayerPrefs.SetInt("Player Points", saveManager.Instance.state.points);
         updatePointsText();
         initShop();
 	}
@@ -59,7 +60,7 @@ public class characterBuyText : MonoBehaviour {
 
     private void OnCharacterSelect(int currentIndex)
     {
-        Debug.Log("Selecting Character Button  : " + currentIndex);
+        //Debug.Log("Selecting Character Button  : " + currentIndex);
         selectCharacterIndex = currentIndex;
 
        if (saveManager.Instance.IsCharacterOwned(currentIndex))
@@ -90,6 +91,7 @@ public class characterBuyText : MonoBehaviour {
             }
             else
             {
+                pointsText.text = "Not enough points!";
                 Debug.Log("Not enough points!");
             }
         }

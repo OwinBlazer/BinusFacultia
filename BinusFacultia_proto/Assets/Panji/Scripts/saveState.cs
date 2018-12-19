@@ -1,5 +1,5 @@
 ﻿public class saveState
 {
-    public int points = 0;
+    public int points = 5000;
     public int characterOwned = 0;
 }

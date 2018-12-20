@@ -64,10 +64,6 @@ public class CombatEngine : MonoBehaviour {
         //FIX THIS @
         allChara.Add(enemy1.GetComponent<EnemyChara>().chara);
         allChara[allChara.Count - 1].Initialize();
-        allChara.Add(enemy2.GetComponent<EnemyChara>().chara);
-        allChara[allChara.Count - 1].Initialize();
-        allChara.Add(enemy3.GetComponent<EnemyChara>().chara);
-        allChara[allChara.Count - 1].Initialize();
     }
     public void Combat()
     {
@@ -86,10 +82,6 @@ public class CombatEngine : MonoBehaviour {
                 chara.actionPointMax++;
             }
         }
-        //run every status effect on character<=============================@
-        //TEST CASE:
-        //Try poison
-        //try atkbuff
         EffectPoison();
         UpdateHPUI();
         RunAllEffect();

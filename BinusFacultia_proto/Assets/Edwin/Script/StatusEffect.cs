@@ -13,6 +13,7 @@ public abstract class StatusEffect {
     4 = AtkDOWN
     5 = SpdDOWN
     6 = DefDOWN
+    7 = HPDOwn
     11 = Poison(Overload)
     12 = Shield
     13 = Extend
@@ -211,6 +212,37 @@ public class Ef_DefDOWN : StatusEffect
     public override void ResetEffect(Chara target)
     {
         target.def += effect;
+    }
+}
+public class Ef_HPDOWN : StatusEffect
+{
+    private int effect;
+    public override void InitializeSE(int level, int duration)
+    {
+
+        {
+            this.level = level;
+            this.duration = duration;
+            this.StatusID = 7;
+        }
+    }
+    public override void RunEffect(Chara target)
+    {
+        effect = (int)Mathf.Floor(Mathf.Pow(level + 1, 1.5f));
+        target.HPmax -= effect;
+        if (target.HPmax < target.HPcurr) { target.TakeDamage(target.HPcurr - target.HPmax); }
+    }
+    public override void ReduceDur(Chara target)
+    {
+        ChangeDurBy(-1);
+        if (GetDur() <= 0)
+        {
+            ResetEffect(target);
+        }
+    }
+    public override void ResetEffect(Chara target)
+    {
+        target.HPmax += effect;
     }
 }
 public class Ef_Poison : StatusEffect

@@ -5,5 +5,6 @@ using UnityEngine;
 [System.Serializable]
 public class EnemyChara : MonoBehaviour
 {
+    public int enemyID;
     public Chara chara;
 }

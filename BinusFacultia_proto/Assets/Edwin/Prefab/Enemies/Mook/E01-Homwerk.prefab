@@ -51,18 +51,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30bc12e60db90b349ad4821e9e3850cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyID: 1
   chara:
     isDefending: 0
-    name: Whoao
-    HPmax: 30
-    HPcurr: 30
-    MP: 10
-    atk: 5
-    def: 2
-    spd: 5
+    name: Homwerk
+    HPmax: 38
+    HPcurr: 38
+    MPmax: 0
+    MPcurr: 0
+    atk: 18
+    def: 6
+    spd: 14
+    baseHPmax: 38
+    baseAtk: 18
+    baseDef: 6
+    baseSpd: 14
+    efShield: 0
+    efTauntRate: 0
+    efStunRate: 0
+    efRecov: 0
+    efExtend: 0
+    efPoison: 0
     actionPointMax: 3
     isEnemy: 1
     sequence:
+    - value: 5
+      actions:
+      - {fileID: 114083514298504650, guid: f3bb6ed9ccd3925419314daa1de51c04, type: 2}
+    - value: 2
+      actions:
+      - {fileID: 114708668418814040, guid: a2222483bf73e204792d2bd30db09431, type: 2}
     - value: 1
       actions:
+      - {fileID: 114842352165323050, guid: a3a680fcf7a44b34fbf75bf4354513e3, type: 2}
       - {fileID: 114083514298504650, guid: f3bb6ed9ccd3925419314daa1de51c04, type: 2}

@@ -109,33 +109,3 @@ public class AttackFoe : Action
         target = viableTargets[rng];
     }
 }
-public class AttackPlayer : Action
-{
-    private int damage;
-    private Chara target;
-    public AttackPlayer(Chara source, List<Chara> targetList)
-    {
-        this.source = source;
-        this.targetList = targetList;
-    }
-    public override void updateLog(Text targetBox)
-    {
-        message = source.name + " attacks " + target.name + " for " + damage + "\n";
-        targetBox.text += message;
-    }
-    public override void executeAction()
-    {
-        List<Chara> viableTargets = new List<Chara>();
-        foreach (Chara chara in targetList)
-        {
-            if (!chara.isEnemy && chara.HPcurr > 0)
-            {
-                viableTargets.Add(chara);
-            }
-        }
-        int rng = Random.Range(0, viableTargets.Count);
-        damage = CalculateDamage(source.atk, viableTargets[rng]);
-        viableTargets[rng].TakeDamage(damage);
-        target = viableTargets[rng];
-    }
-}

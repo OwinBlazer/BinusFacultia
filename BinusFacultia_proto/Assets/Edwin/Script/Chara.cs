@@ -31,6 +31,8 @@ public class Chara
 
     public int actionPointMax;
     public bool isEnemy;
+    private int enemyID;
+
     public Chara(string name, int HPmax, int MP, int atk, int def, int spd, bool isEnemy)
     {
         this.name = name;
@@ -62,6 +64,9 @@ public class Chara
                 if (statusEffectList[i].level < se.level)
                 {
                     statusEffectList[i] = se;
+                }else if(statusEffectList[i].level == se.level)
+                {
+                    statusEffectList[i].duration = Mathf.Max(statusEffectList[i].duration, se.duration);
                 }
             }
         }
@@ -81,6 +86,7 @@ public class Chara
         efPoison = 0;
         efShield = 0;
         efExtend = 0;
+        actIndex = 99;
     }
     public void TakeDamage(int damage)
     {
@@ -125,13 +131,14 @@ public class Chara
     {
         if (actIndex >= sequence[seqIndex].actions.Length)
         {
+            seqIndex = 0;
             //memilih sequence yang sesuai dengan rng
             int maxSequence = 0;
             foreach (ActionSequence seq in sequence)
             {
                 maxSequence += seq.value;
             }
-            int rng = Random.Range(0, maxSequence);
+            int rng = Random.Range(1, maxSequence+1);
             while (rng > sequence[seqIndex].value)
             {
                 rng -= sequence[seqIndex].value;
@@ -143,4 +150,12 @@ public class Chara
         return sequence[seqIndex].actions[actIndex-1].GetAction(this,allChara);
     }
     public ActionSequence[] sequence;
+    public void SetFoeID(int id)
+    {
+        enemyID = id;
+    }
+    public int GetFoeID()
+    {
+        return enemyID;
+    }
 }

@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Dicky/Scene/Main Menu.unity
+- path: Assets/Panji/Scene/Inventory.unity
   isLoaded: 1
   isActive: 1

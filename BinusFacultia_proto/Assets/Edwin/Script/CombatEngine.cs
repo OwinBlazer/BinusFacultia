@@ -3,16 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+public class ActEntryList {
+    public int entryID;
+    public Action action;
+    public ActEntryList(Action act, int entryID)
+    {
+        this.action = act;
+        this.entryID = entryID;
+    }
+}
 
 public class CombatEngine : MonoBehaviour {
     //tempo
     public GameObject enemy1, enemy2, enemy3;
+    //more final
+    [SerializeField] GameObject[] EnemyList;
+    [SerializeField] List<GameObject> ActiveEnemy;
+
     [SerializeField] GameObject targetListParent;
     [SerializeField] GameObject targetButton;
     private List<GameObject> buttonList = new List<GameObject>();
     [SerializeField] Animator anim;
     [SerializeField] private GameObject executeButton;
     [SerializeField]Chara tempSource;
+    
     PlayerAction tempAction;
     Chara tempTarget;
     private int phaseID;
@@ -25,7 +39,7 @@ public class CombatEngine : MonoBehaviour {
     [SerializeField] public Text[] charAPtext;
     public PlayerLoader playerLoader;
     List<Chara> allChara = new List<Chara>();
-    List<Action> allActions = new List<Action>();
+    List<ActEntryList> allActions = new List<ActEntryList>();
     public GameObject[] skillButton;
     public GameObject[] itemButton;
     bool combatInProgress;
@@ -36,9 +50,6 @@ public class CombatEngine : MonoBehaviour {
     }
 	// Use this for initialization
 	void Start () {
-        enemy1 = Instantiate(enemy1);
-        enemy2 = Instantiate(enemy1);
-        enemy3 = Instantiate(enemy1);
         phaseID = 0;
 
         playerLoader.initializeParty();
@@ -46,6 +57,10 @@ public class CombatEngine : MonoBehaviour {
         foreach(Chara chara in tempList)
         {
             allChara.Add(chara);
+        }
+        for(int i = 0; i < 5; i++)
+        {
+            ActiveEnemy.Add(transform.GetChild(i).gameObject);
         }
         /*
 
@@ -62,8 +77,54 @@ public class CombatEngine : MonoBehaviour {
     private void LoadEnemy()
     {
         //FIX THIS @
-        allChara.Add(enemy1.GetComponent<EnemyChara>().chara);
-        allChara[allChara.Count - 1].Initialize();
+        //This section loads all listed enemy in the encounter list
+        SpawnEnemy(0);
+        SpawnEnemy(0);
+        SpawnEnemy(1);
+    }
+    public void SpawnEnemy(int ID)
+    {
+        //add enemy here :D 
+        //Step 1, assign an idle ActiveEnemy object
+        //Step 2, get the object's EnemyChara component
+        //Step 3, copy the enemyChara component values
+        //step 4, initialize the new enemy
+        foreach (GameObject go in ActiveEnemy)
+        {
+            EnemyChara eChara = go.GetComponent<EnemyChara>();
+            //if dead/empty
+            if (eChara.chara.HPcurr <= 0)
+            {
+                EnemyChara sourceChara = EnemyList[ID].GetComponent<EnemyChara>();
+                //initialize that component as the correct spawn
+                
+                eChara.enemyID = ID;
+                eChara.chara.isEnemy = true;
+
+                eChara.chara.baseHPmax = sourceChara.chara.baseHPmax;
+                eChara.chara.HPmax = sourceChara.chara.HPmax;
+                eChara.chara.HPcurr = sourceChara.chara.HPcurr;
+
+                eChara.chara.MPmax = sourceChara.chara.MPmax;
+                eChara.chara.MPcurr = sourceChara.chara.MPcurr;
+
+                eChara.chara.name = sourceChara.chara.name;
+
+                eChara.chara.atk = sourceChara.chara.atk;
+                eChara.chara.baseAtk = sourceChara.chara.baseAtk;
+
+                eChara.chara.spd = sourceChara.chara.spd;
+                eChara.chara.baseSpd = sourceChara.chara.baseSpd;
+
+                eChara.chara.def = sourceChara.chara.def;
+                eChara.chara.baseDef = sourceChara.chara.baseDef;
+                eChara.chara.sequence = sourceChara.chara.sequence;
+                eChara.chara.Initialize();
+                allChara.Add(eChara.chara);
+                UpdateHPUI();
+                break;
+            }
+        }
     }
     public void Combat()
     {
@@ -318,9 +379,10 @@ public class CombatEngine : MonoBehaviour {
             }
             foreach (Chara chara in allChara)
             {
-                for(int i = chara.queuedAction.Count - 1; i >= 0; i--)
+                foreach(Action act in chara.queuedAction)
                 {
-                    allActions.Add(chara.queuedAction[i]);
+                    allActions.Add(new ActEntryList(act,allActions.Count));
+                    Debug.Log(chara.name+" with id "+(allActions.Count-1).ToString() +"and speed "+ chara.spd.ToString());
                 }
             }
             ExecutionPhase();
@@ -341,6 +403,10 @@ public class CombatEngine : MonoBehaviour {
             VictoryCheck();
         }
         EndPhase();
+    }
+    void SortActionList(List<Action> actionList)
+    {
+
     }
     void EndPhase()
     {
@@ -369,18 +435,18 @@ public class CombatEngine : MonoBehaviour {
     }
     void ExecuteByBatch()
     {
-        int flagSpd = allActions[0].source.spd;
-        while (allActions.Count>0&&flagSpd == allActions[0].source.spd)
+        int flagSpd = allActions[0].action.source.spd;
+        while (allActions.Count>0&&flagSpd == allActions[0].action.source.spd)
         {
-            if (EffectStun(allActions[0].source.efStunRate))
+            if (EffectStun(allActions[0].action.source.efStunRate))
             {
-                logbox.text += allActions[0].source.name + " is stunned for this action!\n";
+                logbox.text += allActions[0].action.source.name + " is stunned for this action!\n";
             }
             else
             {
-                allActions[0].executeAction();
-                allActions[0].updateLog(logbox);
-                allActions[0].source.actionPointMax--;
+                allActions[0].action.executeAction();
+                allActions[0].action.updateLog(logbox);
+                allActions[0].action.source.actionPointMax--;
             }
             allActions.RemoveAt(0);
         }
@@ -403,7 +469,7 @@ public class CombatEngine : MonoBehaviour {
         int tempFlag = 0;
         while (tempFlag < allActions.Count)
         {
-            if (allActions[tempFlag].source.HPcurr <= 0)
+            if (allActions[tempFlag].action.source.HPcurr <= 0)
             {
                 allActions.RemoveAt(tempFlag);
             }
@@ -417,13 +483,21 @@ public class CombatEngine : MonoBehaviour {
     {
         int allyCount=0;
         int enemyCount=0;
-        foreach(Chara chara in allChara)
+
+        int tempIndex = 0;
+        while (tempIndex < allChara.Count)
         {
+            Chara chara = allChara[tempIndex];
             if (chara.isEnemy)
             {
                 if (chara.HPcurr > 0)
                 {
                     enemyCount++;
+                }
+                else
+                {
+                    allChara.RemoveAt(tempIndex);
+                    break;
                 }
             }
             else
@@ -433,6 +507,7 @@ public class CombatEngine : MonoBehaviour {
                     allyCount++;
                 }
             }
+            tempIndex++;
         }
 
         if (enemyCount == 0)
@@ -463,17 +538,22 @@ public class CombatEngine : MonoBehaviour {
         anim.SetInteger("actionMenuID", 9);
     }
 }
-class actionSpdComp : IComparer<Action> {
-    public int Compare(Action act1, Action act2)
+class actionSpdComp : IComparer<ActEntryList>
+{
+    public int Compare(ActEntryList act1, ActEntryList act2)
     {
-        if (act1.source.spd > act2.source.spd)
+        if (act1.action.source.spd > act2.action.source.spd)
         {
             return -1;
-        }
-        if (act1.source.spd < act2.source.spd)
+        }else
+        if (act1.action.source.spd < act2.action.source.spd)
         {
             return 1;
         }
+        else if(act1.entryID > act2.entryID)
+        {
+            return 1; }
+        else if(act1.entryID < act2.entryID){ return -1; }
         return 0;
     }
 }

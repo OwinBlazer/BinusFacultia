@@ -62,10 +62,10 @@ MonoBehaviour:
     atk: 14
     def: 4
     spd: 7
-    baseHPmax: 38
-    baseAtk: 16
-    baseDef: 3
-    baseSpd: 11
+    baseHPmax: 40
+    baseAtk: 14
+    baseDef: 4
+    baseSpd: 7
     efShield: 0
     efTauntRate: 0
     efStunRate: 0
@@ -80,11 +80,11 @@ MonoBehaviour:
       - {fileID: 114083514298504650, guid: f3bb6ed9ccd3925419314daa1de51c04, type: 2}
     - value: 3
       actions:
-      - {fileID: 114138266176196484, guid: 02dc8b27292b9424a8a0d327e1f6eba7, type: 2}
+      - {fileID: 114017864338407578, guid: bcb40e1d39e8aad4a8079da9329106be, type: 2}
     - value: 3
       actions:
-      - {fileID: 114247551191743858, guid: d076cb31daab23e44b6ebca80b25455e, type: 2}
+      - {fileID: 114310255713495200, guid: d8b00dc4047e68c4799492cbfb16cc52, type: 2}
     - value: 1
       actions:
-      - {fileID: 114413649454074892, guid: f48f04c4867b8a240aa1dccf46146882, type: 2}
+      - {fileID: 114842352165323050, guid: a3a680fcf7a44b34fbf75bf4354513e3, type: 2}
       - {fileID: 114083514298504650, guid: f3bb6ed9ccd3925419314daa1de51c04, type: 2}

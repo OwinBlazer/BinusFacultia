@@ -1,0 +1,98 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1346807523820822}
+  m_IsPrefabAsset: 1
+--- !u!1 &1346807523820822
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4180253134879444}
+  - component: {fileID: 114694702061006122}
+  m_Layer: 0
+  m_Name: B03-UAS7
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4180253134879444
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1346807523820822}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.71609664, y: 2.5174978, z: 2.884918}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114694702061006122
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1346807523820822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30bc12e60db90b349ad4821e9e3850cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyID: 107
+  chara:
+    isDefending: 0
+    name: UAS7
+    HPmax: 550
+    HPcurr: 550
+    MPmax: 0
+    MPcurr: 0
+    atk: 70
+    def: 25
+    spd: 49
+    baseHPmax: 550
+    baseAtk: 70
+    baseDef: 25
+    baseSpd: 49
+    efShield: 0
+    efTauntRate: 0
+    efStunRate: 0
+    efRecov: 0
+    efExtend: 0
+    efPoison: 0
+    actionPointMax: 3
+    isEnemy: 1
+    sequence:
+    - value: 6
+      actions:
+      - {fileID: 114083514298504650, guid: f3bb6ed9ccd3925419314daa1de51c04, type: 2}
+    - value: 2
+      actions:
+      - {fileID: 114124000579361302, guid: 5105a59ec9798d7448d8dc424d8cf17f, type: 2}
+      - {fileID: 114820562975335198, guid: 9a84312a85108f9409ca999b68529b1c, type: 2}
+      - {fileID: 114130384363468412, guid: cbb208d57f4243349b6aa178e22dd485, type: 2}
+    - value: 1
+      actions:
+      - {fileID: 114813129550022114, guid: f999e7673a2004548a597e56fdeff647, type: 2}
+      - {fileID: 114763776814520364, guid: 4e1fa9fa4a76b2549abffbe402e57d36, type: 2}
+      - {fileID: 114039881126690220, guid: c5e80a7cbddd7da4a9d99e656850025f, type: 2}
+    - value: 2
+      actions:
+      - {fileID: 114124000579361302, guid: 5105a59ec9798d7448d8dc424d8cf17f, type: 2}
+      - {fileID: 114124000579361302, guid: 5105a59ec9798d7448d8dc424d8cf17f, type: 2}
+      - {fileID: 114820562975335198, guid: 9a84312a85108f9409ca999b68529b1c, type: 2}
+    - value: 1
+      actions:
+      - {fileID: 114072558499475766, guid: 032425053c5d1e04ca30204d72a6a410, type: 2}

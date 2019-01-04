@@ -54,7 +54,7 @@ MonoBehaviour:
   enemyID: 1
   chara:
     isDefending: 0
-    name: Homwerk
+    name: PR
     HPmax: 38
     HPcurr: 38
     MPmax: 0
@@ -81,6 +81,9 @@ MonoBehaviour:
     - value: 2
       actions:
       - {fileID: 114708668418814040, guid: a2222483bf73e204792d2bd30db09431, type: 2}
+    - value: 2
+      actions:
+      - {fileID: 114136913376968080, guid: df05b3411580d084485d4187d213f68c, type: 2}
     - value: 1
       actions:
       - {fileID: 114842352165323050, guid: a3a680fcf7a44b34fbf75bf4354513e3, type: 2}

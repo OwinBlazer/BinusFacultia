@@ -19,6 +19,7 @@ public abstract class StatusEffect {
     13 = Extend
     14 = Regen
     15 = Stun
+    16 = Taunt
     */
     public abstract void InitializeSE(int level, int duration);
     public abstract void RunEffect(Chara target);
@@ -387,5 +388,34 @@ public class Ef_Stun : StatusEffect
     public override void ResetEffect(Chara target)
     {
         target.efStunRate = 0;
+    }
+}
+
+public class Ef_Taunt : StatusEffect
+{
+    public override void InitializeSE(int level, int duration)
+    {
+
+        {
+            this.level = level;
+            this.duration = duration;
+            this.StatusID = 16;
+        }
+    }
+    public override void RunEffect(Chara target)
+    {
+        target.efTauntRate = level / (level + 2);
+    }
+    public override void ReduceDur(Chara target)
+    {
+        ChangeDurBy(-1);
+        if (GetDur() <= 0)
+        {
+            ResetEffect(target);
+        }
+    }
+    public override void ResetEffect(Chara target)
+    {
+        target.efTauntRate = 0;
     }
 }

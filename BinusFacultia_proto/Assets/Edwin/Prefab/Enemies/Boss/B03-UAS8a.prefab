@@ -1,0 +1,84 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1346807523820822}
+  m_IsPrefabAsset: 1
+--- !u!1 &1346807523820822
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4180253134879444}
+  - component: {fileID: 114694702061006122}
+  m_Layer: 0
+  m_Name: B03-UAS8a
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4180253134879444
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1346807523820822}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.71609664, y: 2.5174978, z: 2.884918}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114694702061006122
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1346807523820822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30bc12e60db90b349ad4821e9e3850cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyID: 1071
+  chara:
+    isDefending: 0
+    name: Enrichment
+    HPmax: 200
+    HPcurr: 200
+    MPmax: 0
+    MPcurr: 0
+    atk: 70
+    def: 20
+    spd: 40
+    baseHPmax: 200
+    baseAtk: 70
+    baseDef: 20
+    baseSpd: 40
+    efShield: 0
+    efTauntRate: 0
+    efStunRate: 0
+    efRecov: 0
+    efExtend: 0
+    efPoison: 0
+    actionPointMax: 3
+    isEnemy: 1
+    sequence:
+    - value: 1
+      actions:
+      - {fileID: 114316712171490498, guid: e721d4b9cd7969c46a4896039fd14254, type: 2}
+      - {fileID: 114231383550656742, guid: 2f769e3d99f1a9b4583fca4d5423da48, type: 2}
+      - {fileID: 114803676652322256, guid: 6a4dfa4870e84b144bc0cd5218fc5362, type: 2}
+      - {fileID: 114083514298504650, guid: f3bb6ed9ccd3925419314daa1de51c04, type: 2}
+      - {fileID: 114083514298504650, guid: f3bb6ed9ccd3925419314daa1de51c04, type: 2}

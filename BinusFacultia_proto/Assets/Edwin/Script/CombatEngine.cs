@@ -82,6 +82,45 @@ public class CombatEngine : MonoBehaviour {
         SpawnEnemy(0);
         SpawnEnemy(1);
     }
+    public void SpawnEnemy(EnemyChara spawnChara)
+    {
+        //another way to spawn enemy
+        foreach (GameObject go in ActiveEnemy)
+        {
+            EnemyChara eChara = go.GetComponent<EnemyChara>();
+            //if dead/empty
+            if (eChara.chara.HPcurr <= 0)
+            {
+                //initialize that component as the correct spawn
+
+                eChara.enemyID = spawnChara.enemyID;
+                eChara.chara.isEnemy = true;
+
+                eChara.chara.baseHPmax = spawnChara.chara.baseHPmax;
+                eChara.chara.HPmax = spawnChara.chara.HPmax;
+                eChara.chara.HPcurr = spawnChara.chara.HPcurr;
+
+                eChara.chara.MPmax = spawnChara.chara.MPmax;
+                eChara.chara.MPcurr = spawnChara.chara.MPcurr;
+
+                eChara.chara.name = spawnChara.chara.name;
+
+                eChara.chara.atk = spawnChara.chara.atk;
+                eChara.chara.baseAtk = spawnChara.chara.baseAtk;
+
+                eChara.chara.spd = spawnChara.chara.spd;
+                eChara.chara.baseSpd = spawnChara.chara.baseSpd;
+
+                eChara.chara.def = spawnChara.chara.def;
+                eChara.chara.baseDef = spawnChara.chara.baseDef;
+                eChara.chara.sequence = spawnChara.chara.sequence;
+                eChara.chara.Initialize();
+                allChara.Add(eChara.chara);
+                UpdateHPUI();
+                break;
+            }
+        }
+    }
     public void SpawnEnemy(int ID)
     {
         //add enemy here :D 
@@ -440,13 +479,17 @@ public class CombatEngine : MonoBehaviour {
         {
             if (EffectStun(allActions[0].action.source.efStunRate))
             {
+                //if stun succeeds
                 logbox.text += allActions[0].action.source.name + " is stunned for this action!\n";
             }
             else
             {
-                allActions[0].action.executeAction();
-                allActions[0].action.updateLog(logbox);
-                allActions[0].action.source.actionPointMax--;
+                if (allActions[0].action.source.HPcurr > 0)
+                {
+                    allActions[0].action.executeAction();
+                    allActions[0].action.updateLog(logbox);
+                    allActions[0].action.source.actionPointMax--;
+                }
             }
             allActions.RemoveAt(0);
         }
@@ -457,10 +500,12 @@ public class CombatEngine : MonoBehaviour {
         float rng = Random.Range((float)0, (float)1);
         if (rng <= failNum)
         {
+            //stun fails
             return false;
         }
         else
         {
+            //stun succeeds
             return true;
         }
     }

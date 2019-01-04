@@ -51,7 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30bc12e60db90b349ad4821e9e3850cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyID: 3
+  enemyID: 6
   chara:
     isDefending: 0
     name: MainHP

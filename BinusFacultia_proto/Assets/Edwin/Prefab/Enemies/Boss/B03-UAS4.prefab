@@ -1,0 +1,89 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1346807523820822}
+  m_IsPrefabAsset: 1
+--- !u!1 &1346807523820822
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4180253134879444}
+  - component: {fileID: 114694702061006122}
+  m_Layer: 0
+  m_Name: B03-UAS4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4180253134879444
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1346807523820822}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.71609664, y: 2.5174978, z: 2.884918}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114694702061006122
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1346807523820822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30bc12e60db90b349ad4821e9e3850cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyID: 104
+  chara:
+    isDefending: 0
+    name: UAS4
+    HPmax: 500
+    HPcurr: 500
+    MPmax: 0
+    MPcurr: 0
+    atk: 60
+    def: 15
+    spd: 30
+    baseHPmax: 500
+    baseAtk: 60
+    baseDef: 15
+    baseSpd: 30
+    efShield: 0
+    efTauntRate: 0
+    efStunRate: 0
+    efRecov: 0
+    efExtend: 0
+    efPoison: 0
+    actionPointMax: 3
+    isEnemy: 1
+    sequence:
+    - value: 5
+      actions:
+      - {fileID: 114083514298504650, guid: f3bb6ed9ccd3925419314daa1de51c04, type: 2}
+    - value: 2
+      actions:
+      - {fileID: 114530836400890128, guid: 930fec8e5c1257d4c974f36b3fe91b46, type: 2}
+      - {fileID: 114506642110132604, guid: 895b06f67d767d54583ca6bd2a4a2097, type: 2}
+      - {fileID: 114169273054222290, guid: f604208ff174fc14b889b2ad44b9f5ca, type: 2}
+    - value: 1
+      actions:
+      - {fileID: 114962056175976974, guid: b1254b4c428467943a88a0b61c4b97e8, type: 2}
+      - {fileID: 114403558171397330, guid: ff2c14baaa9e6c3498344fae6d2ac208, type: 2}

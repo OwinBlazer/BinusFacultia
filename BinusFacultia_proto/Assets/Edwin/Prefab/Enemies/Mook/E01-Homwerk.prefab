@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4180253134879444}
   - component: {fileID: 114694702061006122}
   m_Layer: 0
-  m_Name: E01-Homwerk
+  m_Name: E01-PR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

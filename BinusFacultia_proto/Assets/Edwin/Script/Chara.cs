@@ -17,6 +17,7 @@ public class Chara
     public int def;
     public int spd;
     public int baseHPmax;
+    public int baseMPmax;
     public int baseAtk;
     public int baseDef;
     public int baseSpd;

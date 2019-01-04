@@ -141,7 +141,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41185e20ed4e1ab4d8ed8740e6200309, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trainTracker: 
   chara:
     isDefending: 0
     name: 
@@ -152,9 +151,16 @@ MonoBehaviour:
     atk: 0
     def: 0
     spd: 0
+    baseHPmax: 0
     baseAtk: 0
     baseDef: 0
     baseSpd: 0
+    efShield: 0
+    efTauntRate: 0
+    efStunRate: 0
+    efRecov: 0
+    efExtend: 0
+    efPoison: 0
     actionPointMax: 0
     isEnemy: 0
     sequence: []
@@ -170,7 +176,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41185e20ed4e1ab4d8ed8740e6200309, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trainTracker: 
   chara:
     isDefending: 0
     name: 
@@ -181,9 +186,16 @@ MonoBehaviour:
     atk: 0
     def: 0
     spd: 0
+    baseHPmax: 0
     baseAtk: 0
     baseDef: 0
     baseSpd: 0
+    efShield: 0
+    efTauntRate: 0
+    efStunRate: 0
+    efRecov: 0
+    efExtend: 0
+    efPoison: 0
     actionPointMax: 0
     isEnemy: 0
     sequence: []
@@ -200,9 +212,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   allPlayerChara:
-  - {fileID: 1671291080308888, guid: 320a52bdbbd45234c8b4626d783d197c, type: 2}
   - {fileID: 1671291080308888, guid: 9b1ef0f547e1a1447b224683807156a5, type: 2}
   - {fileID: 1671291080308888, guid: cec9b988d4d394f4a83b34f495d6dc12, type: 2}
+  - {fileID: 1671291080308888, guid: a795e103a4ca97e459164ebdb2176ab4, type: 2}
+  - {fileID: 1671291080308888, guid: ef4fce5fb6bc5a74a88bb506142739d8, type: 2}
+  - {fileID: 1671291080308888, guid: d8002c8acd27216478bda39b2f1a8b64, type: 2}
+  - {fileID: 1671291080308888, guid: 9d25ea0fd095fa84aa7c0641c4fe0f47, type: 2}
   allItem:
   - {fileID: 114481585021781610, guid: f6c549331c1f03e4c8d8f01fa2f1ecb2, type: 2}
   party: []
@@ -217,7 +232,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41185e20ed4e1ab4d8ed8740e6200309, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trainTracker: 
   chara:
     isDefending: 0
     name: 
@@ -228,9 +242,16 @@ MonoBehaviour:
     atk: 0
     def: 0
     spd: 0
+    baseHPmax: 0
     baseAtk: 0
     baseDef: 0
     baseSpd: 0
+    efShield: 0
+    efTauntRate: 0
+    efStunRate: 0
+    efRecov: 0
+    efExtend: 0
+    efPoison: 0
     actionPointMax: 0
     isEnemy: 0
     sequence: []

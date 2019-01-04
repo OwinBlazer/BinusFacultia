@@ -6,4 +6,5 @@ using UnityEngine;
 public class PlayerChara : MonoBehaviour {
     public Chara chara;
     public List<SkillInterface> skillList;
+    public int trainCount;
 }

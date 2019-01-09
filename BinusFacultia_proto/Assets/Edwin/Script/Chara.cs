@@ -126,8 +126,8 @@ public class Chara
             HPcurr = HPmax;
         }
     }
-    private int seqIndex=0;
-    private int actIndex=9999;
+    public int seqIndex=0;
+    public int actIndex=9999;
     public Action GetNextAction(List<Chara> allChara)
     {
         if (actIndex >= sequence[seqIndex].actions.Length)

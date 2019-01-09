@@ -17,8 +17,8 @@ public class CombatEngine : MonoBehaviour {
     //tempo
     public GameObject enemy1, enemy2, enemy3;
     //more final
-    [SerializeField] GameObject[] EnemyList;
-    [SerializeField] List<GameObject> ActiveEnemy;
+    [SerializeField] public GameObject[] EnemyList;
+    [SerializeField] public List<GameObject> ActiveEnemy;
 
     [SerializeField] GameObject targetListParent;
     [SerializeField] GameObject targetButton;
@@ -42,7 +42,7 @@ public class CombatEngine : MonoBehaviour {
     List<ActEntryList> allActions = new List<ActEntryList>();
     public GameObject[] skillButton;
     public GameObject[] itemButton;
-    bool combatInProgress;
+    public bool combatInProgress;
 
     public List<Chara> GetAllChara()
     {
@@ -82,7 +82,7 @@ public class CombatEngine : MonoBehaviour {
         SpawnEnemy(0);
         SpawnEnemy(1);
     }
-    public void SpawnEnemy(EnemyChara spawnChara)
+    public EnemyChara SpawnEnemy(EnemyChara spawnChara)
     {
         //another way to spawn enemy
         foreach (GameObject go in ActiveEnemy)
@@ -117,11 +117,12 @@ public class CombatEngine : MonoBehaviour {
                 eChara.chara.Initialize();
                 allChara.Add(eChara.chara);
                 UpdateHPUI();
-                break;
+                return eChara;
             }
         }
+        return null;
     }
-    public void SpawnEnemy(int ID)
+    public EnemyChara SpawnEnemy(int ID)
     {
         //add enemy here :D 
         //Step 1, assign an idle ActiveEnemy object
@@ -161,9 +162,10 @@ public class CombatEngine : MonoBehaviour {
                 eChara.chara.Initialize();
                 allChara.Add(eChara.chara);
                 UpdateHPUI();
-                break;
+                return eChara;
             }
         }
+        return null;
     }
     public void Combat()
     {
@@ -442,10 +444,6 @@ public class CombatEngine : MonoBehaviour {
             VictoryCheck();
         }
         EndPhase();
-    }
-    void SortActionList(List<Action> actionList)
-    {
-
     }
     void EndPhase()
     {

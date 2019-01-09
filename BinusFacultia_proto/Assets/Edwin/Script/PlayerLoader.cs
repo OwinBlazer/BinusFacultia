@@ -30,7 +30,7 @@ public class PlayerLoader : MonoBehaviour {
     {
         string saveData="";
         //store starts with id
-        saveData += GetIDOf(pChara.chara.name)+"#";
+        saveData += GetIDOf(pChara.chara.name)+"#"; //index 0
 
         //base stats and name and skill type will be pulled from id
 
@@ -39,7 +39,7 @@ public class PlayerLoader : MonoBehaviour {
         saveData += pChara.chara.MPmax + "#";
         saveData += pChara.chara.atk + "#";
         saveData += pChara.chara.def + "#";
-        saveData += pChara.chara.spd + "#";
+        saveData += pChara.chara.spd + "#"; //index 5
 
         //saving battle stats
         saveData += pChara.chara.HPcurr + "#";
@@ -47,20 +47,28 @@ public class PlayerLoader : MonoBehaviour {
 
         saveData += pChara.chara.efShield + "#";
         saveData += pChara.chara.efTauntRate + "#";
-        saveData += pChara.chara.efStunRate + "#";
+        saveData += pChara.chara.efStunRate + "#"; //index 10
         saveData += pChara.chara.efRecov + "#";
         saveData += pChara.chara.efExtend + "#";
         saveData += pChara.chara.efPoison + "#";
 
         saveData += pChara.chara.actionPointMax + "#";
 
+        //saving status effects
+        foreach(StatusEffect se in pChara.chara.statusEffectList)
+        {
+            saveData += se.StatusID +'^';
+            saveData += se.level + '^';
+            saveData += se.duration + '&';
+        }
+        saveData += "#"; //index 15
         //saving allocation stats
         saveData += pChara.skillList[0].skillLevel + "#";
         saveData += pChara.skillList[1].skillLevel + "#";
         saveData += pChara.skillList[2].skillLevel + "#";
         saveData += pChara.skillList[3].skillLevel + "#";
 
-        saveData += pChara.trainCount;
+        saveData += pChara.trainCount; //index 20
 
         PlayerPrefs.SetString("partyDetails"+ID,saveData);
     }
@@ -104,16 +112,86 @@ public class PlayerLoader : MonoBehaviour {
             pChara.chara.efStunRate = int.Parse(saveData[10]);
             pChara.chara.efRecov = int.Parse(saveData[11]);
             pChara.chara.efExtend = int.Parse(saveData[12]);
+            pChara.chara.efPoison = int.Parse(saveData[13]);
 
-            pChara.chara.actionPointMax = int.Parse(saveData[13]);
+            pChara.chara.actionPointMax = int.Parse(saveData[14]);
+            //set status effects
+            string[] seData = saveData[15].Split('&');
+            foreach(string seSet in seData)
+            {
+                string[] seDetail = seSet.Split('^');
+                /*1 = AtkUP
+                    2 = SpdUP
+                    3 = DefUP
+                    4 = AtkDOWN
+                    5 = SpdDOWN
+                    6 = DefDOWN
+                    7 = HPDOwn
+                    11 = Poison(Overload)
+                    12 = Shield
+                    13 = Extend
+                    14 = Regen
+                    15 = Stun
+                    16 = Taunt*/
+                StatusEffect tempSE;
+                //set SE according to ID
+                switch (int.Parse(seDetail[0]))
+                {
+                    case 1:
+                        tempSE = new Ef_AtkUP();
+                        break;
+                    case 2:
+                        tempSE = new Ef_SpdUP();
+                        break;
+                    case 3:
+                        tempSE = new Ef_DefUP();
+                        break;
+                    case 4:
+                        tempSE = new Ef_AtkDOWN();
+                        break;
+                    case 5:
+                        tempSE = new Ef_SpdDOWN();
+                        break;
+                    case 6:
+                        tempSE = new Ef_DefDOWN();
+                        break;
+                    case 7:
+                        tempSE = new Ef_HPDOWN();
+                        break;
+                    case 11:
+                        tempSE = new Ef_Poison();
+                        break;
+                    case 12:
+                        tempSE = new Ef_Shield();
+                        break;
+                    case 13:
+                        tempSE = new Ef_Extend();
+                        break;
+                    case 14:
+                        tempSE = new Ef_Regen();
+                        break;
+                    case 15:
+                        tempSE = new Ef_Stun();
+                        break;
+                    case 16:
+                        tempSE = new Ef_Taunt();
+                        break;
+                    default:
+                        //in case buff not found, turn to regen
+                        tempSE = new Ef_Regen();
+                        break;
+                }
+                tempSE.InitializeSE(int.Parse(seDetail[1]), int.Parse(seDetail[2]));
+                pChara.chara.statusEffectList.Add(tempSE);
+             }
 
             //allocation
-            pChara.skillList[0].skillLevel = int.Parse(saveData[14]);
-            pChara.skillList[1].skillLevel = int.Parse(saveData[15]);
-            pChara.skillList[2].skillLevel = int.Parse(saveData[16]);
-            pChara.skillList[3].skillLevel = int.Parse(saveData[17]);
+            pChara.skillList[0].skillLevel = int.Parse(saveData[16]);
+            pChara.skillList[1].skillLevel = int.Parse(saveData[17]);
+            pChara.skillList[2].skillLevel = int.Parse(saveData[18]);
+            pChara.skillList[3].skillLevel = int.Parse(saveData[19]);
 
-            pChara.trainCount = int.Parse(saveData[18]);
+            pChara.trainCount = int.Parse(saveData[20]);
             return pChara;
         }
     }

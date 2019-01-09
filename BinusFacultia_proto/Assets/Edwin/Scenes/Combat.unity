@@ -1222,6 +1222,8 @@ MonoBehaviour:
     efPoison: 0
     actionPointMax: 0
     isEnemy: 0
+    seqIndex: 0
+    actIndex: 0
     sequence: []
 --- !u!1 &462996183
 GameObject:
@@ -1570,6 +1572,10 @@ MonoBehaviour:
   - {fileID: 1346807523820822, guid: 9dd25835307f56d4c966b7f62dce429d, type: 2}
   - {fileID: 1346807523820822, guid: 724d80cad6db96441b07fd1df6c95680, type: 2}
   - {fileID: 1346807523820822, guid: 0bfbe8921f0df04459d1f58e1404e2f6, type: 2}
+  - {fileID: 1346807523820822, guid: 213a7054a356b5d4f8bddd75faa1212e, type: 2}
+  - {fileID: 1346807523820822, guid: dc5f6331617065c4a972c491b795da00, type: 2}
+  - {fileID: 1346807523820822, guid: 0c912bdd0434b224ba8ed9f90bf436c0, type: 2}
+  - {fileID: 1346807523820822, guid: fa0bfd574c83e654fb8f5e9fde66fbff, type: 2}
   ActiveEnemy: []
   targetListParent: {fileID: 542989395}
   targetButton: {fileID: 1310187514939472, guid: 9447c20f7aa81634186b37bc2220c15f,
@@ -1599,6 +1605,8 @@ MonoBehaviour:
     efPoison: 0
     actionPointMax: 0
     isEnemy: 0
+    seqIndex: 0
+    actIndex: 0
     sequence: []
   logbox: {fileID: 1159765456}
   charNameText:
@@ -1634,6 +1642,7 @@ MonoBehaviour:
   - {fileID: 1231406174}
   - {fileID: 2111905840}
   - {fileID: 1460833926}
+  combatInProgress: 0
 --- !u!1 &517532213
 GameObject:
   m_ObjectHideFlags: 0
@@ -3401,6 +3410,8 @@ MonoBehaviour:
     efPoison: 0
     actionPointMax: 0
     isEnemy: 0
+    seqIndex: 0
+    actIndex: 0
     sequence: []
 --- !u!1 &1133613570
 GameObject:
@@ -3738,6 +3749,8 @@ MonoBehaviour:
     efPoison: 0
     actionPointMax: 0
     isEnemy: 0
+    seqIndex: 0
+    actIndex: 0
     sequence: []
 --- !u!1 &1219698947
 GameObject:
@@ -4126,8 +4139,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1384512557}
+  - component: {fileID: 1384512558}
   m_Layer: 0
-  m_Name: PartyDataManager
+  m_Name: LevelLoader
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4146,6 +4160,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1384512558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1384512556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a0285aa2f636854689d9ad320108091, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  combatEngine: {fileID: 0}
 --- !u!1 &1404509620
 GameObject:
   m_ObjectHideFlags: 0
@@ -5781,6 +5807,8 @@ MonoBehaviour:
     efPoison: 0
     actionPointMax: 0
     isEnemy: 0
+    seqIndex: 0
+    actIndex: 0
     sequence: []
 --- !u!1 &2015118371
 GameObject:
@@ -5981,6 +6009,8 @@ MonoBehaviour:
     efPoison: 0
     actionPointMax: 0
     isEnemy: 0
+    seqIndex: 0
+    actIndex: 0
     sequence: []
 --- !u!1 &2083594934
 GameObject:

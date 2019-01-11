@@ -52,6 +52,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyID: 107
+  goldPrize: 12500
   chara:
     isDefending: 0
     name: UAS7
@@ -63,6 +64,7 @@ MonoBehaviour:
     def: 25
     spd: 49
     baseHPmax: 550
+    baseMPmax: 0
     baseAtk: 70
     baseDef: 25
     baseSpd: 49
@@ -74,6 +76,8 @@ MonoBehaviour:
     efPoison: 0
     actionPointMax: 3
     isEnemy: 1
+    seqIndex: 0
+    actIndex: 0
     sequence:
     - value: 6
       actions:

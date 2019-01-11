@@ -38,7 +38,7 @@ public class GlobPol : paSkill
             //launches level+1 attacks at living enemies, stopping only when no more living enemies are left or number of hits reached.
             while(doneHits<level+1 && tempCharaList.Count > 0)
             {
-                listCount = listCount = tempCharaList.Count;
+                listCount = tempCharaList.Count;
                 rng = Random.Range(0, listCount);
                 damage = CalculateDamage(source.atk, tempCharaList[rng]);
                 tempCharaList[rng].TakeDamage(damage);

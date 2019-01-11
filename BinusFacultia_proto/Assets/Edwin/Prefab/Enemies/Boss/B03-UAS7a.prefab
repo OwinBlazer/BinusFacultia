@@ -52,6 +52,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyID: 1071
+  goldPrize: 0
   chara:
     isDefending: 0
     name: Enrichment
@@ -63,6 +64,7 @@ MonoBehaviour:
     def: 15
     spd: 53
     baseHPmax: 70
+    baseMPmax: 0
     baseAtk: 50
     baseDef: 15
     baseSpd: 53
@@ -74,6 +76,8 @@ MonoBehaviour:
     efPoison: 0
     actionPointMax: 3
     isEnemy: 1
+    seqIndex: 0
+    actIndex: 0
     sequence:
     - value: 1
       actions:

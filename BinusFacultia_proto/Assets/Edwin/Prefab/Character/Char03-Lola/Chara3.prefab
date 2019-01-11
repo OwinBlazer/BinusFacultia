@@ -51,7 +51,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41185e20ed4e1ab4d8ed8740e6200309, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trainTracker: 
   chara:
     isDefending: 0
     name: Lola
@@ -63,6 +62,7 @@ MonoBehaviour:
     def: 9
     spd: 12
     baseHPmax: 75
+    baseMPmax: 90
     baseAtk: 6
     baseDef: 9
     baseSpd: 12
@@ -72,11 +72,14 @@ MonoBehaviour:
     efRecov: 0
     efExtend: 0
     efPoison: 0
-    actionPointMax: 5
+    actionPointMax: 0
     isEnemy: 0
+    seqIndex: 0
+    actIndex: 99
     sequence: []
   skillList:
   - {fileID: 114519682370323086, guid: d74afe5188b0561409780f65f88c2c41, type: 2}
   - {fileID: 114021664328950664, guid: 90abd53599a397245a6effb6c64c5cc1, type: 2}
   - {fileID: 114948368148879086, guid: 59a15529eaf3c29479055fa6a74cc787, type: 2}
   - {fileID: 114515522301923272, guid: d607e62930aa9044895469f17f28adb9, type: 2}
+  trainCount: 0

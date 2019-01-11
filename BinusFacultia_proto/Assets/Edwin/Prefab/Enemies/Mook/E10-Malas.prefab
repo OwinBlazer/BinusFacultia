@@ -52,6 +52,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyID: 9
+  goldPrize: 400
   chara:
     isDefending: 0
     name: Tugas Akhir
@@ -63,6 +64,7 @@ MonoBehaviour:
     def: 12
     spd: 35
     baseHPmax: 129
+    baseMPmax: 0
     baseAtk: 74
     baseDef: 12
     baseSpd: 35
@@ -74,6 +76,8 @@ MonoBehaviour:
     efPoison: 0
     actionPointMax: 3
     isEnemy: 1
+    seqIndex: 0
+    actIndex: 0
     sequence:
     - value: 5
       actions:

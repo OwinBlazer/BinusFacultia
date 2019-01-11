@@ -52,6 +52,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyID: 8
+  goldPrize: 100
   chara:
     isDefending: 0
     name: Quiz
@@ -63,6 +64,7 @@ MonoBehaviour:
     def: 11
     spd: 14
     baseHPmax: 54
+    baseMPmax: 0
     baseAtk: 46
     baseDef: 11
     baseSpd: 14
@@ -74,6 +76,8 @@ MonoBehaviour:
     efPoison: 0
     actionPointMax: 3
     isEnemy: 1
+    seqIndex: 0
+    actIndex: 0
     sequence:
     - value: 5
       actions:
@@ -83,7 +87,7 @@ MonoBehaviour:
       - {fileID: 114437451661063694, guid: 31d642110a4018849a655cfa22977952, type: 2}
     - value: 3
       actions:
-      - {fileID: 114708668418814040, guid: 5c599958e7cd7294f86dfe7b4f2f2bca, type: 2}
+      - {fileID: 0}
       - {fileID: 114083514298504650, guid: f3bb6ed9ccd3925419314daa1de51c04, type: 2}
     - value: 2
       actions:

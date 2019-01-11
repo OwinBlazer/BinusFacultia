@@ -62,6 +62,7 @@ MonoBehaviour:
     def: 6
     spd: 9
     baseHPmax: 75
+    baseMPmax: 90
     baseAtk: 12
     baseDef: 6
     baseSpd: 9
@@ -71,11 +72,14 @@ MonoBehaviour:
     efRecov: 0
     efExtend: 0
     efPoison: 0
-    actionPointMax: 5
+    actionPointMax: 0
     isEnemy: 0
+    seqIndex: 0
+    actIndex: 0
     sequence: []
   skillList:
   - {fileID: 114766323862834596, guid: e131e135dc5289e4682bb381886ad138, type: 2}
   - {fileID: 114199207948431462, guid: b30388ecbff4c1e498f13167695dcb95, type: 2}
   - {fileID: 114175042554437672, guid: ba384ce149df6b1419b7a235644c41e5, type: 2}
   - {fileID: 114411142663677496, guid: dddd50337126bc248967648c4515c745, type: 2}
+  trainCount: 0

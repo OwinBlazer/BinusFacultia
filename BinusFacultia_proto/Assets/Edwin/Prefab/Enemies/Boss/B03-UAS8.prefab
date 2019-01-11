@@ -52,6 +52,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyID: 108
+  goldPrize: 0
   chara:
     isDefending: 0
     name: T.H.E.S.I.S
@@ -63,6 +64,7 @@ MonoBehaviour:
     def: 30
     spd: 55
     baseHPmax: 650
+    baseMPmax: 0
     baseAtk: 100
     baseDef: 30
     baseSpd: 55
@@ -74,6 +76,8 @@ MonoBehaviour:
     efPoison: 0
     actionPointMax: 3
     isEnemy: 1
+    seqIndex: 0
+    actIndex: 0
     sequence:
     - value: 6
       actions:

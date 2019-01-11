@@ -11,7 +11,6 @@ public class AI_AttackRefreshSelf : ActionInterface
 }
 public class eAI_AttackRefreshSelf : Action
 {
-    private float tauntSum = 0;
     private int damage;
     private Chara target;
     public eAI_AttackRefreshSelf(Chara source, List<Chara> targetList)

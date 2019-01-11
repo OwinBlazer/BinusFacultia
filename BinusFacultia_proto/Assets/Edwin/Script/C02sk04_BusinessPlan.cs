@@ -29,7 +29,7 @@ public class BusPlan : paSkill
         {
             source.MPcurr -= mpCost;
             message = target.name + " transferred MP and amplified!\n";
-            target.MPcurr += 5 * level;
+            target.HealMP(5 * level);
             foreach (StatusEffect se in target.statusEffectList)
             {
                 se.ResetEffect(target);

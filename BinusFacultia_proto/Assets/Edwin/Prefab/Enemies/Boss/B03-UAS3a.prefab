@@ -52,6 +52,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyID: 1031
+  goldPrize: 0
   chara:
     isDefending: 0
     name: Multipart Essay
@@ -63,6 +64,7 @@ MonoBehaviour:
     def: 5
     spd: 20
     baseHPmax: 100
+    baseMPmax: 0
     baseAtk: 25
     baseDef: 5
     baseSpd: 20
@@ -74,6 +76,8 @@ MonoBehaviour:
     efPoison: 0
     actionPointMax: 3
     isEnemy: 1
+    seqIndex: 0
+    actIndex: 0
     sequence:
     - value: 1
       actions:

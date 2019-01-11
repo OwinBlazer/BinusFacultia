@@ -18,13 +18,18 @@ public class PlayerLoader : MonoBehaviour {
         for(int i = 0; i < 3; i++)
         {
             // tempchara holds the chosen character temporarily
-            //CHANGE THE 0@<========================================================
-            Chara tempChara = allPlayerChara[i].GetComponent<PlayerChara>().chara;
+            //CHANGE THE i@<========================================================
             party.Add(transform.GetChild(i).GetComponent<PlayerChara>());
-            party[i].chara = new Chara(tempChara.name, tempChara.HPmax, tempChara.MPmax, tempChara.baseAtk, tempChara.baseDef, tempChara.baseSpd, false);
-            party[i].skillList = allPlayerChara[i].GetComponent<PlayerChara>().skillList;
+            PlayerDataLoad(i);
         }
 
+    }
+    public void SaveParty()
+    {
+        for(int i = 0; i < 3; i++)
+        {
+            PlayerCharaSave(i,party[i]);
+        }
     }
     public void PlayerCharaSave(int ID,PlayerChara pChara)
     {
@@ -54,12 +59,16 @@ public class PlayerLoader : MonoBehaviour {
 
         saveData += pChara.chara.actionPointMax + "#";
 
+        int seIndex=0;
         //saving status effects
         foreach(StatusEffect se in pChara.chara.statusEffectList)
         {
-            saveData += se.StatusID +'^';
-            saveData += se.level + '^';
-            saveData += se.duration + '&';
+            saveData += se.StatusID +"^";
+            saveData += se.level + "^";
+            if (seIndex < pChara.chara.statusEffectList.Count)
+            {
+                saveData += se.duration + "&";
+            }
         }
         saveData += "#"; //index 15
         //saving allocation stats
@@ -74,7 +83,7 @@ public class PlayerLoader : MonoBehaviour {
     }
     public PlayerChara PlayerDataLoad(int ID)
     {
-        PlayerChara pChara = new PlayerChara();
+        PlayerChara pChara = party[ID].GetComponent<PlayerChara>();
         pChara.chara = new Chara("", 0, 0, 0, 0, 0, false);
         PlayerChara tempCharaHolder;
         string[] saveData;
@@ -116,74 +125,78 @@ public class PlayerLoader : MonoBehaviour {
 
             pChara.chara.actionPointMax = int.Parse(saveData[14]);
             //set status effects
-            string[] seData = saveData[15].Split('&');
-            foreach(string seSet in seData)
+            if (saveData[15].Length > 0)
             {
-                string[] seDetail = seSet.Split('^');
-                /*1 = AtkUP
-                    2 = SpdUP
-                    3 = DefUP
-                    4 = AtkDOWN
-                    5 = SpdDOWN
-                    6 = DefDOWN
-                    7 = HPDOwn
-                    11 = Poison(Overload)
-                    12 = Shield
-                    13 = Extend
-                    14 = Regen
-                    15 = Stun
-                    16 = Taunt*/
-                StatusEffect tempSE;
-                //set SE according to ID
-                switch (int.Parse(seDetail[0]))
+                string[] seData = saveData[15].Split('&');
+                foreach (string seSet in seData)
                 {
-                    case 1:
-                        tempSE = new Ef_AtkUP();
-                        break;
-                    case 2:
-                        tempSE = new Ef_SpdUP();
-                        break;
-                    case 3:
-                        tempSE = new Ef_DefUP();
-                        break;
-                    case 4:
-                        tempSE = new Ef_AtkDOWN();
-                        break;
-                    case 5:
-                        tempSE = new Ef_SpdDOWN();
-                        break;
-                    case 6:
-                        tempSE = new Ef_DefDOWN();
-                        break;
-                    case 7:
-                        tempSE = new Ef_HPDOWN();
-                        break;
-                    case 11:
-                        tempSE = new Ef_Poison();
-                        break;
-                    case 12:
-                        tempSE = new Ef_Shield();
-                        break;
-                    case 13:
-                        tempSE = new Ef_Extend();
-                        break;
-                    case 14:
-                        tempSE = new Ef_Regen();
-                        break;
-                    case 15:
-                        tempSE = new Ef_Stun();
-                        break;
-                    case 16:
-                        tempSE = new Ef_Taunt();
-                        break;
-                    default:
-                        //in case buff not found, turn to regen
-                        tempSE = new Ef_Regen();
-                        break;
+                    string[] seDetail = seSet.Split('^');
+                    /*1 = AtkUP
+                        2 = SpdUP
+                        3 = DefUP
+                        4 = AtkDOWN
+                        5 = SpdDOWN
+                        6 = DefDOWN
+                        7 = HPDOwn
+                        11 = Poison(Overload)
+                        12 = Shield
+                        13 = Extend
+                        14 = Regen
+                        15 = Stun
+                        16 = Taunt*/
+                    StatusEffect tempSE;
+                    //set SE according to ID
+                    switch (int.Parse(seDetail[0]))
+                    {
+                        case 1:
+                            tempSE = new Ef_AtkUP();
+                            break;
+                        case 2:
+                            tempSE = new Ef_SpdUP();
+                            break;
+                        case 3:
+                            tempSE = new Ef_DefUP();
+                            break;
+                        case 4:
+                            tempSE = new Ef_AtkDOWN();
+                            break;
+                        case 5:
+                            tempSE = new Ef_SpdDOWN();
+                            break;
+                        case 6:
+                            tempSE = new Ef_DefDOWN();
+                            break;
+                        case 7:
+                            tempSE = new Ef_HPDOWN();
+                            break;
+                        case 11:
+                            tempSE = new Ef_Poison();
+                            break;
+                        case 12:
+                            tempSE = new Ef_Shield();
+                            break;
+                        case 13:
+                            tempSE = new Ef_Extend();
+                            break;
+                        case 14:
+                            tempSE = new Ef_Regen();
+                            break;
+                        case 15:
+                            tempSE = new Ef_Stun();
+                            break;
+                        case 16:
+                            tempSE = new Ef_Taunt();
+                            break;
+                        default:
+                            //in case buff not found, turn to regen
+                            tempSE = new Ef_Regen();
+                            break;
+                    }
+                    tempSE.InitializeSE(int.Parse(seDetail[1]), int.Parse(seDetail[2]));
+                    pChara.chara.statusEffectList.Add(tempSE);
                 }
-                tempSE.InitializeSE(int.Parse(seDetail[1]), int.Parse(seDetail[2]));
-                pChara.chara.statusEffectList.Add(tempSE);
-             }
+            }
+            
 
             //allocation
             pChara.skillList[0].skillLevel = int.Parse(saveData[16]);
@@ -197,15 +210,20 @@ public class PlayerLoader : MonoBehaviour {
     }
     private int GetIDOf(string name)
     {
-        int ID = 0;
+        int ID = -1;
         int tempIndex = 0;
-        while (ID == 0)
+        while (ID == -1)
         {
-            if (allPlayerChara[tempIndex].GetComponent<PlayerChara>().chara.name.Equals(name))
+            PlayerChara pChara = allPlayerChara[tempIndex].GetComponent<PlayerChara>();
+            
+            if (pChara.chara.name==name)
             {
                 ID = tempIndex;
+                //Debug.Log("id changed into "+tempIndex);
             }
+            tempIndex++;
         }
+        //Debug.Log("exited");
         return ID;
     }
     public List<Chara> GetPlayerCharacters()
@@ -214,6 +232,15 @@ public class PlayerLoader : MonoBehaviour {
         foreach(PlayerChara pChara in party)
         {
             tempCharaList.Add(pChara.chara);
+        }
+        return tempCharaList;
+    }
+    public List<PlayerChara> GetParty()
+    {
+        List<PlayerChara> tempCharaList = new List<PlayerChara>();
+        foreach (PlayerChara pChara in party)
+        {
+            tempCharaList.Add(pChara);
         }
         return tempCharaList;
     }

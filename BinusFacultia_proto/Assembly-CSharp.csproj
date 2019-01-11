@@ -156,6 +156,7 @@
     <Compile Include="Assets\Edwin\Script\It01HPpot.cs" />
     <Compile Include="Assets\Edwin\Script\ItemInterface.cs" />
     <Compile Include="Assets\Edwin\Script\LevelLoader.cs" />
+    <Compile Include="Assets\Edwin\Script\PartySelector.cs" />
     <Compile Include="Assets\Edwin\Script\PlayerChara.cs" />
     <Compile Include="Assets\Edwin\Script\PlayerLoader.cs" />
     <Compile Include="Assets\Edwin\Script\SkillInterface.cs" />

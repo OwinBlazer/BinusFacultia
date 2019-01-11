@@ -6,5 +6,6 @@ using UnityEngine;
 public class EnemyChara : MonoBehaviour
 {
     public int enemyID;
+    public int goldPrize;
     public Chara chara;
 }

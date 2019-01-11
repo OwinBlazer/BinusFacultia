@@ -51,7 +51,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41185e20ed4e1ab4d8ed8740e6200309, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trainTracker: 
   chara:
     isDefending: 0
     name: Nisbi
@@ -63,6 +62,7 @@ MonoBehaviour:
     def: 9
     spd: 15
     baseHPmax: 60
+    baseMPmax: 45
     baseAtk: 15
     baseDef: 9
     baseSpd: 15
@@ -72,11 +72,14 @@ MonoBehaviour:
     efRecov: 0
     efExtend: 0
     efPoison: 0
-    actionPointMax: 5
+    actionPointMax: 0
     isEnemy: 0
+    seqIndex: 0
+    actIndex: 0
     sequence: []
   skillList:
   - {fileID: 114313820103699134, guid: 488c9b7adc91bc046bb48c14e415ed78, type: 2}
   - {fileID: 114622612297140366, guid: ca1c39acec251b34bbd338ba98e58189, type: 2}
   - {fileID: 114667155234858614, guid: 2e51a61344b57284d85de60c2267e96e, type: 2}
   - {fileID: 114440312047953322, guid: 65a83ae0034e3d94eb39ea1042c66afe, type: 2}
+  trainCount: 0

@@ -52,6 +52,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyID: 6
+  goldPrize: 50
   chara:
     isDefending: 0
     name: MainHP
@@ -63,6 +64,7 @@ MonoBehaviour:
     def: 15
     spd: 23
     baseHPmax: 65
+    baseMPmax: 0
     baseAtk: 30
     baseDef: 15
     baseSpd: 23
@@ -74,6 +76,8 @@ MonoBehaviour:
     efPoison: 0
     actionPointMax: 3
     isEnemy: 1
+    seqIndex: 0
+    actIndex: 0
     sequence:
     - value: 4
       actions:

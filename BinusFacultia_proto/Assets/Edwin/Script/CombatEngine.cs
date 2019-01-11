@@ -15,7 +15,7 @@ public class ActEntryList {
 
 public class CombatEngine : MonoBehaviour {
     //tempo
-    public GameObject enemy1, enemy2, enemy3;
+    public LevelLoader levelLoader;
     //more final
     [SerializeField] public GameObject[] EnemyList;
     [SerializeField] public List<GameObject> ActiveEnemy;
@@ -34,9 +34,12 @@ public class CombatEngine : MonoBehaviour {
     //1=order
     //2=execution
     [SerializeField] public Text logbox;
+    [SerializeField] Text resultBox;
+
     [SerializeField] public Text[] charNameText;
     [SerializeField] public Text[] charHPText;
     [SerializeField] public Text[] charAPtext;
+
     public PlayerLoader playerLoader;
     List<Chara> allChara = new List<Chara>();
     List<ActEntryList> allActions = new List<ActEntryList>();
@@ -50,6 +53,8 @@ public class CombatEngine : MonoBehaviour {
     }
 	// Use this for initialization
 	void Start () {
+        combatInProgress = true;
+        //PlayerPrefs.DeleteAll();
         phaseID = 0;
 
         playerLoader.initializeParty();
@@ -62,25 +67,24 @@ public class CombatEngine : MonoBehaviour {
         {
             ActiveEnemy.Add(transform.GetChild(i).gameObject);
         }
-        /*
-
-        allChara.Add(new Chara("Gatto", 30, 20, 10, 3, 9, false));
-        allChara.Add(new Chara("Gitte", 30, 20, 10, 3, 8, false));
-        allChara.Add(new Chara("Goando", 30, 20, 10, 3, 10, false));
-        */
-
+        foreach(GameObject go in ActiveEnemy)
+        {
+            EnemyChara echara = go.GetComponent<EnemyChara>();
+            echara.chara.Initialize();
+            allChara.Add(echara.chara);
+        }
         LoadEnemy();
-        combatInProgress = true;
+
         UpdateHPUI();
         Combat();
+        VictoryCheck();
     }
     private void LoadEnemy()
     {
-        //FIX THIS @
+        levelLoader.initSession();
+        //FIX THIS 
         //This section loads all listed enemy in the encounter list
-        SpawnEnemy(0);
-        SpawnEnemy(0);
-        SpawnEnemy(1);
+        //this is handled in LevelLoader
     }
     public EnemyChara SpawnEnemy(EnemyChara spawnChara)
     {
@@ -115,7 +119,6 @@ public class CombatEngine : MonoBehaviour {
                 eChara.chara.baseDef = spawnChara.chara.baseDef;
                 eChara.chara.sequence = spawnChara.chara.sequence;
                 eChara.chara.Initialize();
-                allChara.Add(eChara.chara);
                 UpdateHPUI();
                 return eChara;
             }
@@ -124,6 +127,7 @@ public class CombatEngine : MonoBehaviour {
     }
     public EnemyChara SpawnEnemy(int ID)
     {
+        //Debug.Log("Spawned: "+ID);
         //add enemy here :D 
         //Step 1, assign an idle ActiveEnemy object
         //Step 2, get the object's EnemyChara component
@@ -135,11 +139,22 @@ public class CombatEngine : MonoBehaviour {
             //if dead/empty
             if (eChara.chara.HPcurr <= 0)
             {
-                EnemyChara sourceChara = EnemyList[ID].GetComponent<EnemyChara>();
+                //GetCorrectEnemyByID
+                int correctIndex=0;
+                for (int i = 0;i < EnemyList.Length; i++)
+                {
+                    if (EnemyList[i].GetComponent<EnemyChara>().enemyID == ID)
+                    {
+                        correctIndex = i;
+                        break;
+                    }
+                }
+                EnemyChara sourceChara = EnemyList[correctIndex].GetComponent<EnemyChara>();
                 //initialize that component as the correct spawn
                 
                 eChara.enemyID = ID;
                 eChara.chara.isEnemy = true;
+                eChara.goldPrize = sourceChara.goldPrize;
 
                 eChara.chara.baseHPmax = sourceChara.chara.baseHPmax;
                 eChara.chara.HPmax = sourceChara.chara.HPmax;
@@ -160,7 +175,6 @@ public class CombatEngine : MonoBehaviour {
                 eChara.chara.baseDef = sourceChara.chara.baseDef;
                 eChara.chara.sequence = sourceChara.chara.sequence;
                 eChara.chara.Initialize();
-                allChara.Add(eChara.chara);
                 UpdateHPUI();
                 return eChara;
             }
@@ -401,7 +415,6 @@ public class CombatEngine : MonoBehaviour {
     {
         if (combatInProgress)
         {
-            List<Chara> charaWithoutAction = new List<Chara>();
 
             //all chara with no action -> defending
             foreach (Chara chara in allChara)
@@ -423,7 +436,7 @@ public class CombatEngine : MonoBehaviour {
                 foreach(Action act in chara.queuedAction)
                 {
                     allActions.Add(new ActEntryList(act,allActions.Count));
-                    Debug.Log(chara.name+" with id "+(allActions.Count-1).ToString() +"and speed "+ chara.spd.ToString());
+                    //Debug.Log(chara.name+" with id "+(allActions.Count-1).ToString() +"and speed "+ chara.spd.ToString());
                 }
             }
             ExecutionPhase();
@@ -453,10 +466,14 @@ public class CombatEngine : MonoBehaviour {
             chara.queuedAction.Clear();
             chara.isDefending = false;
         }
+        levelLoader.saveEnemies();
+        playerLoader.SaveParty();
+
         Combat();
     }
     void UpdateHPUI()
     {
+        //Debug.Log(allChara.Count);
         for(int i = 0; i < allChara.Count; i++)
         {
             charNameText[i].text = allChara[i].name;
@@ -537,11 +554,6 @@ public class CombatEngine : MonoBehaviour {
                 {
                     enemyCount++;
                 }
-                else
-                {
-                    allChara.RemoveAt(tempIndex);
-                    break;
-                }
             }
             else
             {
@@ -552,6 +564,7 @@ public class CombatEngine : MonoBehaviour {
             }
             tempIndex++;
         }
+        //Debug.Log("chara count num: " + enemyCount + " vs "+allyCount);
 
         if (enemyCount == 0)
         {
@@ -569,16 +582,58 @@ public class CombatEngine : MonoBehaviour {
         //continue to next wave here<======================@
         logbox.text += "you won!";
         executeButton.SetActive(false);
-        anim.SetInteger("actionMenuID",9);
+        anim.SetInteger("actionMenuID",10);
 
     }
     void BattleLost()
     {
+        Debug.Log("batteLost");
         combatInProgress = false;
         logbox.text += "you lost...!";
         executeButton.SetActive(false);
         //battle lost trigger here<===========================@
         anim.SetInteger("actionMenuID", 9);
+    }
+
+    public void BonusHP()
+    {
+        int healNum = levelLoader.wave * 5 + levelLoader.semester * 5;
+        foreach(Chara chara in allChara)
+        {
+            if (!chara.isEnemy)
+            {
+                chara.HealDamage(healNum);
+            }
+        }
+        BattleNext();
+    }
+    public void BonusMP()
+    {
+        int mpNum = levelLoader.wave * 5 + levelLoader.semester * 3;
+        foreach (Chara chara in allChara)
+        {
+            if (!chara.isEnemy)
+            {
+                chara.HealMP(mpNum);
+            }
+        }
+        BattleNext();
+    }
+    public void BonusGold()
+    {
+        //((Semester*Wave)^1.5)*10
+        int goldGain = (int)Mathf.Pow(((levelLoader.wave * levelLoader.semester)),1.5f) *10;
+        PlayerPrefs.SetInt("gold", PlayerPrefs.GetInt("gold",0)+goldGain);
+        BattleNext();
+    }
+
+    void BattleNext()
+    {
+        anim.SetInteger("actionMenuID", 0);
+        executeButton.SetActive(true);
+        levelLoader.NextWaveSem();
+        combatInProgress = true;
+        levelLoader.SaveSession();
     }
 }
 class actionSpdComp : IComparer<ActEntryList>

@@ -51,6 +51,7 @@ public class Chara
         isDefending = false;
         actionPointMax = 0;
         queuedAction = new List<Action>();
+        Initialize();
     }
     public void InflictStatus(StatusEffect se)
     {
@@ -89,14 +90,19 @@ public class Chara
         efExtend = 0;
         actIndex = 99;
     }
+    void Die()
+    {
+        Initialize();
+    }
     public void TakeDamage(int damage)
     {
         if (efShield <= 0)
         {
             HPcurr -= damage;
-            if (HPcurr < 0)
+            if (HPcurr <= 0)
             {
                 HPcurr = 0;
+                Die();
             }
         }
         else
@@ -124,6 +130,14 @@ public class Chara
         if(HPcurr > HPmax)
         {
             HPcurr = HPmax;
+        }
+    }
+    public void HealMP(int mpRecov)
+    {
+        MPcurr += mpRecov;
+        if (MPcurr > mpRecov)
+        {
+            MPcurr = MPmax;
         }
     }
     public int seqIndex=0;

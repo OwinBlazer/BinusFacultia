@@ -21,7 +21,6 @@ public class eAI_DefbreakAll : Action
     public int defDownLevel;
     public int defDownDur;
     public int sevMod;
-    private Chara target;
     public eAI_DefbreakAll(Chara source, List<Chara> targetList)
     {
         this.source = source;
@@ -41,11 +40,11 @@ public class eAI_DefbreakAll : Action
             if (!chara.isEnemy && chara.HPcurr > 0)
             {
                 //severity
-                foreach (StatusEffect se2 in target.statusEffectList)
+                foreach (StatusEffect se2 in chara.statusEffectList)
                 {
-                    se2.ResetEffect(target);
+                    se2.ResetEffect(chara);
                     se2.level += sevMod;
-                    se2.RunEffect(target);
+                    se2.RunEffect(chara);
                 }
                 chara.InflictStatus(se);
             }

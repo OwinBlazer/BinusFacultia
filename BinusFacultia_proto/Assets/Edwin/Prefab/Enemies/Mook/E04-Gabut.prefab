@@ -52,6 +52,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyID: 4
+  goldPrize: 20
   chara:
     isDefending: 0
     name: Gabut
@@ -63,6 +64,7 @@ MonoBehaviour:
     def: 4
     spd: 7
     baseHPmax: 40
+    baseMPmax: 0
     baseAtk: 14
     baseDef: 4
     baseSpd: 7
@@ -74,6 +76,8 @@ MonoBehaviour:
     efPoison: 0
     actionPointMax: 3
     isEnemy: 1
+    seqIndex: 0
+    actIndex: 0
     sequence:
     - value: 5
       actions:

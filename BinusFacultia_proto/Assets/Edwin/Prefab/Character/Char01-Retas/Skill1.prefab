@@ -51,6 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e882726961171b4cb2761c36e175652, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skillIcon: {fileID: 21300000, guid: 6bbc109320f00d840a47e93ac9dc1941, type: 3}
   skillName: Computer Security
   mpCost: 5
   skillLevel: 1

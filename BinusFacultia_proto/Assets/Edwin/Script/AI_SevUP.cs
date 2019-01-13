@@ -14,6 +14,7 @@ public class AI_SevUP : ActionInterface
 }
 public class eAI_SevUP : Action
 {
+
     public int level;
     private Chara target;
     public eAI_SevUP(Chara source, List<Chara> targetList)
@@ -47,5 +48,6 @@ public class eAI_SevUP : Action
             se.RunEffect(target);
             indexFlag++;
         }
+        GameObject.FindObjectOfType<CombatEngine>().PlayBuffFX(target);
     }
 }

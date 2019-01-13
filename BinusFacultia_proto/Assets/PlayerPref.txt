@@ -16,4 +16,5 @@ partyDetails0			- string- For the first party member, Holds name, Max HP, curren
 partyDetails1			- string- For the second party member, Holds name, Max HP, current HP, Max MP, current MP, base atk, def, spd, unlocked skills, number of trainings done and status effects they have.
 partyDetails2			- string- For the third party member, Holds name, Max HP, current HP, Max MP, current MP, base atk, def, spd, unlocked skills, number of trainings done and status effects they have.
 enemyDetails			- string- Stores number of enemies, and the relevant information of enemies by order of load. Includes name, id, current hp, status effects and current action in list of action
-sessionDetails			- string- Stores wave, semester, combatInProgress 
+sessionDetails			- string- Stores wave, semester, combatInProgress
+sessionBookmark			- int	- 0/null = no session. 1: battle session. 2: consult session;

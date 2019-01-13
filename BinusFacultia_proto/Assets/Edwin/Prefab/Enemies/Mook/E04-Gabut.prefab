@@ -54,6 +54,7 @@ MonoBehaviour:
   enemyID: 4
   goldPrize: 20
   chara:
+    sprite: {fileID: 21300000, guid: f3e620a319cb93a4da06482bec9455df, type: 3}
     isDefending: 0
     name: Gabut
     HPmax: 40

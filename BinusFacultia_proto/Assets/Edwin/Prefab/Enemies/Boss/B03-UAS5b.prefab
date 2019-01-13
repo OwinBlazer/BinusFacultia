@@ -54,6 +54,7 @@ MonoBehaviour:
   enemyID: 1052
   goldPrize: 2500
   chara:
+    sprite: {fileID: 21300000, guid: bae37f8dc1f40434981a87ab413154fa, type: 3}
     isDefending: 0
     name: UAS5 B
     HPmax: 300

@@ -52,6 +52,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chara:
+    sprite: {fileID: 21300000, guid: 0c1f5f6d5c03d104f913925c9b4a9bba, type: 3}
     isDefending: 0
     name: Kumhu
     HPmax: 75

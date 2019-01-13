@@ -32,6 +32,7 @@ public class eAI_SevUPAll : Action
         {
             if (!chara.isEnemy && chara.HPcurr > 0)
             {
+                GameObject.FindObjectOfType<CombatEngine>().PlayBuffFX(chara);
                 int indexFlag = 0;
                 StatusEffect se;
                 while (indexFlag < target.statusEffectList.Count)

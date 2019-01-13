@@ -54,6 +54,7 @@ MonoBehaviour:
   enemyID: 6
   goldPrize: 50
   chara:
+    sprite: {fileID: 21300000, guid: a5bc3170484949745813d7aae3472d50, type: 3}
     isDefending: 0
     name: MainHP
     HPmax: 65

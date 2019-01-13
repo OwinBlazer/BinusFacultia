@@ -32,14 +32,14 @@ public class eAI_BuffAtkSpdAll : Action
     public override void executeAction()
     {
 
-        StatusEffect se = new Ef_SpdUP();
-        se.InitializeSE(level, duration);
-        StatusEffect se2 = new Ef_AtkUP();
-        se2.InitializeSE(level, duration);
         foreach (Chara chara in targetList)
         {
             if (chara.isEnemy && chara.HPcurr > 0)
             {
+                StatusEffect se = new Ef_SpdUP();
+                se.InitializeSE(level, duration);
+                StatusEffect se2 = new Ef_AtkUP();
+                se2.InitializeSE(level, duration);
                 chara.InflictStatus(se);
                 chara.InflictStatus(se2);
             }

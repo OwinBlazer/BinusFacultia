@@ -28,13 +28,12 @@ public class eAI_DefbreakAll : Action
     }
     public override void updateLog(Text targetBox)
     {
-        message = source.name + " sprays your team with Def DOWN and amplified all status effects!\n";
+        message = source.name + " sprays your team with all status effects amplified  and Def DOWN!\n";
         targetBox.text += message;
     }
     public override void executeAction()
     {
-        StatusEffect se = new Ef_DefDOWN();
-        se.InitializeSE(defDownLevel, defDownDur);
+        StatusEffect se;
         foreach (Chara chara in targetList)
         {
             if (!chara.isEnemy && chara.HPcurr > 0)
@@ -45,8 +44,13 @@ public class eAI_DefbreakAll : Action
                     se2.ResetEffect(chara);
                     se2.level += sevMod;
                     se2.RunEffect(chara);
+                    GameObject.FindObjectOfType<CombatEngine>().PlayDebuffFX(chara);
                 }
+
+                se = new Ef_DefDOWN();
+                se.InitializeSE(defDownLevel, defDownDur);
                 chara.InflictStatus(se);
+                GameObject.FindObjectOfType<CombatEngine>().PlayDebuffFX(chara);
             }
         }
         

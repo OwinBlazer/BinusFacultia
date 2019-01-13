@@ -1,13 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class LevelLoader : MonoBehaviour {
     public CombatEngine combatEngine;
     public int wave;
     public int semester;
     [SerializeField] Semester[] bossList;
     [SerializeField]public Semester[] semesterList;
+    [SerializeField] Sprite[] bgImageList;
+    [SerializeField] Image bgImage;
 	// Use this for initialization
 
     
@@ -60,7 +62,7 @@ public class LevelLoader : MonoBehaviour {
         }
         PlayerPrefs.SetString("sessionDetails", saveData);
     }
-public int GetWave()
+    public int GetWave()
     {
         return wave;
     }
@@ -103,6 +105,18 @@ public int GetWave()
     }
     public void loadEnemies()
     {
+        if (semester < 4)
+        {
+            bgImage.sprite = bgImageList[0];
+        }else if (semester < 7)
+        {
+            bgImage.sprite = bgImageList[1];
+        }
+        else
+        {
+            bgImage.sprite = bgImageList[2];
+        }
+
         //Debug.Log(combatEngine.combatInProgress);
         if (combatEngine.combatInProgress)
         {
@@ -136,7 +150,6 @@ public int GetWave()
 
                     //loads currhp
                     eChara.chara.HPcurr = int.Parse(enemyDetail[2]);
-
                     //loads battle stats
                     eChara.chara.efExtend = int.Parse(enemyDetail[3]);
                     eChara.chara.efPoison = int.Parse(enemyDetail[4]);
@@ -160,7 +173,6 @@ public int GetWave()
                     if (enemyDetail[10].Length > 0)
                     {
                         string[] seData = enemyDetail[10].Split('&');
-                        Debug.Log(seData.Length);
                         foreach (string seSet in seData)
                         {
                             string[] seDetail = seSet.Split('^');
@@ -267,7 +279,7 @@ public int GetWave()
         {
             EnemyChara eChara = go.GetComponent<EnemyChara>();
             saveData += eChara.chara.name+'#'; //index 0
-            saveData += eChara.chara.GetFoeID() + "#";
+            saveData += eChara.enemyID + "#";
             saveData += eChara.chara.HPcurr + "#";
 
             //saves battle data

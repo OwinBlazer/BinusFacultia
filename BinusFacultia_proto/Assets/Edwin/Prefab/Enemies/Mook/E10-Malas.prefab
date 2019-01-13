@@ -54,20 +54,21 @@ MonoBehaviour:
   enemyID: 9
   goldPrize: 400
   chara:
+    sprite: {fileID: 21300000, guid: 2af45ad3cc57c2a4489fa4b4f46dab65, type: 3}
     isDefending: 0
-    name: Tugas Akhir
-    HPmax: 129
-    HPcurr: 129
+    name: Malas
+    HPmax: 105
+    HPcurr: 105
     MPmax: 0
     MPcurr: 0
-    atk: 74
-    def: 12
-    spd: 35
-    baseHPmax: 129
+    atk: 101
+    def: 26
+    spd: 27
+    baseHPmax: 1051
     baseMPmax: 0
-    baseAtk: 74
-    baseDef: 12
-    baseSpd: 35
+    baseAtk: 101
+    baseDef: 26
+    baseSpd: 27
     efShield: 0
     efTauntRate: 0
     efStunRate: 0

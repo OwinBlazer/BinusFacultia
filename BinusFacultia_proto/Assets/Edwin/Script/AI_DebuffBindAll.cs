@@ -25,14 +25,14 @@ public class eAI_DebuffBindAll : Action
     }
     public override void executeAction()
     {
-        StatusEffect se = new Ef_Stun();
-        StatusEffect se2 = new Ef_SpdDOWN();
-        se.InitializeSE(8, 3);
-        se2.InitializeSE(5, 4);
         foreach (Chara chara in targetList)
         {
             if (!chara.isEnemy && chara.HPcurr > 0)
             {
+                StatusEffect se = new Ef_Stun();
+                StatusEffect se2 = new Ef_SpdDOWN();
+                se.InitializeSE(8, 3);
+                se2.InitializeSE(5, 4);
                 chara.InflictStatus(se);
                 chara.InflictStatus(se2);
                 chara.TakeDamage(CalculateDamage(source.atk,chara));

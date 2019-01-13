@@ -326,3 +326,8 @@ MonoBehaviour:
       - {fileID: 114694702061006122, guid: dc5f6331617065c4a972c491b795da00, type: 2}
       - {fileID: 114694702061006122, guid: 9e8d019c5cc384b4d96b3e8125c4413f, type: 2}
       - {fileID: 114694702061006122, guid: 0c912bdd0434b224ba8ed9f90bf436c0, type: 2}
+  bgImageList:
+  - {fileID: 21300000, guid: 99942561c41418e4c8f4d1b02af6bd9a, type: 3}
+  - {fileID: 21300000, guid: d6af757197694e24eb9971024a2111b5, type: 3}
+  - {fileID: 21300000, guid: ef0b61eadd397de439fc3c5d9b9b5898, type: 3}
+  bgImage: {fileID: 0}

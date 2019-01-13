@@ -51,6 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e1e7c1c7b639d94aab56f5c46277c0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skillIcon: {fileID: 21300000, guid: d3dec8506620efb4cb3ec69d63975a89, type: 3}
   skillName: International Relation
   mpCost: 5
   skillLevel: 1

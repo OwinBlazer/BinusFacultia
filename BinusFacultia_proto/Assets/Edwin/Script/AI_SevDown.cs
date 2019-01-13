@@ -37,6 +37,7 @@ public class eAI_SevDown : Action
             }
         }
         target = viableTargets[Random.Range(0, viableTargets.Count)];
+        GameObject.FindObjectOfType<CombatEngine>().PlayDebuffFX(target);
         int indexFlag = 0;
         StatusEffect se;
         while (indexFlag < target.statusEffectList.Count)

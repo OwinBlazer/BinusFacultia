@@ -28,7 +28,7 @@ public class eAI_SevUPSelf : Action
     }
     public override void executeAction()
     {
-        
+        GameObject.FindObjectOfType<CombatEngine>().PlayBuffFX(source);
         int indexFlag = 0;
         StatusEffect se;
         while (indexFlag < source.statusEffectList.Count)

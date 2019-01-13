@@ -51,6 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f28ace1ec58723a41b17db649daa2e16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skillIcon: {fileID: 21300000, guid: 12be4a098b4106b4a9d9e362d27c0b0b, type: 3}
   skillName: Culinary Arts
   mpCost: 5
   skillLevel: 1

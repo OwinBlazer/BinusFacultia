@@ -54,6 +54,7 @@ MonoBehaviour:
   enemyID: 5
   goldPrize: 50
   chara:
+    sprite: {fileID: 21300000, guid: 6719c34097913fa40948f419c48ecae1, type: 3}
     isDefending: 0
     name: Nongkrong
     HPmax: 40

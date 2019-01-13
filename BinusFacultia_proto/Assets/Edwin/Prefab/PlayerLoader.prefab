@@ -142,6 +142,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chara:
+    sprite: {fileID: 0}
     isDefending: 0
     name: 
     HPmax: 0
@@ -152,6 +153,7 @@ MonoBehaviour:
     def: 0
     spd: 0
     baseHPmax: 0
+    baseMPmax: 0
     baseAtk: 0
     baseDef: 0
     baseSpd: 0
@@ -163,8 +165,11 @@ MonoBehaviour:
     efPoison: 0
     actionPointMax: 0
     isEnemy: 0
+    seqIndex: 0
+    actIndex: 0
     sequence: []
   skillList: []
+  trainCount: 0
 --- !u!114 &114144491472073984
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -177,6 +182,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chara:
+    sprite: {fileID: 0}
     isDefending: 0
     name: 
     HPmax: 0
@@ -187,6 +193,7 @@ MonoBehaviour:
     def: 0
     spd: 0
     baseHPmax: 0
+    baseMPmax: 0
     baseAtk: 0
     baseDef: 0
     baseSpd: 0
@@ -198,8 +205,11 @@ MonoBehaviour:
     efPoison: 0
     actionPointMax: 0
     isEnemy: 0
+    seqIndex: 0
+    actIndex: 0
     sequence: []
   skillList: []
+  trainCount: 0
 --- !u!114 &114244667038122374
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -220,6 +230,9 @@ MonoBehaviour:
   - {fileID: 1671291080308888, guid: 9d25ea0fd095fa84aa7c0641c4fe0f47, type: 2}
   allItem:
   - {fileID: 114481585021781610, guid: f6c549331c1f03e4c8d8f01fa2f1ecb2, type: 2}
+  - {fileID: 114056225591417374, guid: 8743f41f28df7294b8b3368c2427d297, type: 2}
+  - {fileID: 114355086708723216, guid: 39bc1099c25004c43b2f7fd78f066235, type: 2}
+  - {fileID: 114817902745519336, guid: 1b7a6988008437441b0070091538eb33, type: 2}
   party: []
 --- !u!114 &114473283062020512
 MonoBehaviour:
@@ -233,6 +246,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chara:
+    sprite: {fileID: 0}
     isDefending: 0
     name: 
     HPmax: 0
@@ -243,6 +257,7 @@ MonoBehaviour:
     def: 0
     spd: 0
     baseHPmax: 0
+    baseMPmax: 0
     baseAtk: 0
     baseDef: 0
     baseSpd: 0
@@ -254,5 +269,8 @@ MonoBehaviour:
     efPoison: 0
     actionPointMax: 0
     isEnemy: 0
+    seqIndex: 0
+    actIndex: 0
     sequence: []
   skillList: []
+  trainCount: 0

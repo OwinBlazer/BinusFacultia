@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 [System.Serializable]
 public class Chara
 {
     public List<StatusEffect> statusEffectList = new List<StatusEffect>();
     public List<Action> queuedAction = new List<Action>();
+    public Sprite sprite;
+
     public bool isDefending;
     public string name;
     public int HPmax;
@@ -77,6 +78,14 @@ public class Chara
             statusEffectList.Add(se);
             se.RunEffect(this);
         }
+        if (se.isBuff)
+        {
+            GameObject.FindObjectOfType<CombatEngine>().PlayBuffFX(this);
+        }
+        else
+        {
+            GameObject.FindObjectOfType<CombatEngine>().PlayDebuffFX(this);
+        }
     }
     public void Initialize()
     {
@@ -96,9 +105,11 @@ public class Chara
     }
     public void TakeDamage(int damage)
     {
+        int takenDamage = 0;
         if (efShield <= 0)
         {
             HPcurr -= damage;
+            takenDamage = damage;
             if (HPcurr <= 0)
             {
                 HPcurr = 0;
@@ -108,6 +119,7 @@ public class Chara
         else
         {
             efShield--;
+            takenDamage = 0;
             int tempFlag = 0;
             while (tempFlag < statusEffectList.Count)
             {
@@ -123,9 +135,12 @@ public class Chara
                 tempFlag++;
             }
         }
+        //find combatscene and pass chara (to later find ID) and damage
+        GameObject.FindObjectOfType<CombatEngine>().PlayHitFX(damage, this);
     }
     public void HealDamage(int heal)
     {
+        GameObject.FindObjectOfType<CombatEngine>().PlayHealFX(heal, this, 0);
         HPcurr += heal;
         if(HPcurr > HPmax)
         {
@@ -134,6 +149,7 @@ public class Chara
     }
     public void HealMP(int mpRecov)
     {
+        GameObject.FindObjectOfType<CombatEngine>().PlayHealFX(mpRecov, this, 1);
         MPcurr += mpRecov;
         if (MPcurr > mpRecov)
         {

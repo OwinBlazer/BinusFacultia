@@ -61,6 +61,7 @@ public class eAI_SevUPTarget : Action
         
         int indexFlag = 0;
         StatusEffect se;
+        GameObject.FindObjectOfType<CombatEngine>().PlayBuffFX(target);
         while (indexFlag < target.statusEffectList.Count)
         {
             se = target.statusEffectList[indexFlag];

@@ -29,12 +29,12 @@ public class eAI_BuffDefAll : Action
     }
     public override void executeAction()
     {
-        StatusEffect se = new Ef_DefUP();
-        se.InitializeSE(level, duration);
         foreach (Chara chara in targetList)
         {
             if (chara.isEnemy && chara.HPcurr > 0)
             {
+                StatusEffect se = new Ef_DefUP();
+                se.InitializeSE(level, duration);
                 chara.InflictStatus(se);
             }
         }

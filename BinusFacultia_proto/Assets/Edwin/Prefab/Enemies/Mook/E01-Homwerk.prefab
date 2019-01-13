@@ -54,6 +54,7 @@ MonoBehaviour:
   enemyID: 1
   goldPrize: 10
   chara:
+    sprite: {fileID: 21300000, guid: 92666c2da102301479e12031d0a5bc4b, type: 3}
     isDefending: 0
     name: PR
     HPmax: 38

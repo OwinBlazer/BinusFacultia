@@ -51,6 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc97f16f53875aa418ef83120113a751, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skillIcon: {fileID: 21300000, guid: 58f8e560aff5a174ba253c02dcce8778, type: 3}
   skillName: Game Animation
   mpCost: 3
   skillLevel: 1

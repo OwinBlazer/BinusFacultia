@@ -54,6 +54,7 @@ MonoBehaviour:
   enemyID: 8
   goldPrize: 100
   chara:
+    sprite: {fileID: 21300000, guid: ad51e95c91e628543bab78914209d748, type: 3}
     isDefending: 0
     name: Quiz
     HPmax: 54

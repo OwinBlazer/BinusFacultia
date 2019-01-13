@@ -54,3 +54,4 @@ MonoBehaviour:
   name: Rose Bento
   price: 100
   qty: 10
+  pic: {fileID: 21300000, guid: 1ef3f4ab43c54a4448e1012366c6434f, type: 3}

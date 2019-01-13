@@ -31,12 +31,12 @@ public class eAI_OverloadAll : Action
     }
     public override void executeAction()
     {
-        StatusEffect se = new Ef_Poison();
-        se.InitializeSE(level, duration);
         foreach(Chara chara in targetList)
         {
             if (!chara.isEnemy && chara.HPcurr > 0)
             {
+                StatusEffect se = new Ef_Poison();
+                se.InitializeSE(level, duration);
                 chara.InflictStatus(se);
             }
         }

@@ -52,6 +52,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chara:
+    sprite: {fileID: 21300000, guid: fff632af458daa0429d103c7fe14c99f, type: 3}
     isDefending: 0
     name: Retas
     HPmax: 90

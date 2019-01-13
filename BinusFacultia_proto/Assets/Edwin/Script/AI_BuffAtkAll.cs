@@ -29,12 +29,13 @@ public class eAI_BuffAtkAll : Action
     }
     public override void executeAction()
     {
-        StatusEffect se = new Ef_AtkUP();
-        se.InitializeSE(level, duration);
+        StatusEffect se;
         foreach (Chara chara in targetList)
         {
             if (chara.isEnemy && chara.HPcurr > 0)
             {
+                se = new Ef_AtkUP();
+                se.InitializeSE(level, duration);
                 chara.InflictStatus(se);
             }
         }

@@ -12,6 +12,7 @@ public abstract class ItemInterface : MonoBehaviour
     int price;
     [SerializeField]
     int qty;
+    [SerializeField] Sprite pic;
     public void changeQtyBy(int qtyChange)
     {
         qty += qtyChange;
@@ -27,6 +28,10 @@ public abstract class ItemInterface : MonoBehaviour
     public string GetName()
     {
         return name;
+    }
+    public Sprite GetPic()
+    {
+        return pic;
     }
     public abstract PlayerAction UseItem(Chara source);
 }

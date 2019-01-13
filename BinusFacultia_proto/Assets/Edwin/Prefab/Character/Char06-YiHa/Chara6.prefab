@@ -52,6 +52,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chara:
+    sprite: {fileID: 21300000, guid: f293f669d83551a4ba5332c19de1da13, type: 3}
     isDefending: 0
     name: Yi Ha
     HPmax: 75

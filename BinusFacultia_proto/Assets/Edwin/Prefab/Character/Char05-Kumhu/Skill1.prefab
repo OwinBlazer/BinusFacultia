@@ -51,6 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd5f389f42d4c6849adc6bd4324385ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skillIcon: {fileID: 21300000, guid: 40005b0835867234797eece1d42b04c1, type: 3}
   skillName: Private Law
   mpCost: 3
   skillLevel: 1

@@ -52,6 +52,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chara:
+    sprite: {fileID: 21300000, guid: 400d8f9c32cdfa548ada24eef272844e, type: 3}
     isDefending: 0
     name: Lola
     HPmax: 75

@@ -51,6 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74ccf0f7c34544e4eb6864dcbcb328a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skillIcon: {fileID: 21300000, guid: f533c7f6faab34d4d97c7acf93713d93, type: 3}
   skillName: Food Production
   mpCost: 0
   skillLevel: 1

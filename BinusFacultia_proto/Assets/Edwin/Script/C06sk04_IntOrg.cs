@@ -31,6 +31,7 @@ public class IntOrg : paSkill
             source.MPcurr -= mpCost;
             damage = CalculateDamage(source.atk, target);
             target.TakeDamage(damage);
+            GameObject.FindObjectOfType<CombatEngine>().PlayBuffFX(target);
             foreach (StatusEffect se in target.statusEffectList)
             {
                 se.ResetEffect(target);

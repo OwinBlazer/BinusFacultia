@@ -54,6 +54,7 @@ MonoBehaviour:
   enemyID: 1081
   goldPrize: 0
   chara:
+    sprite: {fileID: 21300000, guid: 0a86ec5d0056e21468760ec831fa3f02, type: 3}
     isDefending: 0
     name: Enrichment
     HPmax: 200

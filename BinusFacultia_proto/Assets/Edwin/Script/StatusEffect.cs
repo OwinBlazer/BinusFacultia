@@ -6,6 +6,7 @@ public abstract class StatusEffect {
     public int level;
     public int duration;
     public int StatusID;
+    public bool isBuff;
     /*status effectID list:
     1 = AtkUP
     2 = SpdUP
@@ -45,6 +46,7 @@ public class Ef_AtkUP:StatusEffect {
             this.level = level;
             this.duration = duration;
             this.StatusID = 1;
+            isBuff = true;
         }
     }
     public override void RunEffect(Chara target)
@@ -75,6 +77,7 @@ public class Ef_SpdUP : StatusEffect
             this.level = level;
             this.duration = duration;
             this.StatusID = 2;
+            isBuff = true;
         }
     }
     public override void RunEffect(Chara target)
@@ -105,6 +108,7 @@ public class Ef_DefUP : StatusEffect
             this.level = level;
             this.duration = duration;
             this.StatusID = 3;
+            isBuff = true;
         }
     }
     public override void RunEffect(Chara target)
@@ -135,6 +139,7 @@ public class Ef_AtkDOWN : StatusEffect
             this.level = level;
             this.duration = duration;
             this.StatusID = 4;
+            isBuff = false;
         }
     }
     public override void RunEffect(Chara target)
@@ -165,6 +170,7 @@ public class Ef_SpdDOWN : StatusEffect
             this.level = level;
             this.duration = duration;
             this.StatusID = 5;
+            isBuff = false;
         }
     }
     public override void RunEffect(Chara target)
@@ -195,6 +201,7 @@ public class Ef_DefDOWN : StatusEffect
             this.level = level;
             this.duration = duration;
             this.StatusID = 6;
+            isBuff = false;
         }
     }
     public override void RunEffect(Chara target)
@@ -225,6 +232,7 @@ public class Ef_HPDOWN : StatusEffect
             this.level = level;
             this.duration = duration;
             this.StatusID = 7;
+            isBuff = false;
         }
     }
     public override void RunEffect(Chara target)
@@ -255,6 +263,7 @@ public class Ef_Poison : StatusEffect
             this.level = level;
             this.duration = duration;
             this.StatusID = 11;
+            isBuff = false;
         }
     }
     public override void RunEffect(Chara target)
@@ -284,6 +293,7 @@ public class Ef_Shield : StatusEffect
             this.level = level;
             this.duration = duration;
             this.StatusID = 12;
+            isBuff = true;
         }
     }
     public override void RunEffect(Chara target)
@@ -313,6 +323,7 @@ public class Ef_Extend : StatusEffect
             this.level = level;
             this.duration = duration;
             this.StatusID = 13;
+            isBuff = true;
         }
     }
     public override void RunEffect(Chara target)
@@ -342,6 +353,7 @@ public class Ef_Regen : StatusEffect
             this.level = level;
             this.duration = duration;
             this.StatusID = 14;
+            isBuff = true;
         }
     }
     public override void RunEffect(Chara target)
@@ -371,6 +383,7 @@ public class Ef_Stun : StatusEffect
             this.level = level;
             this.duration = duration;
             this.StatusID = 15;
+            isBuff = false;
         }
     }
     public override void RunEffect(Chara target)
@@ -400,6 +413,7 @@ public class Ef_Taunt : StatusEffect
             this.level = level;
             this.duration = duration;
             this.StatusID = 16;
+            isBuff = false;
         }
     }
     public override void RunEffect(Chara target)

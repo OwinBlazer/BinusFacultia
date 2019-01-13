@@ -52,6 +52,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chara:
+    sprite: {fileID: 21300000, guid: b3921b5ede6c6ee43a1fa27efb418374, type: 3}
     isDefending: 0
     name: Gatto
     HPmax: 75

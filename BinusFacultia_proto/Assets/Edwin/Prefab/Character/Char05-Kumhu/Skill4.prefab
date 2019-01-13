@@ -51,6 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0e9689ca9fba8b4ba2c3cf995e4d362, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skillIcon: {fileID: 21300000, guid: 30a29db3511461146aeb86ec0788e6ed, type: 3}
   skillName: Labor Law
   mpCost: 5
   skillLevel: 1

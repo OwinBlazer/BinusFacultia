@@ -35,6 +35,7 @@ public class eAI_RefreshAll : Action
                     se.ResetEffect(chara);
                 }
                 chara.statusEffectList.Clear();
+                GameObject.FindObjectOfType<CombatEngine>().PlayHealFX(0, chara, 1);
             }
         }
     }

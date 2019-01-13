@@ -51,6 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d34d163ac497c564992e08c0d6286504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skillIcon: {fileID: 21300000, guid: b49f6065123f5af46a77ca57d73e6a31, type: 3}
   skillName: Hotel Operation
   mpCost: 5
   skillLevel: 1

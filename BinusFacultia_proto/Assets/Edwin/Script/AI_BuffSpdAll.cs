@@ -32,12 +32,12 @@ public class eAI_BuffSpdAll : Action
     public override void executeAction()
     {
         
-        StatusEffect se = new Ef_SpdUP();
-        se.InitializeSE(level, duration);
         foreach (Chara chara in targetList)
         {
             if (chara.isEnemy && chara.HPcurr > 0)
             {
+                StatusEffect se = new Ef_SpdUP();
+                se.InitializeSE(level, duration);
                 chara.InflictStatus(se);
             }
         }

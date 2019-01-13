@@ -28,6 +28,7 @@ public class BusPlan : paSkill
         else
         {
             source.MPcurr -= mpCost;
+            GameObject.FindObjectOfType<CombatEngine>().PlayBuffFX(target);
             message = target.name + " transferred MP and amplified!\n";
             target.HealMP(5 * level);
             foreach (StatusEffect se in target.statusEffectList)

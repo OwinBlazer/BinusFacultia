@@ -51,6 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8180c16632520745b3e763cd4f413b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skillIcon: {fileID: 21300000, guid: 4dce309445db7a149aa2a93513059e76, type: 3}
   skillName: Investment Law
   mpCost: 3
   skillLevel: 1

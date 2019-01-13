@@ -51,6 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 687b7351d6e855b4ab4f052893945375, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skillIcon: {fileID: 21300000, guid: d2206fbb6e2ffff40b7c6ce9c8220662, type: 3}
   skillName: Risk Analysis
   mpCost: 3
   skillLevel: 1

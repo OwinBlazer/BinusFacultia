@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class PartySelector : MonoBehaviour {
     public PlayerLoader playerLoader;
     int chosenID = 0;
+    [SerializeField] Image previewImg;
     [SerializeField] Text[] statText;
     [SerializeField] int[] activeChara = new int[3];
     [SerializeField] mainmenu sceneLoader;
@@ -27,6 +28,10 @@ public class PartySelector : MonoBehaviour {
         for(int i = 0; i < 3; i++)
         {
             activeChara[i] = -1;
+            buttonList[i].interactable = true;
+        }
+        for(int i = 0; i < 6; i++)
+        {
             buttonList[i].interactable = true;
         }
         chosenID = 0;
@@ -64,6 +69,7 @@ public class PartySelector : MonoBehaviour {
         chosenID = ID;
         //select change view
         PlayerChara pChara = playerLoader.allPlayerChara[ID].GetComponent<PlayerChara>();
+        previewImg.sprite = pChara.chara.sprite;
         statText[0].text = pChara.chara.name;
         statText[1].text = pChara.chara.baseHPmax.ToString();
         statText[2].text = pChara.chara.baseMPmax.ToString();
@@ -96,8 +102,9 @@ public class PartySelector : MonoBehaviour {
                 playerLoader.PlayerCharaSave(i, pchara );
             }
             PlayerPrefs.DeleteKey("sessionDetails");
+            PlayerPrefs.DeleteKey("enemyDetails");
             //Debug.Log("Passed deletion, loading now");
-            sceneLoader.LoadSceneNamed("Combat");
+            sceneLoader.LoadSceneNamed("Combat_Test");
         }
     }
 }

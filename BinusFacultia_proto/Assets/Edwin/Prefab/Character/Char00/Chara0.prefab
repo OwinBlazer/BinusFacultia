@@ -51,21 +51,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41185e20ed4e1ab4d8ed8740e6200309, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trainTracker: 
   chara:
+    sprite: {fileID: 21300000, guid: d3848c9078295104bac39c363d148063, type: 3}
     isDefending: 0
     name: Testo
     HPmax: 20
     HPcurr: 20
-    MP: 10
+    MPmax: 0
+    MPcurr: 0
     atk: 10
     def: 5
     spd: 5
+    baseHPmax: 0
+    baseMPmax: 0
     baseAtk: 5
     baseDef: 5
     baseSpd: 5
+    efShield: 0
+    efTauntRate: 0
+    efStunRate: 0
+    efRecov: 0
+    efExtend: 0
+    efPoison: 0
     actionPointMax: 5
     isEnemy: 0
+    seqIndex: 0
+    actIndex: 0
     sequence: []
   skillList:
   - {fileID: 114170005396631792, guid: 3a8543a7907f4ee46b860961d3d04aa7, type: 2}
+  trainCount: 0

@@ -51,6 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2dc6a2e836352374f8ef6ea4d84619df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skillIcon: {fileID: 21300000, guid: 672494c01c35a7649b82b78aa8cab5c3, type: 3}
   skillName: Cyber Law
   mpCost: 0
   skillLevel: 1

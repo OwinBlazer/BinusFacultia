@@ -26,7 +26,7 @@ public class eAI_HealKill : Action
     }
     public override void executeAction()
     {
-        validTargets.Clear();
+        validTargets = new List<Chara>();
         int enemyNum = 0;
         foreach (Chara chara in targetList)
         {

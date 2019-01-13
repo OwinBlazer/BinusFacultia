@@ -26,7 +26,7 @@ public class CombatEngine : MonoBehaviour {
     [SerializeField] Animator anim;
     [SerializeField] private GameObject executeButton;
     [SerializeField]Chara tempSource;
-    
+    [SerializeField] SEDetailViewHandler seDetailView;
     PlayerAction tempAction;
     Chara tempTarget;
     private int phaseID;
@@ -35,11 +35,17 @@ public class CombatEngine : MonoBehaviour {
     //2=execution
     [SerializeField] public Text logbox;
     [SerializeField] Text resultBox;
-
+    [SerializeField] Image[] charaImg;
+    [SerializeField] Sprite emptySprite;
     [SerializeField] public Text[] charNameText;
     [SerializeField] public Text[] charHPText;
-    [SerializeField] public Text[] charAPtext;
-
+    [SerializeField] public APBarHandler[] APbarHandler;
+    [SerializeField] Animator[] fxAnim;
+    [SerializeField] Text[] damageText;
+    [SerializeField] Color[] setColorList;
+    //0 = black, normal
+    //1 = green tint, healing
+    //1 = blue tint, mp recov
     public PlayerLoader playerLoader;
     List<Chara> allChara = new List<Chara>();
     List<ActEntryList> allActions = new List<ActEntryList>();
@@ -53,6 +59,7 @@ public class CombatEngine : MonoBehaviour {
     }
 	// Use this for initialization
 	void Start () {
+        PlayerPrefs.SetInt("sessionBookmark",1);
         combatInProgress = true;
         //PlayerPrefs.DeleteAll();
         phaseID = 0;
@@ -71,6 +78,7 @@ public class CombatEngine : MonoBehaviour {
         {
             EnemyChara echara = go.GetComponent<EnemyChara>();
             echara.chara.Initialize();
+            echara.chara.isEnemy = true;
             allChara.Add(echara.chara);
         }
         LoadEnemy();
@@ -98,8 +106,10 @@ public class CombatEngine : MonoBehaviour {
                 //initialize that component as the correct spawn
 
                 eChara.enemyID = spawnChara.enemyID;
+                eChara.goldPrize = spawnChara.goldPrize;
                 eChara.chara.isEnemy = true;
 
+                eChara.chara.sprite = spawnChara.chara.sprite;
                 eChara.chara.baseHPmax = spawnChara.chara.baseHPmax;
                 eChara.chara.HPmax = spawnChara.chara.HPmax;
                 eChara.chara.HPcurr = spawnChara.chara.HPcurr;
@@ -139,23 +149,41 @@ public class CombatEngine : MonoBehaviour {
             //if dead/empty
             if (eChara.chara.HPcurr <= 0)
             {
+
                 //GetCorrectEnemyByID
-                int correctIndex=0;
+                int correctIndex=-1;
                 for (int i = 0;i < EnemyList.Length; i++)
                 {
+                    
                     if (EnemyList[i].GetComponent<EnemyChara>().enemyID == ID)
                     {
                         correctIndex = i;
                         break;
                     }
                 }
-                EnemyChara sourceChara = EnemyList[correctIndex].GetComponent<EnemyChara>();
-                //initialize that component as the correct spawn
+                EnemyChara sourceChara;
+                if (correctIndex == -1)
+                {
+                    //this is an empty enemy
+                    sourceChara = EnemyList[0].GetComponent<EnemyChara>();
+                }
+                else
+                {
+                    sourceChara = EnemyList[correctIndex].GetComponent<EnemyChara>();
+                    //initialize that component as the correct spawn
+                }
                 
                 eChara.enemyID = ID;
                 eChara.chara.isEnemy = true;
                 eChara.goldPrize = sourceChara.goldPrize;
-
+                if (correctIndex == -1)
+                {
+                    eChara.chara.sprite = emptySprite;
+                }
+                else
+                {
+                    eChara.chara.sprite = sourceChara.chara.sprite;
+                }
                 eChara.chara.baseHPmax = sourceChara.chara.baseHPmax;
                 eChara.chara.HPmax = sourceChara.chara.HPmax;
                 eChara.chara.HPcurr = sourceChara.chara.HPcurr;
@@ -184,6 +212,7 @@ public class CombatEngine : MonoBehaviour {
     public void Combat()
     {
         if (combatInProgress){
+            anim.SetInteger("actionMenuID",0);
             StartPhase();
             OrderPhase();
             //execution phase is triggered by execute button
@@ -198,33 +227,40 @@ public class CombatEngine : MonoBehaviour {
                 chara.actionPointMax++;
             }
         }
-        EffectPoison();
+        EffectTriggerStart();
         UpdateHPUI();
         RunAllEffect();
         UpdateAPUI();
-
+        seDetailView.updateSEList(allChara);
     }
-    void EffectPoison()
+    void EffectTriggerStart()
     {
         foreach (Chara chara in allChara)
         {
             if (chara.efPoison != 0)
             {
-                Debug.Log("Poisoned here!");
-                chara.HPcurr -= chara.efPoison;
-                logbox.text += chara.name+" suffers "+chara.efPoison+" Overload damage!\n";
+                chara.TakeDamage(chara.efPoison);
+                logbox.text = chara.name+" suffers "+chara.efPoison+" Overload damage!\n";
+            }
+            if (chara.efRecov != 0)
+            {
+                chara.HealDamage(chara.efRecov);
+                logbox.text = chara.name + " regenerates " + chara.efRecov + " damage!\n";
             }
         }
     }
     void RunAllEffect()
     {
-        foreach(Chara chara in allChara)
+        //@HERE"S THE LIL SHET (FIND THE EXACT SPOT, IDJOT))
+        int indexFlag;
+        foreach (Chara chara in allChara)
         {
-            int indexFlag = 0;
+            indexFlag = 0;
             while (indexFlag < chara.statusEffectList.Count)
             {
-                //chara.statusEffectList[indexFlag].RunEffect(chara);
-                chara.statusEffectList[indexFlag].ReduceDur(chara);
+                chara.statusEffectList[indexFlag].RunEffect(chara);
+                chara.statusEffectList[indexFlag].duration--;
+
                 if (chara.statusEffectList[indexFlag].GetDur() <= 0)
                 {
                     chara.statusEffectList[indexFlag].ResetEffect(chara);
@@ -235,6 +271,7 @@ public class CombatEngine : MonoBehaviour {
                     indexFlag++;
                 }
             }
+
         }
     }
     void OrderPhase()
@@ -304,7 +341,8 @@ public class CombatEngine : MonoBehaviour {
             {
                 itemCount++;
                 itemButton[i].SetActive(true);
-                itemButton[i].transform.GetChild(0).GetComponent<Text>().text = validItems[i].GetName();
+                itemButton[i].transform.GetChild(0).GetComponent<Image>().sprite = validItems[i].GetPic();
+                itemButton[i].transform.GetChild(1).GetComponent<Text>().text = validItems[i].GetName();
             }
             else
             {
@@ -343,7 +381,8 @@ public class CombatEngine : MonoBehaviour {
             if (validSkill[i].skillLevel > 0)
             {
                 skillButton[i].SetActive(true);
-                skillButton[i].transform.GetChild(0).GetComponent<Text>().text = validSkill[i].skillName;
+                skillButton[i].transform.GetChild(0).GetComponent<Image>().sprite= validSkill[i].skillIcon;
+                skillButton[i].transform.GetChild(1).GetComponent<Text>().text = validSkill[i].skillName;
             }
         }
     }
@@ -413,6 +452,7 @@ public class CombatEngine : MonoBehaviour {
     }
     public void startExecutionPhase()
     {
+        anim.SetInteger("actionMenuID",-1);
         if (combatInProgress)
         {
 
@@ -446,17 +486,9 @@ public class CombatEngine : MonoBehaviour {
     void ExecutionPhase()
     {
         logbox.text = "";
-        while (allActions.Count > 0)
-        {
-            allActions.Sort(new actionSpdComp());
-
-            //execution by speed batch here!
-            ExecuteByBatch();
-            UpdateActionList();
-            UpdateHPUI();
-            VictoryCheck();
-        }
-        EndPhase();
+        //the problem is here. Yield return null returns next frame,
+        //which causes the while to repeat infinitely on that frame
+        StartCoroutine(ExecuteByBatch());
     }
     void EndPhase()
     {
@@ -476,38 +508,66 @@ public class CombatEngine : MonoBehaviour {
         //Debug.Log(allChara.Count);
         for(int i = 0; i < allChara.Count; i++)
         {
+            if (allChara[i].sprite != null)
+            {
+                charaImg[i].sprite = allChara[i].sprite;
+            }
+            else{
+                charaImg[i].sprite = emptySprite;
+            }
             charNameText[i].text = allChara[i].name;
             charHPText[i].text = allChara[i].HPcurr.ToString();
+            if (allChara[i].isEnemy && allChara[i].HPcurr <= 0)
+            {
+                allChara[i].sprite = emptySprite;
+                charHPText[i].text = "";
+            }
         }
     }
     private void UpdateAPUI()
     {
         for(int i = 0; i < 3; i++)
         {
-            charAPtext[i].text = (allChara[i].actionPointMax - allChara[i].queuedAction.Count).ToString();
+            //charAPtext[i].text = (allChara[i].actionPointMax - allChara[i].queuedAction.Count).ToString();
+            APbarHandler[i].UpdateAP(allChara[i].actionPointMax - allChara[i].queuedAction.Count);
         }
     }
-    void ExecuteByBatch()
+    IEnumerator ExecuteByBatch()
     {
-        int flagSpd = allActions[0].action.source.spd;
-        while (allActions.Count>0&&flagSpd == allActions[0].action.source.spd)
+        while (allActions.Count > 0)
         {
-            if (EffectStun(allActions[0].action.source.efStunRate))
+            allActions.Sort(new actionSpdComp());
+
+            //execution by speed batch here!
+            int flagSpd = allActions[0].action.source.spd;
+            while (allActions.Count > 0 && flagSpd == allActions[0].action.source.spd)
             {
-                //if stun succeeds
-                logbox.text += allActions[0].action.source.name + " is stunned for this action!\n";
-            }
-            else
-            {
-                if (allActions[0].action.source.HPcurr > 0)
+                if (EffectStun(allActions[0].action.source.efStunRate))
                 {
-                    allActions[0].action.executeAction();
-                    allActions[0].action.updateLog(logbox);
-                    allActions[0].action.source.actionPointMax--;
+                    //if stun succeeds
+                    logbox.text = allActions[0].action.source.name + " is stunned for this action!\n";
                 }
+                else
+                {
+                    if (allActions[0].action.source.HPcurr > 0)
+                    {
+                        allActions[0].action.executeAction();
+                        logbox.text = "";
+                        allActions[0].action.updateLog(logbox);
+                        allActions[0].action.source.actionPointMax--;
+                        seDetailView.updateSEList(allChara);
+                        yield return new WaitForSeconds(1.5f);
+                    }
+                }
+                allActions.RemoveAt(0);
             }
-            allActions.RemoveAt(0);
+            UpdateActionList();
+            UpdateHPUI();
+            VictoryCheck();
         }
+        EndPhase();
+
+        
     }
     bool EffectStun(float rate)
     {
@@ -580,7 +640,7 @@ public class CombatEngine : MonoBehaviour {
         allActions.Clear();
         combatInProgress = false;
         //continue to next wave here<======================@
-        logbox.text += "you won!";
+        logbox.text = "you won!";
         executeButton.SetActive(false);
         anim.SetInteger("actionMenuID",10);
 
@@ -589,12 +649,82 @@ public class CombatEngine : MonoBehaviour {
     {
         Debug.Log("batteLost");
         combatInProgress = false;
-        logbox.text += "you lost...!";
+        logbox.text = "you lost...!";
         executeButton.SetActive(false);
         //battle lost trigger here<===========================@
         anim.SetInteger("actionMenuID", 9);
+        PlayerPrefs.DeleteKey("sessionDetails");
+        PlayerPrefs.DeleteKey("enemyDetails");
+        PlayerPrefs.DeleteKey("sessionBookmark");
     }
 
+    //animation
+    public void PlayHitFX(int damage, Chara target)
+    {
+        int index = GetCharaIndex(target);
+        if (index != -1)
+        {
+            fxAnim[index].SetBool("FXHitPlay",true);
+            //display damage@@
+            damageText[index].text = damage.ToString();
+            damageText[index].color = setColorList[0];
+        }
+    }
+    public void PlayBuffFX(Chara target)
+    {
+        int index = GetCharaIndex(target);
+        if (index != -1)
+        {
+            fxAnim[index].SetBool("FXBuffPlay", true);
+        }
+    }
+    public void PlayDebuffFX(Chara target)
+    {
+        int index = GetCharaIndex(target);
+        if (index != -1)
+        {
+            fxAnim[index].SetBool("FXDebuffPlay", true);
+        }
+    }
+    public void PlayHealFX(int recov, Chara target, int mode)
+    {
+        //o= recov hp
+        //1= recov mp
+        int index = GetCharaIndex(target);
+        if (index != -1)
+        {
+            fxAnim[index].SetBool("FXHealPlay", true);
+            //display healing@@
+            damageText[index].text = recov.ToString();
+        }
+        if (mode == 0)
+        {
+            damageText[index].color = setColorList[1];
+        }
+        else
+        {
+            damageText[index].color = setColorList[2];
+        }
+
+    }
+    private int GetCharaIndex(Chara target)
+    {
+        int index = -1;
+        int tempIndex = 0;
+        while (index == -1&&tempIndex<8)
+        {
+            if (allChara[tempIndex] == target)
+            {
+                index = tempIndex;
+            }
+            tempIndex++;
+        }
+        if (tempIndex == 8)
+        {
+            Debug.Log("error not found!");
+        }
+        return index;
+    }
     public void BonusHP()
     {
         int healNum = levelLoader.wave * 5 + levelLoader.semester * 5;

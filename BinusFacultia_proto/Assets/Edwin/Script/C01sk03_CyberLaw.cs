@@ -21,6 +21,7 @@ public class CyLaw : paSkill
 {
     public override void executeAction()
     {
+        GameObject.FindObjectOfType<CombatEngine>().PlayBuffFX(target);
         if (source.MPcurr < mpCost)
         {
             message = source.name + " does not have enough MP!\n";
@@ -34,6 +35,7 @@ public class CyLaw : paSkill
                 se.level += level;
                 se.RunEffect(target);
             }
+            GameObject.FindObjectOfType<CombatEngine>().PlayBuffFX(target);
         }
     }
 

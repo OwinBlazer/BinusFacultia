@@ -65,10 +65,13 @@ public class PlayerLoader : MonoBehaviour {
         {
             saveData += se.StatusID +"^";
             saveData += se.level + "^";
-            if (seIndex < pChara.chara.statusEffectList.Count)
+            saveData += se.duration;
+            if (seIndex+1 < pChara.chara.statusEffectList.Count)
             {
-                saveData += se.duration + "&";
+                saveData += "&";
+                
             }
+            seIndex++;
         }
         saveData += "#"; //index 15
         //saving allocation stats
@@ -97,12 +100,13 @@ public class PlayerLoader : MonoBehaviour {
         {
             tempCharaHolder = allPlayerChara[int.Parse(saveData[0])].GetComponent<PlayerChara>();
             //set return pChara based on ID(bases)
+            pChara.chara.sprite = tempCharaHolder.chara.sprite;
             pChara.chara.name = tempCharaHolder.chara.name;
             pChara.chara.baseHPmax = tempCharaHolder.chara.baseHPmax;
-            pChara.chara.baseMPmax = tempCharaHolder.chara.baseHPmax;
-            pChara.chara.baseAtk = tempCharaHolder.chara.baseHPmax;
-            pChara.chara.baseDef = tempCharaHolder.chara.baseHPmax;
-            pChara.chara.baseSpd = tempCharaHolder.chara.baseHPmax;
+            pChara.chara.baseMPmax = tempCharaHolder.chara.baseMPmax;
+            pChara.chara.baseAtk = tempCharaHolder.chara.baseAtk;
+            pChara.chara.baseDef = tempCharaHolder.chara.baseDef;
+            pChara.chara.baseSpd = tempCharaHolder.chara.baseSpd;
             pChara.skillList = tempCharaHolder.skillList;
 
             //set current active stats

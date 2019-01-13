@@ -54,6 +54,7 @@ MonoBehaviour:
   enemyID: 108
   goldPrize: 0
   chara:
+    sprite: {fileID: 21300000, guid: 431562b3635e4b94f8080af785dfd49b, type: 3}
     isDefending: 0
     name: T.H.E.S.I.S
     HPmax: 650

@@ -51,6 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a14439896f548ca4c90db45af7309d3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skillIcon: {fileID: 21300000, guid: 3f995de44b1a64e4186c2ca18ac0d0bc, type: 3}
   skillName: Business Plan
   mpCost: 3
   skillLevel: 1

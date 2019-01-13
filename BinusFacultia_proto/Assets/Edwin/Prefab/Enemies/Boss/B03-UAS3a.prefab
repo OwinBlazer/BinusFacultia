@@ -54,6 +54,7 @@ MonoBehaviour:
   enemyID: 1031
   goldPrize: 0
   chara:
+    sprite: {fileID: 21300000, guid: 5bb4ce658cc429a44b97626aa9fda019, type: 3}
     isDefending: 0
     name: Multipart Essay
     HPmax: 100

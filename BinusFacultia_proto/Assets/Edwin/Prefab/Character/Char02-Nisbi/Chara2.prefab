@@ -52,6 +52,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chara:
+    sprite: {fileID: 21300000, guid: 4fb4cd0d9229486458d8e6198099646f, type: 3}
     isDefending: 0
     name: Nisbi
     HPmax: 60
@@ -75,7 +76,7 @@ MonoBehaviour:
     actionPointMax: 0
     isEnemy: 0
     seqIndex: 0
-    actIndex: 0
+    actIndex: 99
     sequence: []
   skillList:
   - {fileID: 114313820103699134, guid: 488c9b7adc91bc046bb48c14e415ed78, type: 2}

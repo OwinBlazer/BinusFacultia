@@ -31,13 +31,12 @@ public class eAI_DebuffAtkAll : Action
     }
     public override void executeAction()
     {
-        StatusEffect se = new Ef_AtkDOWN();
-        se.InitializeSE(level, dur);
         foreach (Chara chara in targetList)
         {
             if (!chara.isEnemy && chara.HPcurr > 0)
             {
-
+                StatusEffect se = new Ef_AtkDOWN();
+                se.InitializeSE(level, dur);
                 chara.InflictStatus(se);
             }
         }

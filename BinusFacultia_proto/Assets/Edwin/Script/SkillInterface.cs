@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class SkillInterface : MonoBehaviour {
+    public Sprite skillIcon;
     public string skillName;
     public int mpCost;
     public int skillLevel;

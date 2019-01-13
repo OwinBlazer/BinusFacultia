@@ -23,4 +23,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Edwin/Scenes/Combat.unity
     guid: ebfd879e6c51fc4488dcfe5650a9c984
+  - enabled: 1
+    path: Assets/Dicky/Scene/GeneralTutor.unity
+    guid: 6a2d49439c21bac438d2af2aaba722e6
+  - enabled: 1
+    path: Assets/Dicky/Scene/CombatTutor.unity
+    guid: 6013cc5a487664b49a496ecb9685fd7e
+  - enabled: 1
+    path: Assets/Dicky/Scene/EnhancementTutor.unity
+    guid: 5d1f9b4ddb01e5244bfd26243ec7704e
   m_configObjects: {}

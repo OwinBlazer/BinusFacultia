@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Panji/Scene/Inventory.unity
+- path: Assets/Dicky/Scene/CombatTutor.unity
   isLoaded: 1
   isActive: 1

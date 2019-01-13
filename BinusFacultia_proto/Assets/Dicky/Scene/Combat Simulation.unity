@@ -125,7 +125,7 @@ GameObject:
   - component: {fileID: 8716168}
   - component: {fileID: 8716167}
   m_Layer: 5
-  m_Name: Button (2)
+  m_Name: Gatto
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -677,7 +677,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: Gatto
 --- !u!222 &524341045
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1087,7 +1087,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: Yi Ha
 --- !u!222 &1012213120
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1162,7 +1162,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: Retas
 --- !u!222 &1169259833
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1237,7 +1237,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: Lola
 --- !u!222 &1274485507
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1334,7 +1334,7 @@ GameObject:
   - component: {fileID: 1297760298}
   - component: {fileID: 1297760297}
   m_Layer: 5
-  m_Name: Button (4)
+  m_Name: Lola
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1813,7 +1813,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: Nisbi
 --- !u!222 &1471350198
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1888,7 +1888,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: Kumhu
 --- !u!222 &1479670335
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1908,7 +1908,7 @@ GameObject:
   - component: {fileID: 1544622300}
   - component: {fileID: 1544622299}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: Nisbi
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2020,7 +2020,7 @@ GameObject:
   - component: {fileID: 1659816661}
   - component: {fileID: 1659816660}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Retas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2132,7 +2132,7 @@ GameObject:
   - component: {fileID: 1822226109}
   - component: {fileID: 1822226108}
   m_Layer: 5
-  m_Name: Button (3)
+  m_Name: Kumhu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2629,7 +2629,7 @@ GameObject:
   - component: {fileID: 2146004513}
   - component: {fileID: 2146004512}
   m_Layer: 5
-  m_Name: Button (5)
+  m_Name: Yi Ha
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

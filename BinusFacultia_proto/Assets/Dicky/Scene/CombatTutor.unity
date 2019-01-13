@@ -295,10 +295,10 @@ RectTransform:
   m_Father: {fileID: 1014360621}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 2.1, y: -16}
-  m_SizeDelta: {x: 254.1, y: 198.6}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0.00000047684}
+  m_SizeDelta: {x: -107.899994, y: 222}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1007411947
 MonoBehaviour:
@@ -332,12 +332,12 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: A combat feature which is prevalent here is the defend mechanic which allows
+  m_Text: "A combat feature which is prevalent here is the defend mechanic which allows
     players to stock up their actions and use them later on. They do this by using
-    the defend button. Defending halves damage taken, but still leaves you open to
-    status effects. You can only stock up to 2 extra actions. Each round, characters
+    the defend button. \n\nDefending halves damage taken, but still leaves you open
+    to status effects. \rYou can only stock up to 2 extra actions. Each round, characters
     with the highest speed goes first, with characters having a speed tie going and
-    resolving their actions together.
+    resolving their actions together.\r\n"
 --- !u!222 &1007411948
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -447,10 +447,10 @@ RectTransform:
   m_Father: {fileID: 1157127556}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000013351, y: 0}
-  m_SizeDelta: {x: 262.1, y: 78.7}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0.000011444092, y: -28}
+  m_SizeDelta: {x: 40.100006, y: 78.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1058375874
 MonoBehaviour:
@@ -762,10 +762,10 @@ RectTransform:
   m_Father: {fileID: 1014360621}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -204.6}
-  m_SizeDelta: {x: 362.5, y: 59.6}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: 0, y: 29.399994}
+  m_SizeDelta: {x: 0.5, y: 59.600006}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2076357802
 MonoBehaviour:

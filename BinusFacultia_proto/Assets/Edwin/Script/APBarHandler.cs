@@ -22,7 +22,6 @@ public class APBarHandler : MonoBehaviour {
     {
         for(int i = 0; i < 3; i++)
         {
-            Debug.Log(i+" is "+AP[i].color != null);
             if (i <= num - 1)
             {
                 AP[i].color =

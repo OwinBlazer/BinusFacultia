@@ -66,6 +66,7 @@ public class Chara
                 isNewStatusEffect = false;
                 if (statusEffectList[i].level < se.level)
                 {
+                    statusEffectList[i].ResetEffect(this);
                     statusEffectList[i] = se;
                 }else if(statusEffectList[i].level == se.level)
                 {
@@ -101,10 +102,20 @@ public class Chara
     }
     void Die()
     {
+        GameObject.FindObjectOfType<CombatEngine>().DeadCheck(this);
         Initialize();
     }
     public void TakeDamage(int damage)
     {
+        //tech bonus 0 check update
+        if (isEnemy)
+        {
+            CombatEngine ce = GameObject.FindObjectOfType<CombatEngine>();
+            ce.TechCheckUpdate(0, ce.levelLoader.turnCount);
+            //tech bonus 1 check update
+            ce.TechCheckUpdate(1, 1);
+        }
+
         int takenDamage = 0;
         if (efShield <= 0)
         {
@@ -112,6 +123,11 @@ public class Chara
             takenDamage = damage;
             if (HPcurr <= 0)
             {
+                //tech bonus 3 check update
+                if (HPcurr*-1 == HPmax/2)
+                {
+                    GameObject.FindObjectOfType<CombatEngine>().TechCheckUpdate(3,1);
+                }
                 HPcurr = 0;
                 Die();
             }

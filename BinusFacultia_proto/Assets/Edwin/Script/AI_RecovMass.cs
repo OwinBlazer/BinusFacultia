@@ -36,8 +36,8 @@ public class eAI_RecovMass : Action
             if (chara.isEnemy && chara.HPcurr > 0)
             {
                 StatusEffect se = new Ef_Regen();
-                se.duration = duration;
-                se.level = level;
+                se.InitializeSE(level, duration);
+                Debug.Log(se.isBuff);
                 chara.InflictStatus(se);
             }
         }

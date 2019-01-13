@@ -30,11 +30,6 @@ public class PartySelector : MonoBehaviour {
             activeChara[i] = -1;
             buttonList[i].interactable = true;
         }
-        for(int i = 0; i < 6; i++)
-        {
-            buttonList[i].interactable = true;
-        }
-        chosenID = 0;
     }
     public void addToParty()
     {
@@ -104,7 +99,8 @@ public class PartySelector : MonoBehaviour {
             PlayerPrefs.DeleteKey("sessionDetails");
             PlayerPrefs.DeleteKey("enemyDetails");
             //Debug.Log("Passed deletion, loading now");
-            sceneLoader.LoadSceneNamed("Combat_Test");
+            //sceneLoader.LoadSceneNamed("Combat_Test");
+            sceneLoader.LoadSceneNamed("Combat");
         }
     }
 }

@@ -1,8 +1,7 @@
-﻿    using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
 public class ActEntryList {
     public int entryID;
     public Action action;
@@ -34,11 +33,18 @@ public class CombatEngine : MonoBehaviour {
     //1=order
     //2=execution
     [SerializeField] public Text logbox;
-    [SerializeField] Text resultBox;
+    [SerializeField] Text[] resultBox;
+    //0 = goldgained
+    //1= turncount bonus
+    //2 = Semester Bonus
+    //3 = tech bonus
     [SerializeField] Image[] charaImg;
     [SerializeField] Sprite emptySprite;
     [SerializeField] public Text[] charNameText;
     [SerializeField] public Text[] charHPText;
+    [SerializeField] public Text[] charMPText;
+    [SerializeField] public Slider[] charHPbar;
+    [SerializeField] public Slider[] charMPbar;
     [SerializeField] public APBarHandler[] APbarHandler;
     [SerializeField] Animator[] fxAnim;
     [SerializeField] Text[] damageText;
@@ -52,7 +58,6 @@ public class CombatEngine : MonoBehaviour {
     public GameObject[] skillButton;
     public GameObject[] itemButton;
     public bool combatInProgress;
-
     public List<Chara> GetAllChara()
     {
         return allChara;
@@ -62,6 +67,7 @@ public class CombatEngine : MonoBehaviour {
         PlayerPrefs.SetInt("sessionBookmark",1);
         combatInProgress = true;
         //PlayerPrefs.DeleteAll();
+        //levelLoader.techBonus = { 0,0,0,0};
         phaseID = 0;
 
         playerLoader.initializeParty();
@@ -240,6 +246,11 @@ public class CombatEngine : MonoBehaviour {
             if (chara.efPoison != 0)
             {
                 chara.TakeDamage(chara.efPoison);
+
+                //tech bonus 1 system
+                TechCheckUpdate(1, -1);
+                //^^----
+
                 logbox.text = chara.name+" suffers "+chara.efPoison+" Overload damage!\n";
             }
             if (chara.efRecov != 0)
@@ -251,13 +262,13 @@ public class CombatEngine : MonoBehaviour {
     }
     void RunAllEffect()
     {
-        //@HERE"S THE LIL SHET (FIND THE EXACT SPOT, IDJOT))
         int indexFlag;
         foreach (Chara chara in allChara)
         {
             indexFlag = 0;
             while (indexFlag < chara.statusEffectList.Count)
             {
+                chara.statusEffectList[indexFlag].ResetEffect(chara);
                 chara.statusEffectList[indexFlag].RunEffect(chara);
                 chara.statusEffectList[indexFlag].duration--;
 
@@ -464,6 +475,8 @@ public class CombatEngine : MonoBehaviour {
                     if (chara.queuedAction.Count == 0)
                     {
                         chara.isDefending = true;
+                        //tech bonus update
+                        TechCheckUpdate(2, 1);
                     }
                     else
                     {
@@ -500,7 +513,8 @@ public class CombatEngine : MonoBehaviour {
         }
         levelLoader.saveEnemies();
         playerLoader.SaveParty();
-
+        levelLoader.turnCount++;
+        levelLoader.SaveSession();
         Combat();
     }
     void UpdateHPUI()
@@ -515,12 +529,21 @@ public class CombatEngine : MonoBehaviour {
             else{
                 charaImg[i].sprite = emptySprite;
             }
+
             charNameText[i].text = allChara[i].name;
             charHPText[i].text = allChara[i].HPcurr.ToString();
-            if (allChara[i].isEnemy && allChara[i].HPcurr <= 0)
+            if (i < 3)
             {
+                charMPText[i].text = allChara[i].MPcurr.ToString();
+                charHPbar[i].value =(float)allChara[i].HPcurr / (float)allChara[i].HPmax;
+                charMPbar[i].value = (float)allChara[i].MPcurr / (float)allChara[i].MPmax;
+            }
+            if(allChara[i].HPcurr<=0)
+            {
+
                 allChara[i].sprite = emptySprite;
                 charHPText[i].text = "";
+                charNameText[i].text = "";
             }
         }
     }
@@ -557,6 +580,7 @@ public class CombatEngine : MonoBehaviour {
                         allActions[0].action.source.actionPointMax--;
                         seDetailView.updateSEList(allChara);
                         yield return new WaitForSeconds(1.5f);
+                        UpdateHPUI();
                     }
                 }
                 allActions.RemoveAt(0);
@@ -635,6 +659,46 @@ public class CombatEngine : MonoBehaviour {
             BattleLost();
         }
     }
+    public void DeadCheck(Chara deadChara)
+    {
+        if (deadChara.isEnemy)
+        {
+            //add gold to entry
+            levelLoader.goldGain += FindECharaOfChara(deadChara).goldPrize;
+
+            
+        }
+    }
+    public void TechCheckUpdate(int mode, int newValue)
+    {
+        if(mode == 3||mode==1)
+        {
+            levelLoader.techBonus[mode] += newValue;
+        }
+        else if(mode==2)
+        {
+            levelLoader.techBonus[mode] = newValue;
+        }
+        else
+        {
+            if (levelLoader.techBonus[mode] == 0)
+            {
+                levelLoader.techBonus[mode] = newValue;
+            }
+        }
+    }
+    EnemyChara FindECharaOfChara(Chara deadChara)
+    {
+        foreach(GameObject go in ActiveEnemy)
+        {
+            if(go.GetComponent<EnemyChara>().chara == deadChara)
+            {
+                return go.GetComponent<EnemyChara>();
+            }
+        }
+        return null;
+
+    }
     void BattleVictory()
     {
         allActions.Clear();
@@ -642,8 +706,123 @@ public class CombatEngine : MonoBehaviour {
         //continue to next wave here<======================@
         logbox.text = "you won!";
         executeButton.SetActive(false);
+        ResultBoxUpdate();
         anim.SetInteger("actionMenuID",10);
 
+    }
+    void ResultBoxUpdate()
+    {
+        //Turn Count Bonus
+        int turnCountBonus = 0;
+        if (levelLoader.turnCount < 4)
+        {
+            turnCountBonus = 100;
+        }else if (levelLoader.turnCount < 9)
+        {
+            turnCountBonus = 50;
+        }
+        else if(levelLoader.turnCount < 15)
+        {
+            turnCountBonus = 20;
+        }
+        else
+        {
+            turnCountBonus = 0;
+        }
+
+        //semester bonus
+        int semesterBonus = 0;
+        switch (levelLoader.semester) {
+            case 0:semesterBonus = 5;
+                break;
+            case 1:
+                semesterBonus = 10;
+                break;
+            case 2:
+                semesterBonus = 20;
+                break;
+            case 3:
+                semesterBonus = 30;
+                break;
+            case 4:
+                semesterBonus = 40;
+                break;
+            case 5:
+                semesterBonus = 50;
+                break;
+            case 6:
+                semesterBonus = 60;
+                break;
+            case 7:
+                semesterBonus = 75;
+                break;
+            default:
+                semesterBonus = 0;
+                break;
+        }
+
+        //Tech Bonus
+
+        //check 1 shot in 1 round
+        int[] techBonusNum= new int[4];
+        if (levelLoader.techBonus[0] >= levelLoader.turnCount)
+        {
+            techBonusNum[0] = 20;
+
+        }
+        //check direct offense
+        if (levelLoader.techBonus[1] == 0)
+        {
+            techBonusNum[1] = 20;
+        }
+        //check defense
+        if (levelLoader.techBonus[2] == 0)
+        {
+            techBonusNum[2] = 10;
+        }
+        //check overkill
+        techBonusNum[3] = 5 * levelLoader.techBonus[3];
+
+        //check bosskil
+        if (levelLoader.wave == 4)
+        {
+            techBonusNum[4] = 50;
+        }
+        //@TEXT HERE
+
+        resultBox[0].text = levelLoader.goldGain.ToString();
+        resultBox[1].text = turnCountBonus.ToString();
+        resultBox[2].text = semesterBonus.ToString();
+
+        resultBox[3].text = "";
+        for(int i = 0; i < 4; i++)
+        {
+            switch (i)
+            {
+                case 0: resultBox[3].text += "Overnight Study: ";
+
+                    break;
+                case 1:
+                    resultBox[3].text += "Foresight Learning: ";
+
+                    break;
+                case 2:
+                    resultBox[3].text += "Reckless Abandon: ";
+
+                    break;
+                case 3:
+                    resultBox[3].text += "Overachieving: ";
+
+                    break;
+                case 4:
+                    resultBox[3].text += "A new journey: ";
+
+                    break;
+                default: break;
+
+            }
+            resultBox[3].text += techBonusNum[i]+"pts\n";
+        }
     }
     void BattleLost()
     {
@@ -651,7 +830,7 @@ public class CombatEngine : MonoBehaviour {
         combatInProgress = false;
         logbox.text = "you lost...!";
         executeButton.SetActive(false);
-        //battle lost trigger here<===========================@
+        //battle lost trigger here<===========================
         anim.SetInteger("actionMenuID", 9);
         PlayerPrefs.DeleteKey("sessionDetails");
         PlayerPrefs.DeleteKey("enemyDetails");
@@ -665,7 +844,7 @@ public class CombatEngine : MonoBehaviour {
         if (index != -1)
         {
             fxAnim[index].SetBool("FXHitPlay",true);
-            //display damage@@
+            //display damage
             damageText[index].text = damage.ToString();
             damageText[index].color = setColorList[0];
         }
@@ -694,7 +873,6 @@ public class CombatEngine : MonoBehaviour {
         if (index != -1)
         {
             fxAnim[index].SetBool("FXHealPlay", true);
-            //display healing@@
             damageText[index].text = recov.ToString();
         }
         if (mode == 0)

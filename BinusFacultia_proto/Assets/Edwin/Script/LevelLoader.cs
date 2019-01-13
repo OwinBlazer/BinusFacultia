@@ -10,11 +10,21 @@ public class LevelLoader : MonoBehaviour {
     [SerializeField]public Semester[] semesterList;
     [SerializeField] Sprite[] bgImageList;
     [SerializeField] Image bgImage;
-	// Use this for initialization
 
-    
+    //gold/points components
+    public int turnCount=0;
+    public int goldGain =0;
+    public int pointGain =0;
+    public int[] techBonus;
+    // Use this for initialization
+
+    private void Update()
+    {
+
+    }
     public void initSession()
     {
+        techBonus = new int[5];
         string sessionData = PlayerPrefs.GetString("sessionDetails", "");
         string[] sessionDetail = sessionData.Split('#');
         if (sessionDetail.Length < 3)
@@ -23,7 +33,7 @@ public class LevelLoader : MonoBehaviour {
             wave = 0;
             semester = 1;
             combatEngine.combatInProgress = true;
-            PlayerPrefs.SetString("sessionDetails","0#1#1");
+            PlayerPrefs.SetString("sessionDetails","0#1#1#0#0#0#0^0^0^0^0");
         }
         else
         {
@@ -40,6 +50,16 @@ public class LevelLoader : MonoBehaviour {
             {
                 combatEngine.combatInProgress = true;
             }
+            turnCount = int.Parse(sessionDetail[3]);
+            goldGain = int.Parse(sessionDetail[4]);
+            pointGain = int.Parse(sessionDetail[5]);
+
+            string[] loadedTechBonus = sessionDetail[6].Split('^');
+            for(int i = 0; i < 5; i++)
+            {
+                techBonus[i] = int.Parse(loadedTechBonus[i]);
+            }
+
         }
         //load enemies as stored
         loadEnemies();
@@ -54,12 +74,24 @@ public class LevelLoader : MonoBehaviour {
         saveData += semester + "#";
         if (combatEngine.combatInProgress)
         {
-            saveData += "1";
+            saveData += "1#";
         }
         else
         {
-            saveData += "0";
+            saveData += "0#";
         }
+        saveData += turnCount+"#";
+        saveData += goldGain + "#";
+        saveData += pointGain+"#";
+        for(int i = 0; i < 5; i++)
+        {
+            saveData += techBonus[i];
+            if (i < 4)
+            {
+                saveData += "^";
+            }
+        }
+        Debug.Log(saveData);
         PlayerPrefs.SetString("sessionDetails", saveData);
     }
     public int GetWave()
@@ -80,6 +112,7 @@ public class LevelLoader : MonoBehaviour {
             semester++;
             //@@Between Semester Scene
             //
+            
             Debug.Log("Next Semester Loads!");
         }
         else
@@ -93,7 +126,11 @@ public class LevelLoader : MonoBehaviour {
                 loadBoss();
             }
         }
-        
+        turnCount = 0;
+        for(int i = 0; i < 5; i++)
+        {
+            techBonus[i] = 0;
+        }
         return wave;
     }
     public void loadBoss()

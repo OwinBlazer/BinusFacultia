@@ -35,8 +35,8 @@ public class IndPers : paSkill
             {
                 if (chara.isEnemy && chara.HPcurr > 0)
                 {
-                    damage = CalculateDamage(source.atk + (int)Mathf.Pow(level + 1, 2), target);
-                    target.TakeDamage(damage);
+                    damage = CalculateDamage(source.atk + (int)Mathf.Pow(level + 1, 2), chara);
+                    chara.TakeDamage(damage);
                 }
             }
         }

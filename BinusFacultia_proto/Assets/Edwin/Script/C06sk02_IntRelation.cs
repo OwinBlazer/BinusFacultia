@@ -40,9 +40,9 @@ public class IntRel : paSkill
             {
                 if (chara.isEnemy && chara.HPcurr > 0)
                 {
-                    damage = CalculateDamage(source.atk , target);
-                    target.TakeDamage(damage);
-                    target.InflictStatus(se);
+                    damage = CalculateDamage(source.atk , chara);
+                    chara.TakeDamage(damage);
+                    chara.InflictStatus(se);
                 }
             }
         }

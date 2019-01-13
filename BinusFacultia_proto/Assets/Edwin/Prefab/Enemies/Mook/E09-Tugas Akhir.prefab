@@ -88,7 +88,7 @@ MonoBehaviour:
       - {fileID: 114930258195454282, guid: 54728a25fa209a64b8d1485f06b882ef, type: 2}
     - value: 3
       actions:
-      - {fileID: 0}
+      - {fileID: 114881504866181012, guid: 2476033d09d4db847b3dfebc7caadaf4, type: 2}
     - value: 1
       actions:
       - {fileID: 114944974119348570, guid: e4015e0d6298fe94c98fc4aa065a30df, type: 2}

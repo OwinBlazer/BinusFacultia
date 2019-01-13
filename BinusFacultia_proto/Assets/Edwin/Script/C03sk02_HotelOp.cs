@@ -34,12 +34,12 @@ public class HotelOp : paSkill
         {
             source.MPcurr -= mpCost;
             message = "Party is inflicted with Def UP!\n";
-            StatusEffect se = new Ef_DefUP();
-            se.InitializeSE(level, duration);
             foreach(Chara chara in allChara)
             {
                 if (!chara.isEnemy && chara.HPcurr > 0)
                 {
+                    StatusEffect se = new Ef_DefUP();
+                    se.InitializeSE(level, duration);
                     chara.InflictStatus(se);
                 }
             }

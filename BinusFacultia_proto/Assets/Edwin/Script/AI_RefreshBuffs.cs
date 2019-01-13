@@ -39,6 +39,7 @@ public class eAI_RefreshBuffs : Action
         {
             if (target.statusEffectList[tempIndex].isBuff)
             {
+                GameObject.FindObjectOfType<CombatEngine>().PlayDebuffFX(target);
                 target.statusEffectList[tempIndex].ResetEffect(target);
                 target.statusEffectList.RemoveAt(tempIndex);
             }

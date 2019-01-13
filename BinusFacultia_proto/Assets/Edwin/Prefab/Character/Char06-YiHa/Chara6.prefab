@@ -76,11 +76,11 @@ MonoBehaviour:
     actionPointMax: 0
     isEnemy: 0
     seqIndex: 0
-    actIndex: 0
+    actIndex: 99
     sequence: []
   skillList:
-  - {fileID: 114766323862834596, guid: e131e135dc5289e4682bb381886ad138, type: 2}
-  - {fileID: 114199207948431462, guid: b30388ecbff4c1e498f13167695dcb95, type: 2}
-  - {fileID: 114175042554437672, guid: ba384ce149df6b1419b7a235644c41e5, type: 2}
-  - {fileID: 114411142663677496, guid: dddd50337126bc248967648c4515c745, type: 2}
+  - {fileID: 114572227521227366, guid: 86ba8296155eb7249ad717fbef1ba7e2, type: 2}
+  - {fileID: 114499082871040142, guid: 57b7d9e0bf2b7f44091afbb888e2abe2, type: 2}
+  - {fileID: 114985382179737352, guid: e613292d2868e534199e46abe55513b3, type: 2}
+  - {fileID: 114724429955079336, guid: e3ae5f4c7531f90408fe43143da21dac, type: 2}
   trainCount: 0

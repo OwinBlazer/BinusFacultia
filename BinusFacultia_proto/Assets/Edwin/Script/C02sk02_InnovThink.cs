@@ -48,7 +48,7 @@ public class InnovThink : paSkill
 
     public override void updateLog(Text targetBox)
     {
-        message = source.name + " attacks " + target.name + " for " + damage + " damage " + (2 + level) + " times!\n";
+
         targetBox.text += message;
     }
 

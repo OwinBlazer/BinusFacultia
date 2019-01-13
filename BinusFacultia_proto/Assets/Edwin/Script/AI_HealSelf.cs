@@ -19,7 +19,7 @@ public class eAI_HealSelf : Action
     }
     public override void updateLog(Text targetBox)
     {
-        message = source.name + " grants Recovery to its team!\n";
+        message = source.name + " heals itself!\n";
         targetBox.text += message;
     }
     public override void executeAction()

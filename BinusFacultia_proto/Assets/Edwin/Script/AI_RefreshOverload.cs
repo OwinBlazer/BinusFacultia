@@ -28,6 +28,7 @@ public class eAI_RefreshOverload : Action
         {
             if (chara.isEnemy && chara.HPcurr > 0)
             {
+                GameObject.FindObjectOfType<CombatEngine>().PlayHealFX(0, chara, 1);
                 int tempIndex = 0;
                 while (tempIndex < chara.statusEffectList.Count)
                 {

@@ -31,12 +31,12 @@ public class eAI_AtkBreak : Action
     }
     public override void executeAction()
     {
-        StatusEffect se = new Ef_AtkDOWN();
-        se.InitializeSE(level, duration);
         foreach (Chara chara in targetList)
         {
             if (!chara.isEnemy && chara.HPcurr > 0)
             {
+                StatusEffect se = new Ef_AtkDOWN();
+                se.InitializeSE(level, duration);
                 chara.TakeDamage(CalculateDamage(source.atk / 2, chara));
                 chara.InflictStatus(se);
             }

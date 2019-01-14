@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Edwin/Scenes/Combat.unity
+- path: Assets/Dicky/Scene/Combat Simulation.unity
   isLoaded: 1
   isActive: 1

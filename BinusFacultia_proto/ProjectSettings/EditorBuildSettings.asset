@@ -27,6 +27,9 @@ EditorBuildSettings:
     path: Assets/Dicky/Scene/Retas.unity
     guid: e4bbdb0ee526a154fbb69000f9f82043
   - enabled: 1
+    path: Assets/Dicky/Scene/SEIcon.unity
+    guid: 495a9553d02d1b942a63352d37da2ca0
+  - enabled: 1
     path: Assets/Edwin/Scenes/Combat.unity
     guid: ebfd879e6c51fc4488dcfe5650a9c984
   - enabled: 1

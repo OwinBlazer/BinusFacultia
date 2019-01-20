@@ -85,6 +85,11 @@ public class SEDetailViewHandler : MonoBehaviour {
     {
         for(int i = 0; i < 8; i++)
         {
+            seDetailList[i].nameText.text = allChara[i].name;
+            if (allChara[i].HPcurr <= 0)
+            {
+                seDetailList[i].nameText.text = "";
+            }
             for (int j = 0; j < seDetailList[i].seDetail.Count; j++)
             {
                 seDetailList[i].seDetail[j].levelText.text = "";

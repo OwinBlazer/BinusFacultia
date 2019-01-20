@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class ActEntryList {
     public int entryID;
     public Action action;
+    public Chara originalTarget;
     public ActEntryList(Action act, int entryID)
     {
         this.action = act;
@@ -52,6 +53,11 @@ public class CombatEngine : MonoBehaviour {
     //0 = black, normal
     //1 = green tint, healing
     //1 = blue tint, mp recov
+    [SerializeField] AudioClip[] soundEffects;
+    //0=hit
+    //1=buff
+    //2=debuff
+    //3=heal
     public PlayerLoader playerLoader;
     List<Chara> allChara = new List<Chara>();
     List<ActEntryList> allActions = new List<ActEntryList>();
@@ -76,7 +82,7 @@ public class CombatEngine : MonoBehaviour {
         {
             allChara.Add(chara);
         }
-        for(int i = 0; i < 5; i++)
+        for (int i = 0; i < 5; i++)
         {
             ActiveEnemy.Add(transform.GetChild(i).gameObject);
         }
@@ -222,6 +228,7 @@ public class CombatEngine : MonoBehaviour {
             StartPhase();
             OrderPhase();
             //execution phase is triggered by execute button
+            
         }
     }
     void StartPhase()
@@ -236,6 +243,7 @@ public class CombatEngine : MonoBehaviour {
         EffectTriggerStart();
         UpdateHPUI();
         RunAllEffect();
+        VictoryCheck();
         UpdateAPUI();
         seDetailView.updateSEList(allChara);
     }
@@ -488,7 +496,12 @@ public class CombatEngine : MonoBehaviour {
             {
                 foreach(Action act in chara.queuedAction)
                 {
-                    allActions.Add(new ActEntryList(act,allActions.Count));
+                    ActEntryList tempActEntry = new ActEntryList(act, allActions.Count);
+                    //if (!chara.isEnemy)
+                    //{
+                    //    temp
+                    //}
+                    allActions.Add(tempActEntry);
                     //Debug.Log(chara.name+" with id "+(allActions.Count-1).ToString() +"and speed "+ chara.spd.ToString());
                 }
             }
@@ -574,13 +587,45 @@ public class CombatEngine : MonoBehaviour {
                 {
                     if (allActions[0].action.source.HPcurr > 0)
                     {
-                        allActions[0].action.executeAction();
-                        logbox.text = "";
-                        allActions[0].action.updateLog(logbox);
-                        allActions[0].action.source.actionPointMax--;
-                        seDetailView.updateSEList(allChara);
-                        yield return new WaitForSeconds(1.5f);
-                        UpdateHPUI();
+                        if (!allActions[0].action.source.isEnemy)
+                        {
+                            PlayerAction tempPA = (PlayerAction)allActions[0].action;
+                            if (tempPA.target!=null){
+                                if(tempPA.target.HPcurr > 0)
+                                {
+                                    //if(!allActions[0].action.source.isEnemy&& )
+                                    allActions[0].action.executeAction();
+                                    logbox.text = "";
+                                    allActions[0].action.updateLog(logbox);
+                                    allActions[0].action.source.actionPointMax--;
+                                    seDetailView.updateSEList(allChara);
+                                    yield return new WaitForSeconds(1.5f);
+                                    UpdateHPUI();
+                                }
+                            }
+                            else
+                            {
+                                allActions[0].action.executeAction();
+                                logbox.text = "";
+                                allActions[0].action.updateLog(logbox);
+                                allActions[0].action.source.actionPointMax--;
+                                seDetailView.updateSEList(allChara);
+                                yield return new WaitForSeconds(1.5f);
+                                UpdateHPUI();
+                            }
+                        }
+                        else
+                        {
+                            //if(!allActions[0].action.source.isEnemy&& )
+                            allActions[0].action.executeAction();
+                            logbox.text = "";
+                            allActions[0].action.updateLog(logbox);
+                            allActions[0].action.source.actionPointMax--;
+                            seDetailView.updateSEList(allChara);
+                            yield return new WaitForSeconds(1.5f);
+                            UpdateHPUI();
+                        }
+                        
                     }
                 }
                 allActions.RemoveAt(0);
@@ -704,7 +749,7 @@ public class CombatEngine : MonoBehaviour {
         allActions.Clear();
         combatInProgress = false;
         //continue to next wave here<======================@
-        logbox.text = "you won!";
+        logbox.text = "You won! ";
         executeButton.SetActive(false);
         ResultBoxUpdate();
         anim.SetInteger("actionMenuID",10);
@@ -764,7 +809,7 @@ public class CombatEngine : MonoBehaviour {
         //Tech Bonus
 
         //check 1 shot in 1 round
-        int[] techBonusNum= new int[4];
+        int[] techBonusNum= new int[5];
         if (levelLoader.techBonus[0] >= levelLoader.turnCount)
         {
             techBonusNum[0] = 20;
@@ -795,7 +840,7 @@ public class CombatEngine : MonoBehaviour {
         resultBox[2].text = semesterBonus.ToString();
 
         resultBox[3].text = "";
-        for(int i = 0; i < 4; i++)
+        for(int i = 0; i < 5; i++)
         {
             switch (i)
             {
@@ -823,15 +868,25 @@ public class CombatEngine : MonoBehaviour {
             }
             resultBox[3].text += techBonusNum[i]+"pts\n";
         }
+
+        levelLoader.pointGain = turnCountBonus + semesterBonus;
+        foreach(int i in techBonusNum)
+        {
+            levelLoader.pointGain += i;
+        }
+        levelLoader.SaveSession();
     }
     void BattleLost()
     {
         Debug.Log("batteLost");
         combatInProgress = false;
-        logbox.text = "you lost...!";
+        logbox.text = "You lost...! ";
         executeButton.SetActive(false);
         //battle lost trigger here<===========================
         anim.SetInteger("actionMenuID", 9);
+        //show point gains
+
+        PlayerPrefs.SetInt("point", PlayerPrefs.GetInt("point", 0) + levelLoader.pointGain);
         PlayerPrefs.DeleteKey("sessionDetails");
         PlayerPrefs.DeleteKey("enemyDetails");
         PlayerPrefs.DeleteKey("sessionBookmark");
@@ -847,6 +902,7 @@ public class CombatEngine : MonoBehaviour {
             //display damage
             damageText[index].text = damage.ToString();
             damageText[index].color = setColorList[0];
+            AudioHandler.audioHandler.playSFX(soundEffects[0]);
         }
     }
     public void PlayBuffFX(Chara target)
@@ -855,6 +911,7 @@ public class CombatEngine : MonoBehaviour {
         if (index != -1)
         {
             fxAnim[index].SetBool("FXBuffPlay", true);
+            AudioHandler.audioHandler.playSFX(soundEffects[1]);
         }
     }
     public void PlayDebuffFX(Chara target)
@@ -863,6 +920,7 @@ public class CombatEngine : MonoBehaviour {
         if (index != -1)
         {
             fxAnim[index].SetBool("FXDebuffPlay", true);
+            AudioHandler.audioHandler.playSFX(soundEffects[2]);
         }
     }
     public void PlayHealFX(int recov, Chara target, int mode)
@@ -873,6 +931,7 @@ public class CombatEngine : MonoBehaviour {
         if (index != -1)
         {
             fxAnim[index].SetBool("FXHealPlay", true);
+            AudioHandler.audioHandler.playSFX(soundEffects[3]);
             damageText[index].text = recov.ToString();
         }
         if (mode == 0)
@@ -932,16 +991,73 @@ public class CombatEngine : MonoBehaviour {
         //((Semester*Wave)^1.5)*10
         int goldGain = (int)Mathf.Pow(((levelLoader.wave * levelLoader.semester)),1.5f) *10;
         PlayerPrefs.SetInt("gold", PlayerPrefs.GetInt("gold",0)+goldGain);
+
+        //lite bonus
+        LiteUpgradeRandomStat(playerLoader.GetParty());
         BattleNext();
     }
 
     void BattleNext()
     {
+        //upgrade random stat
+        LiteUpgradeRandomStat(playerLoader.GetParty());
+        if (levelLoader.wave == 5)
+        {
+            LiteUpgradeRandomSkill(playerLoader.GetParty());
+            LiteUpgradeRandomSkill(playerLoader.GetParty());
+        }
         anim.SetInteger("actionMenuID", 0);
         executeButton.SetActive(true);
         levelLoader.NextWaveSem();
         combatInProgress = true;
+        Combat();
         levelLoader.SaveSession();
+    }
+    void LiteUpgradeRandomStat(List<PlayerChara> pChara)
+    {
+        foreach(PlayerChara pChar in pChara)
+        {
+            logbox.text += pChar.chara.name+" got +";
+            int rng = Random.Range(0, 4);
+            switch (rng) {
+                case 0:
+                    rng = Random.Range(5, 10);
+                    pChar.chara.HPmax += rng;
+                    pChar.chara.HPcurr += rng;
+                    logbox.text +=rng+"HP";
+                    break;
+                case 1:
+                    rng = Random.Range(1, 3);
+                    pChar.chara.atk += rng;
+                    logbox.text += rng + "atk";
+                    break;
+                case 2:
+                    rng = Random.Range(1, 3);
+                    pChar.chara.def += rng;
+                    logbox.text += rng + "def";
+                    break;
+                case 3:
+                    rng = Random.Range(1, 3);
+                    pChar.chara.spd += rng;
+                    logbox.text += rng + "spd";
+                    break;
+                default:
+                    break;
+            }
+            if (pChara.IndexOf(pChar) + 1 < pChara.Count)
+            {
+                logbox.text += ", ";
+            }
+
+        }
+    }
+    void LiteUpgradeRandomSkill(List<PlayerChara> pChara)
+    {
+        foreach(PlayerChara pChar in pChara)
+        {
+            int rng = Random.Range(0, 4);
+            pChar.skillList[rng].skillLevel += 1;
+        }
     }
 }
 class actionSpdComp : IComparer<ActEntryList>

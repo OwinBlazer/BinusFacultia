@@ -10,24 +10,31 @@ public class characterBuyText : MonoBehaviour {
     public Text characterBuySetText;
     public int points;
     public Text pointsText;
-
-    private int[] characterCost = new int[] { 1000, 1000, 1000, 1000, 1000, 1000 };
+    [SerializeField] AudioClip buySound;
+    private int[] characterCost = new int[] { 0, 0, 0, 1000, 1000, 1000 };
     private int selectCharacterIndex;
+    private int selectedCharPref;
+    public void SelectedCharPrefIndex(int index)
+    {
+        selectedCharPref = index;
+    }
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         //points = 5000;
         //pointsText.text = points.ToString()+" Pts";
         //saveManager.Instance.state.points = 5000;
-        PlayerPrefs.SetInt("Player Points", saveManager.Instance.state.points);
+        PlayerPrefs.SetInt("point", saveManager.Instance.state.points);
+        //PlayerPrefs.GetInt("Player Points");
         updatePointsText();
         initShop();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
+        //pointsText.text = points.ToString() + " Pts";
+        //PlayerPrefs.SetInt("Player Points", saveManager.Instance.state.points);
+    }
 
     private void initShop()
     {
@@ -55,7 +62,7 @@ public class characterBuyText : MonoBehaviour {
 
     private void updatePointsText()
     {
-        pointsText.text = saveManager.Instance.state.points.ToString();
+        pointsText.text = saveManager.Instance.state.points.ToString() + " Pts";
     }
 
     private void OnCharacterSelect(int currentIndex)
@@ -70,7 +77,7 @@ public class characterBuyText : MonoBehaviour {
        }
        else
        {
-           characterBuySetText.text = "Buy" /*+characterCost[currentIndex].ToString()*/;
+           characterBuySetText.text = "Buy\n" +characterCost[currentIndex].ToString() + " Pts";
        }
     }
 
@@ -87,6 +94,9 @@ public class characterBuyText : MonoBehaviour {
             if (saveManager.Instance.BuyCharacter(selectCharacterIndex, characterCost[selectCharacterIndex]))
             {
                 setCharacter(selectCharacterIndex);
+                PlayerPrefs.SetInt("char0" + (selectedCharPref+1)+ "isUnlocked", 1);
+                Debug.Log(PlayerPrefs.GetInt("char0" + (selectedCharPref + 1) + "isUnlocked",0));
+                AudioHandler.audioHandler.playSFX(buySound);
                 updatePointsText();
             }
             else

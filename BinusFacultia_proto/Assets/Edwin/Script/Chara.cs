@@ -167,7 +167,7 @@ public class Chara
     {
         GameObject.FindObjectOfType<CombatEngine>().PlayHealFX(mpRecov, this, 1);
         MPcurr += mpRecov;
-        if (MPcurr > mpRecov)
+        if (MPcurr > MPmax)
         {
             MPcurr = MPmax;
         }

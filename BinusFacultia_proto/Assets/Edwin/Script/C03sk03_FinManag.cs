@@ -71,4 +71,9 @@ public class FinManag : paSkill
         }
         return validTarget;
     }
+
+    public override int GetMPCost(int level)
+    {
+        return level * 2;
+    }
 }

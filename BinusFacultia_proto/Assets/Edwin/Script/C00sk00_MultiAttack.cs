@@ -53,4 +53,9 @@ public class MultiAttack : paSkill {
         }
         return validTarget;
     }
+
+    public override int GetMPCost(int level)
+    {
+        return mpCost;
+    }
 }

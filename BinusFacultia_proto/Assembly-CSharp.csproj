@@ -61,6 +61,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\AudioHandler.cs" />
+    <Compile Include="Assets\BasicSongHandler.cs" />
+    <Compile Include="Assets\BGMHandler.cs" />
     <Compile Include="Assets\Dicky\Script\mainmenu.cs" />
     <Compile Include="Assets\Edwin\Script\Action.cs" />
     <Compile Include="Assets\Edwin\Script\ActionInterface.cs" />
@@ -177,6 +180,8 @@
     <Compile Include="Assets\Panji\Scripts\playerGold.cs" />
     <Compile Include="Assets\Panji\Scripts\saveManager.cs" />
     <Compile Include="Assets\Panji\Scripts\saveState.cs" />
+    <Compile Include="Assets\Panji\Scripts\Training.cs" />
+    <Compile Include="Assets\SkillEnhancementHandler.cs" />
     <None Include="Assets\PlayerPref.txt" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>E:/04_DeveloperFolder/09_MWGPFacultia/Gitroot/BinusFacultia/BinusFacultia_proto/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>

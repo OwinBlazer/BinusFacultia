@@ -63,4 +63,9 @@ public class RiskAnlys : paSkill
         }
         return validTarget;
     }
+
+    public override int GetMPCost(int level)
+    {
+        return mpCost + 4 * level;
+    }
 }

@@ -60,4 +60,9 @@ public class PoisonStack : paSkill
         }
         return validTarget;
     }
+
+    public override int GetMPCost(int level)
+    {
+        return mpCost;
+    }
 }

@@ -64,6 +64,7 @@ public class Ef_AtkUP:StatusEffect {
     }
     public override void ResetEffect(Chara target)
     {
+        effect = (int)Mathf.Floor(Mathf.Pow(level + 1, 1.5f));
         target.atk -=effect;
     }
 }
@@ -95,6 +96,7 @@ public class Ef_SpdUP : StatusEffect
     }
     public override void ResetEffect(Chara target)
     {
+        effect = (int)Mathf.Floor(Mathf.Pow(level + 1, 1.5f));
         target.spd -= effect;
     }
 }
@@ -126,6 +128,7 @@ public class Ef_DefUP : StatusEffect
     }
     public override void ResetEffect(Chara target)
     {
+        effect = (int)Mathf.Floor(Mathf.Pow(level + 1, 1.5f));
         target.def -=effect;
     }
 }
@@ -157,6 +160,7 @@ public class Ef_AtkDOWN : StatusEffect
     }
     public override void ResetEffect(Chara target)
     {
+        effect = (int)Mathf.Floor(Mathf.Pow(level + 1, 1.5f));
         target.atk += effect;
     }
 }
@@ -188,6 +192,7 @@ public class Ef_SpdDOWN : StatusEffect
     }
     public override void ResetEffect(Chara target)
     {
+        effect = (int)Mathf.Floor(Mathf.Pow(level + 1, 1.5f));
         target.spd += effect;
     }
 }
@@ -219,6 +224,7 @@ public class Ef_DefDOWN : StatusEffect
     }
     public override void ResetEffect(Chara target)
     {
+        effect = (int)Mathf.Floor(Mathf.Pow(level + 1, 1.5f));
         target.def += effect;
     }
 }
@@ -251,6 +257,7 @@ public class Ef_HPDOWN : StatusEffect
     }
     public override void ResetEffect(Chara target)
     {
+        effect = (int)Mathf.Floor(Mathf.Pow(level + 1, 1.5f));
         target.HPmax += effect;
     }
 }

@@ -57,4 +57,9 @@ public class Crypto : paSkill
         }
         return validTarget;
     }
+
+    public override int GetMPCost(int level)
+    {
+        return mpCost + 3 * (level - 1);
+    }
 }

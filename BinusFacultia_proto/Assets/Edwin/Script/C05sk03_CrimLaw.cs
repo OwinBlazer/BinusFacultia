@@ -58,4 +58,9 @@ public class CrimLaw : paSkill
         }
         return validTarget;
     }
+
+    public override int GetMPCost(int level)
+    {
+        return 2 * level;
+    }
 }

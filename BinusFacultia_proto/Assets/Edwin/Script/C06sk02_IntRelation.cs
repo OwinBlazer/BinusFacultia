@@ -34,12 +34,12 @@ public class IntRel : paSkill
         else
         {
             source.MPcurr -= mpCost;
-            StatusEffect se = new Ef_AtkDOWN();
-            se.InitializeSE(level, duration);
             foreach (Chara chara in allChara)
             {
                 if (chara.isEnemy && chara.HPcurr > 0)
                 {
+                    StatusEffect se = new Ef_AtkDOWN();
+                    se.InitializeSE(level, duration);
                     damage = CalculateDamage(source.atk , chara);
                     chara.TakeDamage(damage);
                     chara.InflictStatus(se);
@@ -65,5 +65,10 @@ public class IntRel : paSkill
             }
         }
         return validTarget;
+    }
+
+    public override int GetMPCost(int level)
+    {
+        return mpCost + 2 * level;
     }
 }

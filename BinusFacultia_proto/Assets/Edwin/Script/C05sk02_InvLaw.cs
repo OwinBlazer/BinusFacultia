@@ -52,4 +52,9 @@ public class InvLaw : paSkill
         }
         return validTarget;
     }
+
+    public override int GetMPCost(int level)
+    {
+        return mpCost + 2 * level;
+    }
 }

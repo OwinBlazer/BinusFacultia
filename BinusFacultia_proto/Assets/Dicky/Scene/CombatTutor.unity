@@ -297,8 +297,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -36.7, y: 663.2}
+  m_AnchoredPosition: {x: 0, y: 9.975}
+  m_SizeDelta: {x: -36.7, y: 683.15}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1007411947
 MonoBehaviour:
@@ -332,12 +332,19 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "A combat feature which is prevalent here is the defend mechanic which allows
-    players to stock up their actions and use them later on. They do this by using
-    the defend button. \n\nDefending halves damage taken, but still leaves you open
-    to status effects. \rYou can only stock up to 2 extra actions. Each round, characters
-    with the highest speed goes first, with characters having a speed tie going and
-    resolving their actions together.\r\n"
+  m_Text: 'Actions are issued every turn.
+
+
+    A Character can take an action for every Action Point(AP) they have.
+
+
+    Every start of turn, you gain 1 AP.
+
+
+    If you don''t spend any AP, your character will defend, taking half damage.
+
+
+    Your party and enemies will execute their actions in order of speed.'
 --- !u!222 &1007411948
 CanvasRenderer:
   m_ObjectHideFlags: 0

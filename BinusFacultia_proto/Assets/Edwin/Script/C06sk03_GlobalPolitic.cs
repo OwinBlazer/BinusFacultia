@@ -70,4 +70,9 @@ public class GlobPol : paSkill
         }
         return validTarget;
     }
+
+    public override int GetMPCost(int level)
+    {
+        return 5 * level;
+    }
 }

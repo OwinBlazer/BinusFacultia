@@ -77,6 +77,7 @@ public abstract class paSkill : PlayerAction
 {
     public int level;
     public int mpCost;
+    public abstract int GetMPCost(int level);
 }
 
 public class AttackFoe : Action

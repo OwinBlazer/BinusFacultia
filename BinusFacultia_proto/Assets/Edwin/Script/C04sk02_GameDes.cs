@@ -34,12 +34,12 @@ public class GameDes : paSkill
         {
             source.MPcurr -= mpCost;
             message = "Party is inflicted with Atk UP!\n";
-            StatusEffect se = new Ef_AtkUP();
-            se.InitializeSE(level, duration);
             foreach (Chara chara in allChara)
             {
                 if (!chara.isEnemy && chara.HPcurr > 0)
                 {
+                    StatusEffect se = new Ef_AtkUP();
+                    se.InitializeSE(level, duration);
                     chara.InflictStatus(se);
                 }
             }
@@ -64,5 +64,10 @@ public class GameDes : paSkill
             }
         }
         return validTarget;
+    }
+
+    public override int GetMPCost(int level)
+    {
+        return mpCost + (level - 1) * 4;
     }
 }

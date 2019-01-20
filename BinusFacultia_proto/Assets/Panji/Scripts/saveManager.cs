@@ -9,12 +9,18 @@ public class saveManager : MonoBehaviour {
 
     private void Awake()
     {
-        resetSave();
-        DontDestroyOnLoad(gameObject);
-        Instance = this;
-        Load();
+        if (Instance != null)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            DontDestroyOnLoad(gameObject);
+            Instance = this;
+            Load();
 
-        Debug.Log(Helper.Serialize<saveState>(state));
+            Debug.Log(Helper.Serialize<saveState>(state));
+        }
     }
 
     public void Save()

@@ -80,7 +80,8 @@ public class PlayerLoader : MonoBehaviour {
         saveData += pChara.skillList[2].skillLevel + "#";
         saveData += pChara.skillList[3].skillLevel + "#";
 
-        saveData += pChara.trainCount; //index 20
+        saveData += pChara.trainCount+"#"; //index 20
+        saveData += pChara.spCount; //index 21
 
         PlayerPrefs.SetString("partyDetails"+ID,saveData);
     }
@@ -209,6 +210,7 @@ public class PlayerLoader : MonoBehaviour {
             pChara.skillList[3].skillLevel = int.Parse(saveData[19]);
 
             pChara.trainCount = int.Parse(saveData[20]);
+            pChara.spCount = int.Parse(saveData[21]);
             return pChara;
         }
     }

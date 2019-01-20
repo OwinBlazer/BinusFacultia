@@ -41,7 +41,7 @@ public class playerGold : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        goldText.text = gold.ToString() + " G";
+        goldText.text = gold.ToString();
         PlayerPrefs.SetInt("Player Gold", gold);
         PlayerPrefs.SetInt("Item001 Qty", item001Qty);
         PlayerPrefs.SetInt("Item002 Qty", item002Qty);

@@ -57,4 +57,9 @@ public class IdeaGen : paSkill
         }
         return validTarget;
     }
+
+    public override int GetMPCost(int level)
+    {
+        return mpCost + level * 3;
+    }
 }

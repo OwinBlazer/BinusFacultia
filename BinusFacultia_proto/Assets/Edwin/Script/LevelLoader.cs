@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 public class LevelLoader : MonoBehaviour {
     public CombatEngine combatEngine;
     public int wave;
     public int semester;
+    [SerializeField] AudioClip[] songList;
     [SerializeField] Semester[] bossList;
     [SerializeField]public Semester[] semesterList;
     [SerializeField] Sprite[] bgImageList;
@@ -17,11 +19,7 @@ public class LevelLoader : MonoBehaviour {
     public int pointGain =0;
     public int[] techBonus;
     // Use this for initialization
-
-    private void Update()
-    {
-
-    }
+    
     public void initSession()
     {
         techBonus = new int[5];
@@ -34,6 +32,7 @@ public class LevelLoader : MonoBehaviour {
             semester = 1;
             combatEngine.combatInProgress = true;
             PlayerPrefs.SetString("sessionDetails","0#1#1#0#0#0#0^0^0^0^0");
+            BGMHandler.BGM.RequestBGM(songList[0]);
         }
         else
         {
@@ -59,7 +58,14 @@ public class LevelLoader : MonoBehaviour {
             {
                 techBonus[i] = int.Parse(loadedTechBonus[i]);
             }
-
+            if (wave == 4)
+            {
+                BGMHandler.BGM.RequestBGM(songList[1]);
+            }
+            else
+            {
+                BGMHandler.BGM.RequestBGM(songList[0]);
+            }
         }
         //load enemies as stored
         loadEnemies();
@@ -91,7 +97,6 @@ public class LevelLoader : MonoBehaviour {
                 saveData += "^";
             }
         }
-        Debug.Log(saveData);
         PlayerPrefs.SetString("sessionDetails", saveData);
     }
     public int GetWave()
@@ -104,34 +109,53 @@ public class LevelLoader : MonoBehaviour {
     }
     public int NextWaveSem()
     {
-        wave++;
-
-        if (wave > 4)
+        if (wave == 5 && semester == 7)
         {
-            wave = 0;
-            semester++;
-            //@@Between Semester Scene
-            //
-            
-            Debug.Log("Next Semester Loads!");
+            PlayerPrefs.SetInt("point",PlayerPrefs.GetInt("point",0)+pointGain);
+            SceneManager.LoadScene("MainMenu");
+            return 0;
         }
         else
         {
-            if (wave <= 3)
+            wave++;
+
+            if (wave == 4)
             {
+                BGMHandler.BGM.RequestBGM(songList[1]);
+            }
+            else
+            {
+                BGMHandler.BGM.RequestBGM(songList[0]);
+            }
+            if (wave > 4)
+            {
+                wave = 0;
+                semester++;
+                //@@Between Semester Scene
+                //temorary: Just For Lite:
                 loadEnemies();
+            
+                Debug.Log("Next Semester Loads!");
             }
-            else if (wave == 4)
+            else
             {
-                loadBoss();
+                if (wave <= 3)
+                {
+                    loadEnemies();
+                }
+                else if (wave == 4)
+                {
+                    loadBoss();
+                }
             }
+            turnCount = 0;
+            for(int i = 0; i < 5; i++)
+            {
+                techBonus[i] = 0;
+            }
+            return wave;
+
         }
-        turnCount = 0;
-        for(int i = 0; i < 5; i++)
-        {
-            techBonus[i] = 0;
-        }
-        return wave;
     }
     public void loadBoss()
     {

@@ -55,5 +55,10 @@ public class CompSec : paSkill
         }
         return validTarget;
     }
+
+    public override int GetMPCost(int level)
+    {
+        return mpCost + 5 * (level - 1);
+    }
 }
 

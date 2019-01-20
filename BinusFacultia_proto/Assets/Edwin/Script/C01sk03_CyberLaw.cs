@@ -57,5 +57,10 @@ public class CyLaw : paSkill
         }
         return validTarget;
     }
+
+    public override int GetMPCost(int level)
+    {
+        return (int)Mathf.Floor(Mathf.Pow((level + 1), 1.5f));
+    }
 }
 

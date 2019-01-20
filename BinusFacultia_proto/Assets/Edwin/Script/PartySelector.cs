@@ -61,6 +61,7 @@ public class PartySelector : MonoBehaviour {
     }
     public void SelectUnit(int ID)
     {
+        Debug.Log(ID);
         chosenID = ID;
         //select change view
         PlayerChara pChara = playerLoader.allPlayerChara[ID].GetComponent<PlayerChara>();

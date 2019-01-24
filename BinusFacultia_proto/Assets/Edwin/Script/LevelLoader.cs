@@ -109,6 +109,7 @@ public class LevelLoader : MonoBehaviour {
     }
     public int NextWaveSem()
     {
+        wave++;
         if (wave == 5 && semester == 7)
         {
             PlayerPrefs.SetInt("point",PlayerPrefs.GetInt("point",0)+pointGain);
@@ -117,7 +118,6 @@ public class LevelLoader : MonoBehaviour {
         }
         else
         {
-            wave++;
 
             if (wave == 4)
             {
@@ -132,10 +132,18 @@ public class LevelLoader : MonoBehaviour {
                 wave = 0;
                 semester++;
                 //@@Between Semester Scene
-                //temorary: Just For Lite:
+                //temporary: Just For Lite:
                 loadEnemies();
-            
-                Debug.Log("Next Semester Loads!");
+
+                for (int i = 0; i < 4; i++)
+                {
+                    PlayerPrefs.SetInt("item01", 3);
+                    PlayerPrefs.SetInt("item02", 3);
+                    PlayerPrefs.SetInt("item03", 3);
+                    PlayerPrefs.SetInt("item04", 3);
+                }
+                Debug.Log("Next Semester Loads! Items Restocked!");
+                combatEngine.logbox.text = "Items have been restocked to 3 each!";
             }
             else
             {

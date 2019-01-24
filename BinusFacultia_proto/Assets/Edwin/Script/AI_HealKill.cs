@@ -57,7 +57,7 @@ public class eAI_HealKill : Action
         else
         {
             //if there are no target
-            message = source.name+"fumbled and failed to act!\n";
+            message = source.name+" fumbled and failed to act!\n";
         }
         
     }

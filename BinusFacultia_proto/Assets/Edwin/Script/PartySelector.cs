@@ -99,6 +99,10 @@ public class PartySelector : MonoBehaviour {
             }
             PlayerPrefs.DeleteKey("sessionDetails");
             PlayerPrefs.DeleteKey("enemyDetails");
+            PlayerPrefs.SetInt("item01", 3);
+            PlayerPrefs.SetInt("item02", 3);
+            PlayerPrefs.SetInt("item03", 3);
+            PlayerPrefs.SetInt("item04", 3);
             //Debug.Log("Passed deletion, loading now");
             //sceneLoader.LoadSceneNamed("Combat_Test");
             sceneLoader.LoadSceneNamed("Combat");

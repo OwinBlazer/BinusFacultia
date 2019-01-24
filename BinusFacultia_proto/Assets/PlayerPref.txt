@@ -2,10 +2,10 @@ Nama 					- Tipe	- Deskripsi
 ________________________________________________________________________________________
 gold 					- int	- uang yang dipakai untuk beli item dan latihan menaikkan stats
 point					- int	- uang yang dapakai untuk unlock karakter
-item01					- int	- Rock Fried Chicken- Reviver 50%
-item02					- int	- Evada Pasta - Status Effect Remover
-item03					- int	- Rose Bento - Recover 1 ally hp to full
-item04					- int	- Hocky Bento - Recover 1 ally mp to full
+item01					- int	- Rose Bento - Recover 1 ally hp to full
+item02					- int	- Hocky Bento - Recover 1 ally mp to full
+item03					- int	- Rock Fried Chicken- Reviver 50%
+item04					- int	- Evada Pasta - Status Effect Remover
 char01isUnlocked		- int	- Retas - Cyber security: Sudah beli atau belum - 0 belum
 char02isUnlocked		- int	- Nisbi - Business Creation - 0 belum
 char03isUnlocked		- int	- Lola - Hotel Management - 0 belum

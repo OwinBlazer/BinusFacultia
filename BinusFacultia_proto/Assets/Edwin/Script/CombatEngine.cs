@@ -233,7 +233,7 @@ public class CombatEngine : MonoBehaviour {
     }
     void StartPhase()
     {
-        foreach(Chara chara in allChara)
+        foreach (Chara chara in allChara)
         {
             if (chara.actionPointMax < 3)
             {
@@ -313,7 +313,7 @@ public class CombatEngine : MonoBehaviour {
     }
     public void SetSource(int chosenID)
     {
-        if (allChara[chosenID].HPcurr > 0 && combatInProgress)
+        if (allChara[chosenID].HPcurr > 0 && combatInProgress && phaseID==1)
         {
 
             //Note, this line only works if the characters are the ones loaded in FIRST
@@ -471,6 +471,7 @@ public class CombatEngine : MonoBehaviour {
     }
     public void startExecutionPhase()
     {
+        phaseID = 2;
         anim.SetInteger("actionMenuID",-1);
         if (combatInProgress)
         {
@@ -518,6 +519,7 @@ public class CombatEngine : MonoBehaviour {
     }
     void EndPhase()
     {
+        phaseID = 3;
         allActions.Clear();
         foreach(Chara chara in allChara)
         {
@@ -548,6 +550,7 @@ public class CombatEngine : MonoBehaviour {
             if (i < 3)
             {
                 charMPText[i].text = allChara[i].MPcurr.ToString();
+                charaImg[i].sprite = allChara[i].sprite;
                 charHPbar[i].value =(float)allChara[i].HPcurr / (float)allChara[i].HPmax;
                 charMPbar[i].value = (float)allChara[i].MPcurr / (float)allChara[i].MPmax;
             }
@@ -591,7 +594,8 @@ public class CombatEngine : MonoBehaviour {
                         {
                             PlayerAction tempPA = (PlayerAction)allActions[0].action;
                             if (tempPA.target!=null){
-                                if(tempPA.target.HPcurr > 0)
+                                //problem: Revival item doesn't work@@
+                                if(tempPA.target.HPcurr > 0||tempPA is Item_Revive)
                                 {
                                     //if(!allActions[0].action.source.isEnemy&& )
                                     allActions[0].action.executeAction();

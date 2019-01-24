@@ -5,20 +5,33 @@ using UnityEngine.UI;
 
 public class It02MPpot : ItemInterface
 {
-    PlayerAction useItem;
+    Item_MPpot useItem;
     public override PlayerAction UseItem(Chara source)
     {
         useItem = new Item_MPpot();
         useItem.source = source;
         useItem.needTarget = true;
+        useItem.itemHandler = this;
         return useItem;
     }
 }
 public class Item_MPpot : PlayerAction
 {
+    string message;
+    public ItemInterface itemHandler;
     public override void executeAction()
     {
-        target.HealMP(target.HPmax);
+        if (itemHandler.GetQty() > 0)
+        {
+            target.HealMP(target.HPmax);
+            itemHandler.changeQtyBy(-1);
+            PlayerPrefs.SetInt("item02", itemHandler.GetQty());
+            message = "The tasty meal recovered " + target.name + "'s MP to max!\n";
+        }
+        else
+        {
+            message = "Party ran out of " + itemHandler.GetName();
+        }
     }
 
     public override List<Chara> GetValidTarget(List<Chara> allChara)
@@ -36,6 +49,6 @@ public class Item_MPpot : PlayerAction
 
     public override void updateLog(Text targetBox)
     {
-        targetBox.text += "The tasty meal recovered " + target.name + "'s MP to max!\n";
+        targetBox.text += message;
     }
 }

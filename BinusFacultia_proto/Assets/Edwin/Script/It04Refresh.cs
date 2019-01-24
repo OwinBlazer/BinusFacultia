@@ -5,32 +5,45 @@ using UnityEngine.UI;
 
 public class It04Refresh : ItemInterface
 {
-    PlayerAction useItem;
+    Item_Refresh useItem;
     public override PlayerAction UseItem(Chara source)
     {
         useItem = new Item_Refresh();
         useItem.source = source;
         useItem.needTarget = true;
+        useItem.itemHandler = this;
         return useItem;
     }
 }
 public class Item_Refresh : PlayerAction
 {
+    string message;
+    public ItemInterface itemHandler;
     public override void executeAction()
     {
-        //remove all negative status from target's selist
-        int tempIndex = 0;
-        while (tempIndex < target.statusEffectList.Count)
+        if (itemHandler.GetQty() > 0)
         {
-            if (target.statusEffectList[tempIndex].isBuff)
+            PlayerPrefs.SetInt("item04", itemHandler.GetQty());
+            //remove all negative status from target's selist
+            int tempIndex = 0;
+            while (tempIndex < target.statusEffectList.Count)
             {
-                target.statusEffectList[tempIndex].ResetEffect(target);
-                target.statusEffectList.RemoveAt(tempIndex);
+                if (target.statusEffectList[tempIndex].isBuff)
+                {
+                    target.statusEffectList[tempIndex].ResetEffect(target);
+                    target.statusEffectList.RemoveAt(tempIndex);
+                }
+                else
+                {
+                    tempIndex++;
+                }
             }
-            else
-            {
-                tempIndex++;
-            }
+            GameObject.FindObjectOfType<CombatEngine>().PlayHealFX(0, target, 1);
+            message = "The popular pasta removed " + target.name + "'s Negative Effects!\n";
+        }
+        else
+        {
+            message = "Party ran out of " + itemHandler.GetName();
         }
     }
 
@@ -49,6 +62,6 @@ public class Item_Refresh : PlayerAction
 
     public override void updateLog(Text targetBox)
     {
-        targetBox.text += "The popular pasta removed " + target.name + "'s Negative Effects!\n";
+        targetBox.text += message;
     }
 }

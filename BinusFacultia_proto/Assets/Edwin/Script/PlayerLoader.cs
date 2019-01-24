@@ -22,7 +22,15 @@ public class PlayerLoader : MonoBehaviour {
             party.Add(transform.GetChild(i).GetComponent<PlayerChara>());
             PlayerDataLoad(i);
         }
-
+        ItemDataLoad();
+    }
+    void ItemDataLoad()
+    {
+        for(int i = 0;i< 4; i++)
+        {
+            int loadedQty = PlayerPrefs.GetInt("item0"+(i+1),0);
+            allItem[i].changeQtyBy(loadedQty - allItem[i].GetQty());
+        }
     }
     public void SaveParty()
     {
